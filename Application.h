@@ -16,7 +16,7 @@ class ModuleParticles;
 
 // Game modules ---
 class ModuleLevelOneStageOne;
-
+class ModuleEntity;
 
 class Application
 {
@@ -41,6 +41,7 @@ public:
 
 	// Game modules ---
 	ModuleLevelOneStageOne* levelOneStageOne;
+	ModuleEntity* entities;
 
 private:
 

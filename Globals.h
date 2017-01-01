@@ -20,7 +20,7 @@ enum update_status
 
 enum COLLIDER_TYPE {
 	NONE,
-	PLAYER,
+	COLLIDER_PLAYER,
 	PLAYER_BULLET,
 	ENEMY,
 	ENEMY_BULLET,

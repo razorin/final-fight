@@ -5,6 +5,8 @@
 #include "Point.h"
 
 #include "ModuleLevelOneStageOne.h"
+#include "ModuleEntity.h"
+#include "Player.h"
 
 ModuleLevelOneStageOne::ModuleLevelOneStageOne(bool active) : Module(active) {
 }
@@ -17,6 +19,13 @@ bool ModuleLevelOneStageOne::Start() {
 	LOG("Loading Level 1-1 ");
 
 	graphics = App->textures->Load("resources/sprites/levels/level1.png");
+
+	player = (Player *)App->entities->Create(ENTITY_TYPE::PLAYER);
+
+	player->position->x = 5;
+	player->position->y = 5;
+	player->position->z = 1;
+
 
 	return true;
 }

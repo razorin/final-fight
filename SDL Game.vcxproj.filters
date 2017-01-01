@@ -14,6 +14,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{ad89cf24-f35e-4d0c-90e5-820c054c274d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Entities">
+      <UniqueIdentifier>{0879100e-21bf-4122-91a2-99209f0239bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModuleRender.h">
@@ -58,7 +61,28 @@
     <ClInclude Include="ModuleCollision.h">
       <Filter>Core Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleLevelOneStageOne.h" />
+    <ClInclude Include="Entity.h">
+      <Filter>Game Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Game Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Creature.h">
+      <Filter>Game Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Section.h">
+      <Filter>Game Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLevelOneStageOne.h">
+      <Filter>Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -94,7 +118,28 @@
     <ClCompile Include="ModuleCollision.cpp">
       <Filter>Core Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Game Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Game Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Creature.cpp">
+      <Filter>Game Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Section.cpp">
+      <Filter>Game Entities</Filter>
+    </ClCompile>
     <ClCompile Include="ModuleLevelOneStageOne.cpp">
+      <Filter>Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEntity.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,6 +4,7 @@
 #include "Module.h"
 
 struct SDL_Texture;
+class Player;
 
 class ModuleLevelOneStageOne : public Module {
 public:
@@ -16,6 +17,7 @@ public:
 
 public:
 	SDL_Texture* graphics = nullptr;
+	Player *player = nullptr;
 };
 
 #endif // !ModuleLevelOneStageOne_H

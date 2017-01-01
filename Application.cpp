@@ -8,7 +8,7 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleLevelOneStageOne.h"
-
+#include "ModuleEntity.h"
 
 using namespace std;
 
@@ -24,6 +24,7 @@ Application::Application()
 
 	// Game Modules
 	modules.push_back(levelOneStageOne = new ModuleLevelOneStageOne(false));
+	modules.push_back(entities = new ModuleEntity(true));
 
 	// Modules to draw on top of game logic
 	modules.push_back(collision = new ModuleCollision());
