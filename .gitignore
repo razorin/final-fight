@@ -27,3 +27,8 @@
 *.exe
 *.out
 *.app
+*.opendb
+*.sdf
+Debug/
+Release/
+SDL Game.VC.db
