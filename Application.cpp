@@ -7,6 +7,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleLevelOneStageOne.h"
 
 
 using namespace std;
@@ -22,7 +23,7 @@ Application::Application()
 	modules.push_back(audio = new ModuleAudio());
 
 	// Game Modules
-
+	modules.push_back(levelOneStageOne = new ModuleLevelOneStageOne(false));
 
 	// Modules to draw on top of game logic
 	modules.push_back(collision = new ModuleCollision());
@@ -50,7 +51,7 @@ bool Application::Init()
 	}
 
 	// Start the first scene --
-
+	fade->FadeToBlack(levelOneStageOne, nullptr, 3.0f);
 	return ret;
 }
 

@@ -15,9 +15,8 @@ class ModuleCollision;
 class ModuleParticles;
 
 // Game modules ---
-class ModulePlayer;
-class ModuleSceneIntro;
-class ModuleSceneSpace;
+class ModuleLevelOneStageOne;
+
 
 class Application
 {
@@ -41,9 +40,7 @@ public:
 	ModuleParticles* particles;
 
 	// Game modules ---
-	ModulePlayer* player;
-	ModuleSceneIntro* scene_intro;
-	ModuleSceneSpace* scene_space;
+	ModuleLevelOneStageOne* levelOneStageOne;
 
 private:
 
