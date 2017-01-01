@@ -152,7 +152,7 @@ bool Particle::Update()
 
 	// TODO 5: This is the core of the particle functionality.
 	// Return false if the particle must be destroyed
-	App->renderer->Blit(App->particles->graphics, position.x, position.y, &(animation.GetCurrentFrame()));
+	App->renderer->Blit(App->particles->graphics, position, &(animation.GetCurrentFrame()));
 	if (fx >= 0) {
 		App->audio->PlayFx(fx);
 		fx = -1;

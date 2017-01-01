@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "Point.h"
 
 #include "ModuleLevelOneStageOne.h"
 
@@ -23,7 +24,7 @@ bool ModuleLevelOneStageOne::Start() {
 update_status ModuleLevelOneStageOne::Update() {
 	SDL_Rect *rect = new SDL_Rect();
 	*rect = { 265, 3, 992, 195 };
-	App->renderer->Blit(graphics, 0, 30, rect);
+	App->renderer->Blit(graphics, iPoint{ 0, 30 }, rect);
 
 	return UPDATE_CONTINUE;
 }

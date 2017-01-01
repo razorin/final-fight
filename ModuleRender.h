@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Globals.h"
 
+template <class TYPE> class Point;
+typedef Point<int> iPoint;
+
 struct SDL_Texture;
 struct SDL_Renderer;
 struct SDL_Rect;
@@ -20,7 +23,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f);
+	bool Blit(SDL_Texture* texture, const iPoint &position, SDL_Rect* section, float speed = 1.0f);
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera = true);
 
 public:
