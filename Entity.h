@@ -9,6 +9,8 @@ typedef Point<int> iPoint;
 struct SDL_Texture;
 struct SDL_Rect;
 struct Collider;
+struct Frame;
+class Animation;
 
 enum ENTITY_TYPE {
 	PLAYER,
@@ -23,6 +25,7 @@ public:
 	virtual void Update();
 	SDL_Texture* getGraphics() const;
 	SDL_Rect * getSection() const;
+	Frame & getCurrentFrame() const;
 
 
 public:
@@ -36,7 +39,7 @@ public:
 protected:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect *section = nullptr;
-
+	Animation *currentAnimation = nullptr;
 };
 
 #endif // !ENTITY_H

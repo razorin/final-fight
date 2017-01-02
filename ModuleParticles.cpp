@@ -18,7 +18,8 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("rtype/particles.png");
+	
+	/*graphics = App->textures->Load("rtype/particles.png");
 
 
 	// TODO 2: Create a prototype for the laser particle
@@ -65,7 +66,7 @@ bool ModuleParticles::Start()
 	// TODO 12: Create a new "Explosion" particle 
 	// audio: rtype/explosion.wav
 	// coords: {274, 296, 33, 30}; {313, 296, 33, 30}; {346, 296, 33, 30}; {382, 296, 33, 30}; {419, 296, 33, 30}; {457, 296, 33, 30};
-
+	*/
 	return true;
 }
 

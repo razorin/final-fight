@@ -3,12 +3,22 @@
 
 using namespace std;
 
+struct Frame {
+	SDL_Rect section;
+	int offset_x;
+	int offset_y;
+	Frame(const SDL_Rect &section, int offset_x = 0, int offset_y = 0) : section(section), offset_x(offset_x), offset_y(offset_y){
+
+	}
+};
+
+
 class Animation
 {
 public:
 	bool loop = true;
 	float speed = 1.0f;
-	vector<SDL_Rect> frames;
+	vector<Frame> frames;
 
 private:
 	float current_frame = 0.0f;
@@ -21,7 +31,7 @@ public:
 	Animation(const Animation& anim) : loop(anim.loop), speed(anim.speed), frames(anim.frames)
 	{}
 
-	SDL_Rect& GetCurrentFrame()
+	Frame& GetCurrentFrame()
 	{
 		float last_frame = (float) frames.size();
 

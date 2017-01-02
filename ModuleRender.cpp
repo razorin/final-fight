@@ -4,6 +4,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 ModuleRender::ModuleRender()
 {
@@ -88,17 +89,17 @@ bool ModuleRender::CleanUp()
 }
 
 // Blit to screen
-bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, SDL_Rect* section, bool flip, float speed)
+bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, Frame* frame, bool flip, float speed)
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + position.x * SCREEN_SIZE;
+	rect.x = (int)(camera.x * speed) + (position.x + (flip ? frame->offset_x : 0)) * SCREEN_SIZE;
 	rect.y = (int)(camera.y * speed) + (position.y + position.z) * SCREEN_SIZE;
 
-	if(section != NULL)
+	if(frame != NULL)
 	{
-		rect.w = section->w;
-		rect.h = section->h;
+		rect.w = frame->section.w;
+		rect.h = frame->section.h;
 	}
 	else
 	{
@@ -108,14 +109,14 @@ bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, SDL_Rect* sectio
 	rect.w *= SCREEN_SIZE;
 	rect.h *= SCREEN_SIZE;
 	if (!flip) {
-		if(SDL_RenderCopy(renderer, texture, section, &rect) != 0)
+		if(SDL_RenderCopy(renderer, texture, &frame->section, &rect) != 0)
 		{
 			LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 			ret = false;
 		}
 	}
 	else {
-		if (SDL_RenderCopyEx(renderer, texture, section, &rect, NULL, nullptr, SDL_FLIP_HORIZONTAL) != 0) {
+		if (SDL_RenderCopyEx(renderer, texture, &frame->section, &rect, NULL, nullptr, SDL_FLIP_HORIZONTAL) != 0) {
 			LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 			ret = false;
 		}

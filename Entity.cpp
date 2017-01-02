@@ -2,6 +2,7 @@
 #include "Point.h"
 #include "Globals.h"
 #include <string.h>
+#include "Animation.h"
 
 Entity::Entity(ENTITY_TYPE type, SDL_Texture* graphics) : type(type), graphics(graphics) {
 	position = new iPoint(0, 0, 0);
@@ -26,4 +27,8 @@ SDL_Texture* Entity::getGraphics() const {
 
 SDL_Rect * Entity::getSection() const {
 	return section;
+}
+
+Frame & Entity::getCurrentFrame() const {
+	return currentAnimation->GetCurrentFrame();
 }

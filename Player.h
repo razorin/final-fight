@@ -3,7 +3,7 @@
 #include "Creature.h"
 
 struct Animation;
-
+struct Frame;
 struct SDL_Texture;
 
 
@@ -17,7 +17,6 @@ public:
 	Animation *movement = nullptr;
 	Animation *jump = nullptr;
 	Animation *attack1 = nullptr;
-	Animation *currentAnimation = nullptr;
 };
 
 #endif // !PLAYER_H

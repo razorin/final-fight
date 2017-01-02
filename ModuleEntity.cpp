@@ -50,7 +50,7 @@ update_status ModuleEntity::Update() {
 			entities.remove(*it);
 		}
 		else {
-			App->renderer->Blit((*it)->getGraphics(), *(*it)->position, (*it)->getSection(), (*it)->flipped);
+			App->renderer->Blit((*it)->getGraphics(), *(*it)->position, &(*it)->getCurrentFrame(), (*it)->flipped);
 		}
 	}
 	return update_status::UPDATE_CONTINUE;

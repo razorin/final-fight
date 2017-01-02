@@ -7,6 +7,7 @@
 #include "ModuleLevelOneStageOne.h"
 #include "ModuleEntity.h"
 #include "Player.h"
+#include "Animation.h"
 
 ModuleLevelOneStageOne::ModuleLevelOneStageOne(bool active) : Module(active) {
 }
@@ -30,9 +31,8 @@ bool ModuleLevelOneStageOne::Start() {
 }
 
 update_status ModuleLevelOneStageOne::Update() {
-	SDL_Rect *rect = new SDL_Rect();
-	*rect = { 265, 3, 992, 195 };
-	App->renderer->Blit(graphics, iPoint{ 0, 30 }, rect);
+	Frame *scene = new Frame({ 265, 3, 992, 195 });
+	App->renderer->Blit(graphics, iPoint{ 0, 30 }, scene);
 
 	return UPDATE_CONTINUE;
 }
