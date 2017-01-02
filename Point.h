@@ -78,7 +78,7 @@ public:
 
 	Point& SetToZero()
 	{
-		x = y = = z = 0;
+		x = y = z = 0;
 		return(*this);
 	}
 

@@ -12,9 +12,9 @@ public:
 	~Creature();
 
 public:
-	int max_life;
-	int life;
-	int lives;
+	int max_life = 100;
+	int life = 100;
+	int lives = 1;
 };
 
 #endif // !CREATURE_H

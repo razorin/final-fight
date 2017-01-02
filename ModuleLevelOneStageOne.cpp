@@ -21,10 +21,9 @@ bool ModuleLevelOneStageOne::Start() {
 	graphics = App->textures->Load("resources/sprites/levels/level1.png");
 
 	player = (Player *)App->entities->Create(ENTITY_TYPE::PLAYER);
-
-	player->position->x = 5;
-	player->position->y = 5;
-	player->position->z = 1;
+	player->position->x = 16;
+	player->position->y = 0;
+	player->position->z = 135;
 
 
 	return true;

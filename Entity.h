@@ -31,6 +31,8 @@ public:
 	bool to_delete = false;
 	ENTITY_TYPE type;
 	iPoint* position = nullptr;
+	bool flipped = false;
+
 protected:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect *section = nullptr;

@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Section.h"
 #include "ModuleRender.h"
+#include "Point.h"
 
 ModuleEntity::ModuleEntity(bool enable) : Module(enable) {
 }
@@ -24,8 +25,10 @@ Entity* ModuleEntity::Create(const ENTITY_TYPE &type) {
 			break;
 	}
 
-	if (result != nullptr)
+	if (result != nullptr) {
 		entities.push_back(result);
+		entities.sort([](const Entity *a, const Entity *b) { return a->position->z < b->position->z;});
+	}
 
 	return result;
 }
@@ -47,7 +50,7 @@ update_status ModuleEntity::Update() {
 			entities.remove(*it);
 		}
 		else {
-			App->renderer->Blit((*it)->getGraphics(), *(*it)->position, (*it)->getSection());
+			App->renderer->Blit((*it)->getGraphics(), *(*it)->position, (*it)->getSection(), (*it)->flipped);
 		}
 	}
 	return update_status::UPDATE_CONTINUE;
