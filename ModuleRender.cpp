@@ -93,8 +93,8 @@ bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, Frame* frame, bo
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + (position.x + (flip ? frame->offset_x : 0)) * SCREEN_SIZE;
-	rect.y = (int)(camera.y * speed) + (position.y + position.z) * SCREEN_SIZE;
+	rect.x = (int)(camera.x * speed) + (position.x + (flip ? -frame->offset_x : frame->offset_x)) * SCREEN_SIZE;
+	rect.y = (int)(camera.y * speed) + (position.y + frame->offset_y ) * SCREEN_SIZE;
 
 	if(frame != NULL)
 	{

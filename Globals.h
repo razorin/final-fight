@@ -21,10 +21,12 @@ enum update_status
 enum COLLIDER_TYPE {
 	NONE,
 	COLLIDER_PLAYER,
-	PLAYER_BULLET,
+	PLAYER_HIT,
 	ENEMY,
-	ENEMY_BULLET,
-	WALL
+	ENEMY_HIT,
+	WALL,
+	ITEM_DESTROYABLE,
+	ITEM_PICKABLE
 };
 
 // Useful typedefs ---------

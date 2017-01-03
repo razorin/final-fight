@@ -8,12 +8,14 @@ using namespace std;
 
 ModuleCollision::ModuleCollision()
 {
-	matrix_collision = new bool[36]{false, false, false, false, false, false,
-									false, false, false, true, true, true,
-									false, false, false, true, false, true,
-									false, true, true, false, false, false,
-									false, true, false, false, false, false,
-									false, true, true, false, false, false };
+	matrix_collision = new bool[64]{false, false, false, false, false, false, false, false,
+									false, false, false, true, true, true, true, true,
+									false, false, false, true, false, false, false, true,
+									false, false, true, false, false, true, false, true,
+									false, true, false, false, false, false, false, false,
+									false, true, false, true, false, false, false, false,
+									false, true, false, false, false, false, false, false,
+									false, true, true, true, false, false, false, false};
 }
 
 // Destructor
@@ -43,7 +45,7 @@ update_status ModuleCollision::Update()
 	// After making it work, review that you are doing the minumum checks possible
 	for (list<Collider*>::iterator it = colliders.begin(); it != colliders.end(); ++it){
 		for (list<Collider*>::iterator jt = std::next(it); jt != colliders.end(); ++jt) {
-			if (matrix_collision[(*it)->type * 6 + (*jt)->type] && (*it)->CheckCollision((*jt)->rect)) {
+			if (matrix_collision[(*it)->type * 6 + (*jt)->type] && (*it)->CheckCollision((*jt)->rect, (*jt)->z, (*jt)->ignore_z)) {
 				(*it)->Notify((*jt)->type);
 				(*jt)->Notify((*it)->type);
 			}
@@ -78,9 +80,9 @@ bool ModuleCollision::CleanUp()
 	return true;
 }
 
-Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, COLLIDER_TYPE type, std::function<void(COLLIDER_TYPE)> onCollision)
+Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYPE type, bool ignore_z, std::function<void(COLLIDER_TYPE)> onCollision)
 {
-	Collider* ret = new Collider(rect, type, onCollision);
+	Collider* ret = new Collider(rect, z, type, ignore_z, onCollision);
 
 	colliders.push_back(ret);
 
@@ -89,14 +91,15 @@ Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, COLLIDER_TYPE type,
 
 // -----------------------------------------------------
 
-bool Collider::CheckCollision(const SDL_Rect& r) const
+bool Collider::CheckCollision(const SDL_Rect& r, int z, bool ignore_z) const
 {
 	// TODO 7: Create by hand (avoid consulting the internet) a simple collision test
 	// Return true if the argument and the own rectangle are intersecting
 	return (this->rect.x < r.x + r.w &&
 			this->rect.x + this->rect.w > r.x &&
 			this->rect.y < r.y + r.h &&
-			this->rect.h + this->rect.y > r.y);
+			this->rect.h + this->rect.y > r.y &&
+			((this->ignore_z || ignore_z) ? true : (this->z - z <= 2 && this->z - z >= -2)));
 }
 
 void Collider::Notify(COLLIDER_TYPE type) {

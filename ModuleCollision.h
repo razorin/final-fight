@@ -21,24 +21,27 @@ struct Collider
 {
 	SDL_Rect rect = { 0,0,0,0 };
 	bool to_delete = false;
+	int z = 0;
+	bool ignore_z = false;
 	COLLIDER_TYPE type;
 	std::function<void(COLLIDER_TYPE)> onCollision;
 
 	// TODO 10: Add a way to notify other classes that a collision happened
 
-	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, std::function<void(COLLIDER_TYPE)> onCollision) : // expand this call if you need to
-		rect(rectangle), type(type), onCollision(onCollision)
+	Collider(SDL_Rect rectangle, int z, COLLIDER_TYPE type, bool ignore_z, std::function<void(COLLIDER_TYPE)> onCollision) : // expand this call if you need to
+		rect(rectangle), z(z), type(type), ignore_z(ignore_z), onCollision(onCollision)
 	{
 
 	}
 
-	void SetPos(int x, int y)
+	void SetPos(int x, int y, int z)
 	{
 		rect.x = x;
 		rect.y = y;
+		this->z = z;
 	}
 
-	bool CheckCollision(const SDL_Rect& r) const;
+	bool CheckCollision(const SDL_Rect& r, int z, bool ignore_z = false) const;
 
 	void Notify(COLLIDER_TYPE type);
 };
@@ -55,7 +58,7 @@ public:
 
 	bool CleanUp();
 
-	Collider* AddCollider(const SDL_Rect& rect, COLLIDER_TYPE type = COLLIDER_TYPE::NONE, std::function<void(COLLIDER_TYPE)> onCollision = nullptr);
+	Collider* AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYPE type = COLLIDER_TYPE::NONE, bool ignore_z = false, std::function<void(COLLIDER_TYPE)> onCollision = nullptr);
 	void DebugDraw();
 
 private:

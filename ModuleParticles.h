@@ -31,7 +31,7 @@ struct Particle
 	PARTICLE_TYPE type;
 
 	SDL_Rect area;
-	Collider *collider;
+	Collider *collider = nullptr;
 	COLLIDER_TYPE collider_type;
 	
 
@@ -62,8 +62,8 @@ private:
 
 public:
 	SDL_Texture* graphics = nullptr;
-	Particle laser_particle;
-	Particle explosion_particle;
+	//Particle laser_particle;
+	//Particle explosion_particle;
 	// prototype particles go here ...
 };
 

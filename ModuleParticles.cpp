@@ -110,8 +110,8 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y)
 	p->area.y = y;
 	p->position.x = x;
 	p->position.y = y;
-	if(particle.has_collisions)
-		p->collider = App->collision->AddCollider(p->area, p->collider_type, std::bind(&Particle::OnCollision, p, std::placeholders::_1));
+	//if(particle.has_collisions)
+		//p->collider = App->collision->AddCollider(p->area, p->collider_type, std::bind(&Particle::OnCollision, p, std::placeholders::_1));
 	active.push_back(p);
 
 }
@@ -138,13 +138,14 @@ Particle::Particle(const Particle& p)
 	this->fx = p.fx;
 	this->type = p.type;
 	this->area = p.area;
+	this->collider = nullptr;
 }
 
 Particle::~Particle()
 {
-	if (has_collisions && collider != NULL)
+	if (has_collisions && collider != nullptr)
 		collider->to_delete = true;
-	collider = NULL;
+	collider = nullptr;
 }
 
 bool Particle::Update()
@@ -169,7 +170,7 @@ bool Particle::Update()
 	return (!auto_destroy || auto_destroy && time_to_live >= SDL_GetTicks() - start_time);
 }
 
-void Particle::OnCollision(COLLIDER_TYPE collider_type) {
+/*void Particle::OnCollision(COLLIDER_TYPE collider_type) {
  	switch (this->type) {
 		case PARTICLE_TYPE::LASER:
 			if (collider_type == COLLIDER_TYPE::WALL)
@@ -179,3 +180,4 @@ void Particle::OnCollision(COLLIDER_TYPE collider_type) {
 	}
 	
 }
+*/

@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "Point.h"
+#include "ModuleCollision.h"
 
 #include "ModuleLevelOneStageOne.h"
 #include "ModuleEntity.h"
@@ -22,9 +23,19 @@ bool ModuleLevelOneStageOne::Start() {
 	graphics = App->textures->Load("resources/sprites/levels/level1.png");
 
 	player = (Player *)App->entities->Create(ENTITY_TYPE::PLAYER);
-	player->position->x = 16;
-	player->position->y = 0;
-	player->position->z = 135;
+
+	player->Move(iPoint(16, 120, 120));
+
+	App->collision->AddCollider({ 0, 0, 992, 175 }, 80, WALL);
+	App->collision->AddCollider({ 0, 225, 992, 3 }, 128, WALL);
+
+	Collider *leftWall = App->collision->AddCollider({ 0, 0, 3, 225 }, 0, WALL, true);
+	Collider *righttWall = App->collision->AddCollider({ 381, 0, 3, 225 }, 0, WALL, true);
+
+
+	//player->position->x = 16;
+	//player->position->y = 0;
+	//player->position->z = 135;
 
 
 	return true;
