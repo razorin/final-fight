@@ -5,7 +5,7 @@
 #include "ModuleRender.h"
 #include "SDL/include/SDL.h"
 
-ModuleFadeToBlack::ModuleFadeToBlack(bool start_enabled) :  Module(start_enabled)
+ModuleFadeToBlack::ModuleFadeToBlack(const JSON_Object *json, bool start_enabled) :  Module(json, start_enabled)
 {}
 
 ModuleFadeToBlack::~ModuleFadeToBlack()

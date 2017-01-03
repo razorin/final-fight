@@ -79,10 +79,18 @@
     <ClInclude Include="Section.h">
       <Filter>Game Entities</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleLevelOneStageOne.h">
-      <Filter>Core Modules</Filter>
+    <ClInclude Include="ModuleEntity.h">
+      <Filter>Game Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleEntity.h" />
+    <ClInclude Include="ModuleLevelOneStageOne.h">
+      <Filter>Game Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Parson.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Configurator.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -136,11 +144,14 @@
     <ClCompile Include="Section.cpp">
       <Filter>Game Entities</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLevelOneStageOne.cpp">
-      <Filter>Core Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleEntity.cpp">
-      <Filter>Main</Filter>
+      <Filter>Game Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLevelOneStageOne.cpp">
+      <Filter>Game Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Parson.c">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

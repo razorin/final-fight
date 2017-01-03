@@ -29,7 +29,7 @@ class ModuleInput : public Module
 
 public:
 
-	ModuleInput();
+	ModuleInput(const JSON_Object *json = nullptr);
 
 	// Destructor
 	virtual ~ModuleInput();

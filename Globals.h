@@ -53,12 +53,4 @@ typedef unsigned int uint;
                               \
 	 }
 
-// Configuration -----------
-#define SCREEN_SIZE 3
-#define SCREEN_WIDTH 384
-#define SCREEN_HEIGHT 240
-#define FULLSCREEN false
-#define VSYNC true
-#define TITLE "Final Fight"
-
 #endif //__GLOBALS_H__

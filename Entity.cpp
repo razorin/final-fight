@@ -4,7 +4,7 @@
 #include <string.h>
 #include "Animation.h"
 
-Entity::Entity(ENTITY_TYPE type, SDL_Texture* graphics) : type(type), graphics(graphics) {
+Entity::Entity(ENTITY_TYPE type) : type(type) {
 	position = new iPoint(0, 0, 0);
 
 }

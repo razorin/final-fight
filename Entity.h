@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include <list>
+#include <map>
 
 template <class TYPE> class Point;
 typedef Point<int> iPoint;
@@ -20,7 +21,7 @@ enum ENTITY_TYPE {
 
 class Entity {
 public:
-	Entity(ENTITY_TYPE type, SDL_Texture* graphics);
+	Entity(ENTITY_TYPE type);
 	virtual ~Entity();
 	virtual void Update();
 	SDL_Texture* getGraphics() const;
@@ -40,6 +41,7 @@ protected:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect *section = nullptr;
 	Animation *currentAnimation = nullptr;
+	std::map<std::string, Animation*> animations;
 };
 
 #endif // !ENTITY_H

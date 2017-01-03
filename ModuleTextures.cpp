@@ -9,7 +9,7 @@
 
 using namespace std;
 
-ModuleTextures::ModuleTextures()
+ModuleTextures::ModuleTextures(const JSON_Object *json) : Module(json)
 {
 }
 

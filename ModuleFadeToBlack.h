@@ -7,7 +7,7 @@
 class ModuleFadeToBlack : public Module
 {
 public:
-	ModuleFadeToBlack(bool start_enabled = true);
+	ModuleFadeToBlack(const JSON_Object *json = nullptr, bool start_enabled = true);
 	~ModuleFadeToBlack();
 
 	bool Start();

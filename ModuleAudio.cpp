@@ -8,7 +8,7 @@
 
 using namespace std;
 
-ModuleAudio::ModuleAudio( bool start_enabled) : Module( start_enabled)
+ModuleAudio::ModuleAudio(const JSON_Object *json, bool start_enabled) : Module( json, start_enabled)
 {}
 
 // Destructor

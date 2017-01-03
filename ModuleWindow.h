@@ -10,7 +10,7 @@ class ModuleWindow : public Module
 {
 public:
 
-	ModuleWindow();
+	ModuleWindow(const JSON_Object *json = nullptr);
 
 	// Destructor
 	virtual ~ModuleWindow();
@@ -27,6 +27,16 @@ public:
 
 	//The surface contained by the window
 	SDL_Surface* screen_surface = nullptr;
+
+	int screen_width = 0;
+	int screen_height = 0;
+	bool fullscreen = false;
+	bool borderless = false;
+	bool resizable = false;
+	bool fullscreen_window = false;
+	int screen_size = 0;
+	const char *title;
+
 };
 
 #endif // __MODULEWINDOW_H__

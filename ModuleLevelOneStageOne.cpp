@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "Animation.h"
 
-ModuleLevelOneStageOne::ModuleLevelOneStageOne(bool active) : Module(active) {
+ModuleLevelOneStageOne::ModuleLevelOneStageOne(const JSON_Object *json, bool active) : Module(json, active) {
 }
 
 
@@ -31,12 +31,6 @@ bool ModuleLevelOneStageOne::Start() {
 
 	Collider *leftWall = App->collision->AddCollider({ 0, 0, 3, 225 }, 0, WALL, true);
 	Collider *righttWall = App->collision->AddCollider({ 381, 0, 3, 225 }, 0, WALL, true);
-
-
-	//player->position->x = 16;
-	//player->position->y = 0;
-	//player->position->z = 135;
-
 
 	return true;
 }

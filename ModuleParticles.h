@@ -47,7 +47,7 @@ struct Particle
 class ModuleParticles : public Module
 {
 public:
-	ModuleParticles();
+	ModuleParticles(const JSON_Object *json = nullptr);
 	~ModuleParticles();
 
 	bool Start();

@@ -15,7 +15,7 @@ struct Frame;
 class ModuleRender : public Module
 {
 public:
-	ModuleRender();
+	ModuleRender(const JSON_Object *json = nullptr);
 	~ModuleRender();
 
 	bool Init();
@@ -30,6 +30,7 @@ public:
 public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
+	bool vsync = false;
 };
 
 #endif // __MODULERENDER_H__

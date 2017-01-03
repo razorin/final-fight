@@ -10,7 +10,7 @@ struct SDL_Texture;
 class ModuleTextures : public Module
 {
 public:
-	ModuleTextures();
+	ModuleTextures(const JSON_Object *json = nullptr);
 	~ModuleTextures();
 
 	bool Init();

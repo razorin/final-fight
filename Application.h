@@ -4,6 +4,7 @@
 #include<list>
 #include "Globals.h"
 #include "Module.h"
+#include "Parson.h"
 
 class ModuleRender;
 class ModuleWindow;
@@ -42,6 +43,7 @@ public:
 	// Game modules ---
 	ModuleLevelOneStageOne* levelOneStageOne;
 	ModuleEntity* entities;
+	JSON_Value *configuration;
 
 private:
 

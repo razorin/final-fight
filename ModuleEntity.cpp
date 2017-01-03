@@ -8,7 +8,7 @@
 #include "ModuleRender.h"
 #include "Point.h"
 
-ModuleEntity::ModuleEntity(bool enable) : Module(enable) {
+ModuleEntity::ModuleEntity(const JSON_Object *json, bool enable) : Module(json, enable) {
 }
 
 
@@ -21,7 +21,7 @@ Entity* ModuleEntity::Create(const ENTITY_TYPE &type) {
 
 	switch (type) {
 		case ENTITY_TYPE::PLAYER: 
-			result = new Player(App->textures->Load("resources/sprites/characters/cody.png"));
+			result = new Player();
 			break;
 	}
 

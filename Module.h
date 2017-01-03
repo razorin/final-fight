@@ -2,13 +2,15 @@
 #define __MODULE_H__
 
 #include "Globals.h"
+#include "Parson.h"
+
 class Application;
 
 class Module
 {
 public:
 
-	Module(bool active = true) : active(active)
+	Module(const JSON_Object *json = nullptr, bool active = true) : active(active)
 	{}
 
 	virtual ~Module()

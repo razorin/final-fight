@@ -14,22 +14,27 @@ using namespace std;
 
 Application::Application()
 {
+	configuration = json_parse_file("config.json");
+	JSON_Object *root = json_value_get_object(configuration);
 	// Order matters: they will init/start/pre/update/post in this order
 	modules.push_back(input = new ModuleInput());
-	modules.push_back(window = new ModuleWindow());
+	modules.push_back(window = new ModuleWindow(json_object_dotget_object(root, "config.window")));
 
-	modules.push_back(renderer = new ModuleRender());
+	modules.push_back(renderer = new ModuleRender(json_object_dotget_object(root, "config.renderer")));
 	modules.push_back(textures = new ModuleTextures());
 	modules.push_back(audio = new ModuleAudio());
 
 	// Game Modules
-	modules.push_back(levelOneStageOne = new ModuleLevelOneStageOne(false));
-	modules.push_back(entities = new ModuleEntity(true));
+	modules.push_back(levelOneStageOne = new ModuleLevelOneStageOne(nullptr, false));
+	modules.push_back(entities = new ModuleEntity(json_object_dotget_object(root, "config.entities"), true));
 
 	// Modules to draw on top of game logic
 	modules.push_back(collision = new ModuleCollision());
 	modules.push_back(particles = new ModuleParticles());
 	modules.push_back(fade = new ModuleFadeToBlack());
+
+	//Configurator *configurator = new Configurator();
+	//configuration = configurator->LoadConfiguration("config.json");
 }
 
 Application::~Application()

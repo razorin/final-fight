@@ -3,8 +3,17 @@
 #include "ModuleWindow.h"
 #include "SDL/include/SDL.h"
 
-ModuleWindow::ModuleWindow()
+ModuleWindow::ModuleWindow(const JSON_Object *json) : Module(json)
 {
+
+	screen_width = (int)json_object_dotget_number(json, "resolution.width");
+	screen_height = (int)json_object_dotget_number(json, "resolution.height");;
+	fullscreen = json_object_dotget_boolean(json, "fullscreen");
+	borderless = (bool)json_object_dotget_boolean(json, "borderless");
+	resizable = json_object_dotget_boolean(json, "resizable");
+	fullscreen_window = json_object_dotget_boolean(json, "fullscren_window");
+	screen_size = (int)json_object_dotget_number(json, "size");
+	title = json_object_dotget_string(json, "title");
 }
 
 // Destructor
@@ -26,16 +35,16 @@ bool ModuleWindow::Init()
 	else
 	{
 		//Create window
-		int width = SCREEN_WIDTH * SCREEN_SIZE;
-		int height = SCREEN_HEIGHT * SCREEN_SIZE;
+		int width = screen_width * screen_size;
+		int height = screen_height * screen_size;
 		Uint32 flags = SDL_WINDOW_SHOWN;
 
-		if(FULLSCREEN == true)
+		if(fullscreen == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
 
-		window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
 
 		if(window == nullptr)
 		{

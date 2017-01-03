@@ -8,7 +8,7 @@ class Player;
 
 class ModuleLevelOneStageOne : public Module {
 public:
-	ModuleLevelOneStageOne(bool active);
+	ModuleLevelOneStageOne(const JSON_Object *json, bool active);
 	~ModuleLevelOneStageOne();
 
 	bool Start();

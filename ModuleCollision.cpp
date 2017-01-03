@@ -6,7 +6,7 @@
 
 using namespace std;
 
-ModuleCollision::ModuleCollision()
+ModuleCollision::ModuleCollision(const JSON_Object *json) : Module(json)
 {
 	matrix_collision = new bool[64]{false, false, false, false, false, false, false, false,
 									false, false, false, true, true, true, true, true,

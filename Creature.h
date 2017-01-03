@@ -8,7 +8,7 @@ struct SDL_Texture;
 
 class Creature : public Entity {
 public:
-	Creature(SDL_Texture* graphics);
+	Creature(ENTITY_TYPE type);
 	~Creature();
 
 public:

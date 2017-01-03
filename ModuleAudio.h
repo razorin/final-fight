@@ -14,7 +14,7 @@ class ModuleAudio : public Module
 {
 public:
 
-	ModuleAudio(bool start_enabled = true);
+	ModuleAudio(const JSON_Object *json = nullptr, bool start_enabled = true);
 	~ModuleAudio();
 
 	bool Init();

@@ -50,7 +50,7 @@ class ModuleCollision : public Module
 {
 public:
 
-	ModuleCollision();
+	ModuleCollision(const JSON_Object *json = nullptr);
 	~ModuleCollision();
 
 	update_status PreUpdate();

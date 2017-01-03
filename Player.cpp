@@ -6,32 +6,38 @@
 #include "ModuleInput.h"
 #include "Globals.h"
 #include "ModuleCollision.h"
+#include "Parson.h"
+#include "ModuleTextures.h"
 
-
-Player::Player(SDL_Texture* graphics) : Creature(graphics){
+Player::Player() : Creature(ENTITY_TYPE::PLAYER){
 	
-	idle = new Animation();
-	idle->frames.push_back(Frame({0, 0, 107, 107}));
-	idle->loop = false;
+	JSON_Object *root = json_value_get_object(App->configuration);
+	JSON_Object *playerConfig = json_object_dotget_object(root, "config.entities.player");
+	JSON_Array *configAnimations = json_object_dotget_array(playerConfig, "animations");
+	const char* path = json_object_dotget_string(playerConfig, "graphics");
+	graphics =  App->textures->Load(path);
 
-	movement = new Animation();
+	for (int i = 0; i < json_array_get_count(configAnimations); ++i) {
+		JSON_Object *configAnimation = json_array_get_object(configAnimations, i);
+		std::string key = json_object_dotget_string(configAnimation, "name");
+		
+		Animation *anim = new Animation();
+		anim->loop = json_object_dotget_boolean(configAnimation, "loop");
+		anim->speed = json_object_dotget_number(configAnimation, "speed");
+		
+		JSON_Array *configFrames = json_object_dotget_array(configAnimation, "frames");
 
-	movement->frames.push_back(Frame({ 107, 0, 107, 107}));
-	movement->frames.push_back(Frame({ 214, 0, 107, 107}));
-	movement->frames.push_back(Frame({ 321, 0, 107, 107}));
-	movement->frames.push_back(Frame({ 428, 0, 107, 107}));
-	movement->frames.push_back(Frame({ 535, 0, 107, 107}));
-	movement->frames.push_back(Frame({ 642, 0, 107, 107}));
-	movement->loop = true;
-	movement->speed = .1f;
+		for (int j = 0; j < json_array_get_count(configFrames); ++j) {
+			JSON_Object *configFrame = json_array_get_object(configFrames, j);
+			anim->frames.push_back(Frame({ (int)json_object_dotget_number(configFrame, "x"), (int)json_object_dotget_number(configFrame, "y"),
+				(int)json_object_dotget_number(configFrame, "width"), (int)json_object_dotget_number(configFrame, "height") },
+				(int)json_object_dotget_number(configFrame, "offset_x"), (int)json_object_dotget_number(configFrame, "offset_y")));
+		}
 
-	attack1 = new Animation();
-	attack1->frames.push_back(Frame({ 0, 107, 107, 107}, 0, 2));
-	attack1->frames.push_back(Frame({ 107, 107, 107, 107 }, 13, 2));
-	attack1->loop = true;
-	attack1->speed = .1f;
+		animations[key] =  anim;
+	}
 
-	currentAnimation = idle;
+	currentAnimation = animations["idle"];
 
 	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, position->z, COLLIDER_PLAYER, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
 }
@@ -39,10 +45,6 @@ Player::Player(SDL_Texture* graphics) : Creature(graphics){
 
 Player::~Player() {
 	currentAnimation = nullptr;
-	RELEASE(idle);
-	RELEASE(movement);
-	RELEASE(jump);
-	RELEASE(attack1);
 }
 
 
@@ -54,30 +56,30 @@ void Player::Update() {
 	if (is_attacking == false) {
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			speed.x -= baseSpeed;
-			currentAnimation = movement;
+			currentAnimation = animations["movement"];
 			flipped = true;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			speed.x += baseSpeed;
-			currentAnimation = movement;
+			currentAnimation = animations["movement"];
 			flipped = false;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 			speed.z += baseSpeed;
 			speed.y += baseSpeed;
-			currentAnimation = movement;
+			currentAnimation = animations["movement"];
 		}
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			speed.z -= baseSpeed;
 			speed.y -= baseSpeed;
-			currentAnimation = movement;
+			currentAnimation = animations["movement"];
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 			LOG("Attacking");
 			is_attacking = true;
 			//attack1->Reset();
-			currentAnimation = attack1;
+			currentAnimation = animations["attack1"];
 		}
 		
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE &&
@@ -86,15 +88,15 @@ void Player::Update() {
 			App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE &&
 			App->input->GetKey(SDL_SCANCODE_E) == KEY_IDLE) {
 
-			movement->Reset();
-			currentAnimation = idle;
+			animations["movement"]->Reset();
+			currentAnimation = animations["idle"];
 		}
 	} else if(is_attacking == true){
 		if (currentAnimation->Finished()){
 			LOG("Attack ending!!");
-			attack1->Reset();
+			animations["attack1"]->Reset();
 			is_attacking = false;
-			currentAnimation = idle;
+			currentAnimation = animations["idle"];
 		}
 	}
 

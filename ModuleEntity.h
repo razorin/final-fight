@@ -9,7 +9,7 @@ enum ENTITY_TYPE;
 
 class ModuleEntity : public Module {
 public:
-	ModuleEntity(bool enable);
+	ModuleEntity(const JSON_Object *json, bool enable);
 	~ModuleEntity();
 
 	bool Start();

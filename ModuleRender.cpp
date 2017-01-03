@@ -6,11 +6,10 @@
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 
-ModuleRender::ModuleRender()
+ModuleRender::ModuleRender(const JSON_Object *json) : Module(json)
 {
-	camera.x = camera.y = 0;
-	camera.w = SCREEN_WIDTH * SCREEN_SIZE;
-	camera.h = SCREEN_HEIGHT* SCREEN_SIZE;
+
+	vsync = json_object_dotget_boolean(json, "vsync");
 }
 
 // Destructor
@@ -21,10 +20,15 @@ ModuleRender::~ModuleRender()
 bool ModuleRender::Init()
 {
 	LOG("Creating Renderer context");
+
+	camera.x = camera.y = 0;
+	camera.w = App->window->screen_width * App->window->screen_size;
+	camera.h = App->window->screen_height* App->window->screen_size;
+
 	bool ret = true;
 	Uint32 flags = 0;
 
-	if(VSYNC == true)
+	if(vsync == true)
 	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 	}
@@ -93,8 +97,8 @@ bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, Frame* frame, bo
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + (position.x + (flip ? -frame->offset_x : frame->offset_x)) * SCREEN_SIZE;
-	rect.y = (int)(camera.y * speed) + (position.y + frame->offset_y ) * SCREEN_SIZE;
+	rect.x = (int)(camera.x * speed) + (position.x + (flip ? -frame->offset_x : frame->offset_x)) * App->window->screen_size;
+	rect.y = (int)(camera.y * speed) + (position.y + frame->offset_y ) * App->window->screen_size;
 
 	if(frame != NULL)
 	{
@@ -106,8 +110,8 @@ bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, Frame* frame, bo
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
 
-	rect.w *= SCREEN_SIZE;
-	rect.h *= SCREEN_SIZE;
+	rect.w *= App->window->screen_size;
+	rect.h *= App->window->screen_size;
 	if (!flip) {
 		if(SDL_RenderCopy(renderer, texture, &frame->section, &rect) != 0)
 		{
@@ -135,10 +139,10 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_Rect rec(rect);
 	if (use_camera)
 	{
-		rec.x = (int)(camera.x + rect.x * SCREEN_SIZE);
-		rec.y = (int)(camera.y + rect.y * SCREEN_SIZE);
-		rec.w *= SCREEN_SIZE;
-		rec.h *= SCREEN_SIZE;
+		rec.x = (int)(camera.x + rect.x * App->window->screen_size);
+		rec.y = (int)(camera.y + rect.y * App->window->screen_size);
+		rec.w *= App->window->screen_size;
+		rec.h *= App->window->screen_size;
 	}
 
 	if (SDL_RenderFillRect(renderer, &rec) != 0)

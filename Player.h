@@ -11,16 +11,12 @@ struct SDL_Texture;
 
 class Player : public Creature {
 public:
-	Player(SDL_Texture* graphics);
+	Player();
 	~Player();
 	void Update();
 	void OnCollision(COLLIDER_TYPE type);
 	void Move(const iPoint &movement);
-public:
-	Animation *idle = nullptr;
-	Animation *movement = nullptr;
-	Animation *jump = nullptr;
-	Animation *attack1 = nullptr;
+
 private:
 	bool is_attacking = false;
 	iPoint previousPosition;

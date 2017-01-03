@@ -8,7 +8,7 @@
 
 #include "SDL/include/SDL_timer.h"
 
-ModuleParticles::ModuleParticles()
+ModuleParticles::ModuleParticles(const JSON_Object *json) : Module(json)
 {}
 
 ModuleParticles::~ModuleParticles()
