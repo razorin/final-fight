@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 #include "Animation.h"
+#include "ModuleCollision.h"
 
 ModuleRender::ModuleRender(const JSON_Object *json) : Module(json)
 {
@@ -98,7 +99,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, Frame* frame, bo
 	bool ret = true;
 	SDL_Rect rect;
 	rect.x = (int)(camera.x * speed) + (position.x + (flip ? -frame->offset_x : frame->offset_x)) * App->window->screen_size;
-	rect.y = (int)(camera.y * speed) + (position.y + frame->offset_y ) * App->window->screen_size;
+	rect.y = (int)(camera.y * speed) + (position.y + frame->offset_y + position.z) * App->window->screen_size;
 
 	if(frame != NULL)
 	{
@@ -129,18 +130,18 @@ bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, Frame* frame, bo
 	return ret;
 }
 
-bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera)
+bool ModuleRender::DrawQuad(const Collider& collider, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera)
 {
 	bool ret = true;
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
-	SDL_Rect rec(rect);
+	SDL_Rect rec(collider.rect);
 	if (use_camera)
 	{
-		rec.x = (int)(camera.x + rect.x * App->window->screen_size);
-		rec.y = (int)(camera.y + rect.y * App->window->screen_size);
+		rec.x = (int)(camera.x + collider.rect.x * App->window->screen_size);
+		rec.y = (int)(camera.y + (collider.rect.y + collider.z) * App->window->screen_size);
 		rec.w *= App->window->screen_size;
 		rec.h *= App->window->screen_size;
 	}

@@ -23,13 +23,14 @@ struct Collider
 	bool to_delete = false;
 	int z = 0;
 	bool ignore_z = false;
+	bool ignore_y = false;
 	COLLIDER_TYPE type;
-	std::function<void(COLLIDER_TYPE)> onCollision;
+	std::function<void(const Collider &)> onCollision;
 
 	// TODO 10: Add a way to notify other classes that a collision happened
 
-	Collider(SDL_Rect rectangle, int z, COLLIDER_TYPE type, bool ignore_z, std::function<void(COLLIDER_TYPE)> onCollision) : // expand this call if you need to
-		rect(rectangle), z(z), type(type), ignore_z(ignore_z), onCollision(onCollision)
+	Collider(SDL_Rect rectangle, int z, COLLIDER_TYPE type, bool ignore_z, bool ignore_y, std::function<void(const Collider &)> onCollision) : // expand this call if you need to
+		rect(rectangle), z(0), type(type), ignore_z(ignore_z), ignore_y(ignore_y), onCollision(onCollision)
 	{
 
 	}
@@ -41,9 +42,15 @@ struct Collider
 		this->z = z;
 	}
 
-	bool CheckCollision(const SDL_Rect& r, int z, bool ignore_z = false) const;
+	void AddPoint(const iPoint &movement) {
+		rect.x += movement.x;
+		rect.y += movement.y;
+		this->z += movement.z;
+	}
 
-	void Notify(COLLIDER_TYPE type);
+	bool CheckCollision(const Collider &other) const;
+
+	void Notify(const Collider &other);
 };
 
 class ModuleCollision : public Module
@@ -58,7 +65,7 @@ public:
 
 	bool CleanUp();
 
-	Collider* AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYPE type = COLLIDER_TYPE::NONE, bool ignore_z = false, std::function<void(COLLIDER_TYPE)> onCollision = nullptr);
+	Collider* AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYPE type = COLLIDER_TYPE::NONE, bool ignore_z = false, bool ignore_y = false, std::function<void(const Collider &)> onCollision = nullptr);
 	void DebugDraw();
 
 private:

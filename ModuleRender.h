@@ -11,6 +11,7 @@ struct SDL_Texture;
 struct SDL_Renderer;
 struct SDL_Rect;
 struct Frame;
+struct Collider;
 
 class ModuleRender : public Module
 {
@@ -25,7 +26,7 @@ public:
 	bool CleanUp();
 
 	bool Blit(SDL_Texture* texture, iPoint &position, Frame* section, bool flip = false, float speed = 1.0f);
-	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera = true);
+	bool DrawQuad(const Collider& collider, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera = true);
 
 public:
 	SDL_Renderer* renderer = nullptr;

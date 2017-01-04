@@ -8,6 +8,7 @@
 #include "ModuleCollision.h"
 #include "Parson.h"
 #include "ModuleTextures.h"
+#include "Timer.h"
 
 Player::Player() : Creature(ENTITY_TYPE::PLAYER){
 	
@@ -39,21 +40,31 @@ Player::Player() : Creature(ENTITY_TYPE::PLAYER){
 
 	currentAnimation = animations["idle"];
 
-	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, position->z, COLLIDER_PLAYER, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
+	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, position->z, COLLIDER_PLAYER, false, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
+	timer = new Timer();
 }
 
+void Player::Init(const iPoint &initialPosition) {
+	*position = initialPosition;
+	positionCollider->SetPos(position->x + 35, position->y + 9, position->z);
+}
 
 Player::~Player() {
 	currentAnimation = nullptr;
+	for (auto it = animations.begin(); it != animations.end(); ++it) {
+		RELEASE(it->second);
+	}
+	animations.clear();
+	RELEASE(timer);
 }
 
 
 void Player::Update() {
 	iPoint speed;
-	previousPosition = *position;
+	previousPosition = iPoint(*position);
 	int baseSpeed = 1;
 	speed.SetToZero();
-	if (is_attacking == false) {
+	if (is_attacking == false && is_jumping == false) {
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			speed.x -= baseSpeed;
 			currentAnimation = animations["movement"];
@@ -65,15 +76,32 @@ void Player::Update() {
 			flipped = false;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			speed.z += baseSpeed;
+			//speed.z += baseSpeed;
 			speed.y += baseSpeed;
 			currentAnimation = animations["movement"];
 		}
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			speed.z -= baseSpeed;
+			//speed.z -= baseSpeed;
 			speed.y -= baseSpeed;
 			currentAnimation = animations["movement"];
 		}
+
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+			is_jumping = true;
+			speed.z -= baseSpeed;
+			currentAnimation = animations["idle"];
+			timer->Start();
+		}
+		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT) {
+			speed.z -= baseSpeed;
+			currentAnimation = animations["idle"];
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_REPEAT) {
+			speed.z += baseSpeed;
+			currentAnimation = animations["idle"];
+		}
+
 
 		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 			LOG("Attacking");
@@ -81,6 +109,7 @@ void Player::Update() {
 			//attack1->Reset();
 			currentAnimation = animations["attack1"];
 		}
+
 		
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE &&
 			App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE &&
@@ -99,22 +128,54 @@ void Player::Update() {
 			currentAnimation = animations["idle"];
 		}
 	}
+	else if (is_jumping == true) {
+		if (is_falling) {
+			if (position->z >= 0) {
+				is_jumping = false;
+				is_falling = false;
+			} else{
+				speed.z += baseSpeed;
+			}
+		}
+		else if (position->z > -10) {
+			speed.z -= baseSpeed;
+		}
+		else if (position->z <= -10) {
+			is_falling = true;
+		}
+	}
 
-		
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		LOG("Player Previous Position: %i,%i,%i (x, y, z)", previousPosition.x, previousPosition.y, previousPosition.z);
+		LOG("Player Position: %i,%i,%i (x, y, z)", position->x, position->y, position->z);
+		LOG("Player Collider: %i,%i,%i,%i,%i (x, w, y, h, z)", positionCollider->rect.x, positionCollider->rect.w, positionCollider->rect.y, positionCollider->rect.h, positionCollider->z);
+	}
+
 	Move(speed);
 	//section = &currentAnimation->GetCurrentFrame();
 }
 
-void Player::OnCollision(COLLIDER_TYPE type) {
-	switch (type) {
+void Player::OnCollision(const Collider &other) {
+	switch (other.type) {
 	case COLLIDER_TYPE::WALL:
-		LOG("COLLISION WITH WALL!!!");
-		*position = previousPosition;
+		//LOG("COLLISION WITH WALL!!!");
+		//LOG("PREVIOUS POSITION: %i,%i,%i (x, y, z)", previousPosition.x, previousPosition.y, previousPosition.z);
+		//LOG("Position BEFORE WALL COLLISION: %i,%i,%i (x, y, z)", position->x, position->y, position->z);
+		Move(previousPosition- *position);
+		//*position = previousPosition;
+		//LOG("Position AFTER WALL COLLISION: %i,%i,%i (x, y, z)", position->x, position->y, position->z);
+		//Move(iPoint(0, 0, 0));
 		break;
 	}
 }
 
 void Player::Move(const iPoint &movement) {
 	*position += movement;
-	positionCollider->SetPos(position->x + 35, position->y + 9, position->z);
+	positionCollider->AddPoint(movement);
+	//positionCollider->SetPos(position->x + 35, position->y + 9, position->z + 9);
+	/*if (is_jumping) {
+		LOG("Movement jumping: %i,%i,%i (x, y, z)", movement.x, movement.y, movement.z);
+		LOG("Position jumping: %i,%i,%i (x, y, z)", position->x, position->y, position->z);
+		LOG("Collider jumping: %i,%i,%i (x, y, z)", positionCollider->rect.x, positionCollider->rect.y, positionCollider->z);
+	}*/
 }

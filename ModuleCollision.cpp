@@ -45,9 +45,9 @@ update_status ModuleCollision::Update()
 	// After making it work, review that you are doing the minumum checks possible
 	for (list<Collider*>::iterator it = colliders.begin(); it != colliders.end(); ++it){
 		for (list<Collider*>::iterator jt = std::next(it); jt != colliders.end(); ++jt) {
-			if (matrix_collision[(*it)->type * 6 + (*jt)->type] && (*it)->CheckCollision((*jt)->rect, (*jt)->z, (*jt)->ignore_z)) {
-				(*it)->Notify((*jt)->type);
-				(*jt)->Notify((*it)->type);
+			if (matrix_collision[(*it)->type * 6 + (*jt)->type] && (*it)->CheckCollision(**jt)) {
+				(*it)->Notify((**jt));
+				(*jt)->Notify((**it));
 			}
 		}
 	}
@@ -64,7 +64,7 @@ update_status ModuleCollision::Update()
 void ModuleCollision::DebugDraw()
 {
 	for (list<Collider*>::iterator it = colliders.begin(); it != colliders.end(); ++it)
-		App->renderer->DrawQuad((*it)->rect, 255, 0, 0, 80);
+		App->renderer->DrawQuad((**it), 255, 0, 0, 80);
 }
 
 // Called before quitting
@@ -80,9 +80,9 @@ bool ModuleCollision::CleanUp()
 	return true;
 }
 
-Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYPE type, bool ignore_z, std::function<void(COLLIDER_TYPE)> onCollision)
+Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYPE type, bool ignore_z, bool ignore_y, std::function<void(const Collider &)> onCollision)
 {
-	Collider* ret = new Collider(rect, z, type, ignore_z, onCollision);
+	Collider* ret = new Collider(rect, z, type, ignore_z, ignore_y, onCollision);
 
 	colliders.push_back(ret);
 
@@ -91,18 +91,18 @@ Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYP
 
 // -----------------------------------------------------
 
-bool Collider::CheckCollision(const SDL_Rect& r, int z, bool ignore_z) const
+bool Collider::CheckCollision(const Collider &other) const
 {
 	// TODO 7: Create by hand (avoid consulting the internet) a simple collision test
 	// Return true if the argument and the own rectangle are intersecting
-	return (this->rect.x < r.x + r.w &&
-			this->rect.x + this->rect.w > r.x &&
-			this->rect.y < r.y + r.h &&
-			this->rect.h + this->rect.y > r.y &&
-			((this->ignore_z || ignore_z) ? true : (this->z - z <= 2 && this->z - z >= -2)));
+	return (this->rect.x < other.rect.x + other.rect.w &&
+		this->rect.x + this->rect.w > other.rect.x &&
+		((this->ignore_y || other.ignore_y) ? true : this->rect.y + rect.h - (other.rect.y + other.rect.h) == 0) &&
+		((this->ignore_z || other.ignore_z) ? true : (this->z - z < 2 && this->z - z > -2)));
+
 }
 
-void Collider::Notify(COLLIDER_TYPE type) {
+void Collider::Notify(const Collider &other) {
 	if (onCollision)
-		onCollision(type);
+		onCollision(other);
 }

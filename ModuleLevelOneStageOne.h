@@ -5,6 +5,7 @@
 
 struct SDL_Texture;
 class Player;
+struct Collider;
 
 class ModuleLevelOneStageOne : public Module {
 public:
@@ -18,6 +19,9 @@ public:
 public:
 	SDL_Texture* graphics = nullptr;
 	Player *player = nullptr;
+	Collider *upperWall = nullptr;
+	Collider *leftWall = nullptr;
+	Collider *righttWall = nullptr;
 };
 
 #endif // !ModuleLevelOneStageOne_H
