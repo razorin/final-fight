@@ -18,17 +18,6 @@ enum update_status
 	UPDATE_ERROR
 };
 
-enum COLLIDER_TYPE {
-	NONE,
-	COLLIDER_PLAYER,
-	PLAYER_HIT,
-	ENEMY,
-	ENEMY_HIT,
-	WALL,
-	ITEM_DESTROYABLE,
-	ITEM_PICKABLE
-};
-
 // Useful typedefs ---------
 typedef unsigned int uint;
 

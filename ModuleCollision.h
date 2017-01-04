@@ -16,6 +16,17 @@ public:
 	}
 };*/
 
+enum COLLIDER_TYPE {
+	NONE,
+	COLLIDER_PLAYER,
+	PLAYER_HIT,
+	ENEMY,
+	ENEMY_HIT,
+	WALL,
+	ITEM_DESTROYABLE,
+	ITEM_PICKABLE,
+	CAMERA_WALL
+};
 
 struct Collider
 {
@@ -29,7 +40,7 @@ struct Collider
 
 	// TODO 10: Add a way to notify other classes that a collision happened
 
-	Collider(SDL_Rect rectangle, int z, COLLIDER_TYPE type, bool ignore_z, bool ignore_y, std::function<void(const Collider &)> onCollision) : // expand this call if you need to
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, bool ignore_z, bool ignore_y, std::function<void(const Collider &)> onCollision) : // expand this call if you need to
 		rect(rectangle), z(0), type(type), ignore_z(ignore_z), ignore_y(ignore_y), onCollision(onCollision)
 	{
 
@@ -65,7 +76,7 @@ public:
 
 	bool CleanUp();
 
-	Collider* AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYPE type = COLLIDER_TYPE::NONE, bool ignore_z = false, bool ignore_y = false, std::function<void(const Collider &)> onCollision = nullptr);
+	Collider* AddCollider(const SDL_Rect& rect, COLLIDER_TYPE type = COLLIDER_TYPE::NONE, bool ignore_z = false, bool ignore_y = false, std::function<void(const Collider &)> onCollision = nullptr);
 	void DebugDraw();
 
 private:

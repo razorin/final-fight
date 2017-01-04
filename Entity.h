@@ -16,6 +16,7 @@ class Animation;
 enum ENTITY_TYPE {
 	PLAYER,
 	CREATURE,
+	LEVEL,
 	UNKNOWN
 };
 

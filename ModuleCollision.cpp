@@ -6,16 +6,20 @@
 
 using namespace std;
 
+
+
 ModuleCollision::ModuleCollision(const JSON_Object *json) : Module(json)
 {
-	matrix_collision = new bool[64]{false, false, false, false, false, false, false, false,
+	matrix_collision = new bool[81]{false, false, false, false, false, false, false, false,
 									false, false, false, true, true, true, true, true,
 									false, false, false, true, false, false, false, true,
 									false, false, true, false, false, true, false, true,
 									false, true, false, false, false, false, false, false,
 									false, true, false, true, false, false, false, false,
 									false, true, false, false, false, false, false, false,
-									false, true, true, true, false, false, false, false};
+									false, true, true, true, false, false, false, false,
+									false, true, false, false, false, false, false, false
+									};
 }
 
 // Destructor
@@ -80,9 +84,9 @@ bool ModuleCollision::CleanUp()
 	return true;
 }
 
-Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, int z, COLLIDER_TYPE type, bool ignore_z, bool ignore_y, std::function<void(const Collider &)> onCollision)
+Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, COLLIDER_TYPE type, bool ignore_z, bool ignore_y, std::function<void(const Collider &)> onCollision)
 {
-	Collider* ret = new Collider(rect, z, type, ignore_z, ignore_y, onCollision);
+	Collider* ret = new Collider(rect, type, ignore_z, ignore_y, onCollision);
 
 	colliders.push_back(ret);
 
