@@ -1,17 +1,18 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+
 #include "Creature.h"
 #include "Globals.h"
 #include "Point.h"
+#include "Parson.h"
 
-struct Animation;
+class Animation;
 struct Frame;
 struct SDL_Texture;
-class Timer;
 
 class Player : public Creature {
 public:
-	Player();
+	Player(const JSON_Object *playerConfig);
 	~Player();
 	void Update();
 	void OnCollision(const Collider &other);
@@ -23,7 +24,6 @@ private:
 	bool is_jumping = false;
 	bool is_falling = false;
 	iPoint previousPosition;
-	Timer *timer;
 };
 
 #endif // !PLAYER_H

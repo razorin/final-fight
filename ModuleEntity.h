@@ -3,13 +3,14 @@
 
 #include <list>
 #include "Module.h"
+#include "Parson.h"
 
 class Entity;
 enum ENTITY_TYPE;
 
 class ModuleEntity : public Module {
 public:
-	ModuleEntity(const JSON_Object *json, bool enable);
+	ModuleEntity(const JSON_Value *json, bool enable);
 	~ModuleEntity();
 
 	bool Start();
@@ -18,7 +19,7 @@ public:
 
 	Entity* Create(const ENTITY_TYPE &type);
 
-
+	JSON_Object *config = nullptr;
 	std::list<Entity*> entities;
 };
 

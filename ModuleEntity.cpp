@@ -8,7 +8,8 @@
 #include "ModuleRender.h"
 #include "Point.h"
 
-ModuleEntity::ModuleEntity(const JSON_Object *json, bool enable) : Module(json, enable) {
+ModuleEntity::ModuleEntity(const JSON_Value *json, bool enable) : Module(json, enable) {
+	config = json_value_get_object(json);
 }
 
 
@@ -21,7 +22,8 @@ Entity* ModuleEntity::Create(const ENTITY_TYPE &type) {
 
 	switch (type) {
 		case ENTITY_TYPE::PLAYER: 
-			result = new Player();
+			//json_object_dotget_object(root, "config.entities")
+			result = new Player(json_object_dotget_object(config, "player"));
 			break;
 	}
 

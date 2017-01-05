@@ -2,26 +2,35 @@
 #define ModuleLevelOneStageOne_H
 
 #include "Module.h"
+#include <map>
+#include <vector>
 
 struct SDL_Texture;
 class Player;
 struct Collider;
+class Section;
 
 class ModuleLevelOneStageOne : public Module {
 public:
-	ModuleLevelOneStageOne(const JSON_Object *json, bool active);
+	ModuleLevelOneStageOne(const JSON_Value *json, bool active);
 	~ModuleLevelOneStageOne();
 
 	bool Start();
 	update_status Update();
 	bool CleanUp();
 
+private:
+	void Clear();
+
 public:
 	SDL_Texture* graphics = nullptr;
 	Player *player = nullptr;
-	Collider *upperWall = nullptr;
-	Collider *leftWall = nullptr;
-	Collider *righttWall = nullptr;
+	JSON_Object *config = nullptr;
+	Frame *scene = nullptr;
+	std::map<std::string, Collider*> cameraWalls;
+	std::vector<Section*> sections;
+	int currentSection = 0;
+
 };
 
 #endif // !ModuleLevelOneStageOne_H

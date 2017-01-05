@@ -16,7 +16,6 @@ class Animation;
 enum ENTITY_TYPE {
 	PLAYER,
 	CREATURE,
-	LEVEL,
 	UNKNOWN
 };
 
@@ -26,7 +25,6 @@ public:
 	virtual ~Entity();
 	virtual void Update();
 	SDL_Texture* getGraphics() const;
-	SDL_Rect * getSection() const;
 	Frame & getCurrentFrame() const;
 
 
@@ -40,7 +38,7 @@ public:
 
 protected:
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect *section = nullptr;
+	//SDL_Rect *section = nullptr;
 	Animation *currentAnimation = nullptr;
 	std::map<std::string, Animation*> animations;
 };

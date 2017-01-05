@@ -10,13 +10,10 @@
 #include "ModuleTextures.h"
 #include "Timer.h"
 
-Player::Player() : Creature(ENTITY_TYPE::PLAYER){
-	
-	JSON_Object *root = json_value_get_object(App->configuration);
-	JSON_Object *playerConfig = json_object_dotget_object(root, "config.entities.player");
-	JSON_Array *configAnimations = json_object_dotget_array(playerConfig, "animations");
+Player::Player(const JSON_Object *playerConfig) : Creature(ENTITY_TYPE::PLAYER){
 	const char* path = json_object_dotget_string(playerConfig, "graphics");
 	graphics =  App->textures->Load(path);
+	JSON_Array *configAnimations = json_object_dotget_array(playerConfig, "animations");
 
 	for (int i = 0; i < json_array_get_count(configAnimations); ++i) {
 		JSON_Object *configAnimation = json_array_get_object(configAnimations, i);
@@ -41,7 +38,7 @@ Player::Player() : Creature(ENTITY_TYPE::PLAYER){
 	currentAnimation = animations["idle"];
 
 	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, COLLIDER_PLAYER, false, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
-	timer = new Timer();
+	
 }
 
 void Player::Init(const iPoint &initialPosition) {
@@ -51,11 +48,6 @@ void Player::Init(const iPoint &initialPosition) {
 
 Player::~Player() {
 	currentAnimation = nullptr;
-	for (auto it = animations.begin(); it != animations.end(); ++it) {
-		RELEASE(it->second);
-	}
-	animations.clear();
-	RELEASE(timer);
 }
 
 
@@ -90,7 +82,6 @@ void Player::Update() {
 			is_jumping = true;
 			speed.z -= baseSpeed;
 			currentAnimation = animations["jump"];
-			timer->Start();
 		}
 
 
@@ -150,7 +141,6 @@ void Player::Update() {
 	}
 
 	Move(speed);
-	//section = &currentAnimation->GetCurrentFrame();
 }
 
 void Player::OnCollision(const Collider &other) {

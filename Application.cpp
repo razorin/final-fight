@@ -26,8 +26,8 @@ Application::Application()
 	modules.push_back(audio = new ModuleAudio());
 
 	// Game Modules
-	modules.push_back(levelOneStageOne = new ModuleLevelOneStageOne(nullptr, false));
-	modules.push_back(entities = new ModuleEntity(json_object_dotget_object(root, "config.entities"), true));
+	modules.push_back(levelOneStageOne = new ModuleLevelOneStageOne(json_object_dotget_value(root, "config.levelOneStageOne"), false));
+	modules.push_back(entities = new ModuleEntity(json_object_dotget_value(root, "config.entities"), true));
 
 	// Modules to draw on top of game logic
 	modules.push_back(collision = new ModuleCollision());
