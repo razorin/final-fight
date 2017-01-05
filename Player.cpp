@@ -9,6 +9,7 @@
 #include "Parson.h"
 #include "ModuleTextures.h"
 #include "Timer.h"
+#include "CodyIdleState.h"
 
 Player::Player(const JSON_Object *playerConfig) : Creature(ENTITY_TYPE::PLAYER){
 	const char* path = json_object_dotget_string(playerConfig, "graphics");
@@ -35,9 +36,11 @@ Player::Player(const JSON_Object *playerConfig) : Creature(ENTITY_TYPE::PLAYER){
 		animations[key] =  anim;
 	}
 
-	currentAnimation = animations["idle"];
+	//currentAnimation = animations["idle"];
+	state = new CodyIdleState();
 
 	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, COLLIDER_PLAYER, false, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
+	state->Start(this);
 	
 }
 
@@ -52,95 +55,14 @@ Player::~Player() {
 
 
 void Player::Update() {
-	iPoint speed;
 	previousPosition = iPoint(*position);
-	int baseSpeed = 1;
-	speed.SetToZero();
-	if (is_attacking == false && is_jumping == false) {
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			speed.x -= baseSpeed;
-			currentAnimation = animations["movement"];
-			flipped = true;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			speed.x += baseSpeed;
-			currentAnimation = animations["movement"];
-			flipped = false;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			//speed.z += baseSpeed;
-			speed.y += baseSpeed;
-			currentAnimation = animations["movement"];
-		}
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			//speed.z -= baseSpeed;
-			speed.y -= baseSpeed;
-			currentAnimation = animations["movement"];
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-			is_jumping = true;
-			speed.z -= baseSpeed;
-			currentAnimation = animations["jump"];
-		}
-
-
-		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-			LOG("Attacking");
-			is_attacking = true;
-			//attack1->Reset();
-			currentAnimation = animations["attack1"];
-		}
-
-		
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE &&
-			App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE &&
-			App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE &&
-			App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE &&
-			App->input->GetKey(SDL_SCANCODE_E) == KEY_IDLE && 
-			App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) {
-
-			animations["movement"]->Reset();
-			currentAnimation = animations["idle"];
-		}
-	} else if(is_attacking == true){
-		if (currentAnimation->Finished()){
-			LOG("Attack ending!!");
-			animations["attack1"]->Reset();
-			is_attacking = false;
-			currentAnimation = animations["idle"];
-		}
+	PlayerStateMachine *newState = state->Update(this);
+	if (newState != nullptr) {
+		RELEASE(state);
+		state = newState;
+		currentAnimation->Reset();
+		state->Start(this);
 	}
-	else if (is_jumping == true) {
-		if (is_falling) {
-			if (position->z >= 0) {
-				is_jumping = false;
-				is_falling = false;
-				currentAnimation = animations["idle"];
-				animations["jump"]->Reset();
-				animations["fall"]->Reset();
-			} else{
-				if(currentAnimation->Finished())
-					currentAnimation = animations["jump"];
-				speed.z += baseSpeed * 2;
-			}
-		}
-		else if (position->z > -55) {
-			speed.z -= baseSpeed * 2;
-		}
-		else if (position->z <= -55) {
-			is_falling = true;
-			currentAnimation = animations["fall"];
-		}
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-		LOG("Player Previous Position: %i,%i,%i (x, y, z)", previousPosition.x, previousPosition.y, previousPosition.z);
-		LOG("Player Position: %i,%i,%i (x, y, z)", position->x, position->y, position->z);
-		LOG("Player Collider: %i,%i,%i,%i,%i (x, w, y, h, z)", positionCollider->rect.x, positionCollider->rect.w, positionCollider->rect.y, positionCollider->rect.h, positionCollider->z);
-	}
-
-	Move(speed);
 }
 
 void Player::OnCollision(const Collider &other) {

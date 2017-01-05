@@ -5,12 +5,14 @@
 #include "Globals.h"
 #include "Point.h"
 #include "Parson.h"
+#include "PlayerStateMachine.h"
 
 class Animation;
 struct Frame;
 struct SDL_Texture;
 
 class Player : public Creature {
+	//friend class PlayerStateMachine;
 public:
 	Player(const JSON_Object *playerConfig);
 	~Player();
@@ -24,6 +26,9 @@ private:
 	bool is_jumping = false;
 	bool is_falling = false;
 	iPoint previousPosition;
+	PlayerStateMachine *state = nullptr;
+public:
+	int baseSpeed = 1;
 };
 
 #endif // !PLAYER_H

@@ -26,7 +26,8 @@ public:
 	virtual void Update();
 	SDL_Texture* getGraphics() const;
 	Frame & getCurrentFrame() const;
-
+	void setCurrentAnimation(Animation *animation);
+	Animation *getCurrentAnimation() const;
 
 public:
 	std::list<Entity *> entities;
@@ -35,12 +36,12 @@ public:
 	ENTITY_TYPE type;
 	iPoint* position = nullptr;
 	bool flipped = false;
+	std::map<std::string, Animation*> animations;
 
 protected:
 	SDL_Texture* graphics = nullptr;
 	//SDL_Rect *section = nullptr;
 	Animation *currentAnimation = nullptr;
-	std::map<std::string, Animation*> animations;
 };
 
 #endif // !ENTITY_H

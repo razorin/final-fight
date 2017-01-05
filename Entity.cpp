@@ -35,3 +35,11 @@ SDL_Texture* Entity::getGraphics() const {
 Frame & Entity::getCurrentFrame() const {
 	return currentAnimation->GetCurrentFrame();
 }
+
+void Entity::setCurrentAnimation(Animation *animation) {
+	this->currentAnimation = animation;
+}
+
+Animation * Entity::getCurrentAnimation() const {
+	return currentAnimation;
+}

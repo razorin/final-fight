@@ -17,6 +17,9 @@
     <Filter Include="Game Entities">
       <UniqueIdentifier>{0879100e-21bf-4122-91a2-99209f0239bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StateMachines">
+      <UniqueIdentifier>{6498dd3c-e2af-4c4c-a644-14c4e59a71d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModuleRender.h">
@@ -91,6 +94,25 @@
     <ClInclude Include="Section.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerStateMachine.h">
+      <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyStateMachine.h">
+      <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyMoveState.h">
+      <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyIdleState.h">
+      <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyIdleJump.h">
+      <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyIdleFall.h">
+      <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyAttackStateOne.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -152,6 +174,21 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyIdleFall.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyIdleJump.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyIdleState.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyMoveState.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyAttackStateOne.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

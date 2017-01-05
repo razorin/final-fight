@@ -48,9 +48,9 @@
               "x": 898,
               "y": 130,
               "width": 100,
-              "height": 45,
+              "height": 50,
               "ignore_z": true,
-              "ignore_y": true
+              "ignore_y": false
             }
           ],
       "cameraWalls": [
@@ -120,7 +120,7 @@
             ]
           },
           {
-            "name": "jump",
+            "name": "iddleJump",
             "loop": false,
             "speed": 0.05,
             "frames": [
@@ -132,6 +132,21 @@
                 "offset_x": 0,
                 "offset_y": 0
               },
+              {
+                "x": 107,
+                "y": 214,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              }
+            ]
+          },
+          {
+            "name": "lastIddleJump",
+            "loop": false,
+            "speed": 1,
+            "frames": [
               {
                 "x": 107,
                 "y": 214,

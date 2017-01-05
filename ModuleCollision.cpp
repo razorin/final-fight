@@ -101,7 +101,7 @@ bool Collider::CheckCollision(const Collider &other) const
 	// Return true if the argument and the own rectangle are intersecting
 	return (this->rect.x < other.rect.x + other.rect.w &&
 		this->rect.x + this->rect.w > other.rect.x &&
-		((this->ignore_y || other.ignore_y) ? true : this->rect.y + rect.h - (other.rect.y + other.rect.h) == 0) &&
+		((this->ignore_y || other.ignore_y) ? true : this->rect.y + rect.h > other.rect.y &&  this->rect.y + rect.h <= other.rect.y + other.rect.h) &&
 		((this->ignore_z || other.ignore_z) ? true : (this->z - z < 2 && this->z - z > -2)));
 
 }

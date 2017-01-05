@@ -126,7 +126,7 @@ void ModuleLevelOneStageOne::Clear() {
 	}
 	sections.clear();
 	RELEASE(scene);
-	RELEASE(graphics);
+	//RELEASE(graphics);
 	json_object_clear(config);
 	RELEASE(config);
 }
