@@ -1,5 +1,5 @@
 #include "CodyIdleState.h"
-#include "CodyIdleJump.h"
+#include "CodyIdleJumpState.h"
 #include "CodyMoveState.h"
 #include "Player.h"
 #include "Application.h"

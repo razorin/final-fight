@@ -72,9 +72,13 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="CodyAttackStateOne.h" />
-    <ClInclude Include="CodyIdleFall.h" />
-    <ClInclude Include="CodyIdleJump.h" />
+    <ClInclude Include="CodyIdleFallState.h" />
+    <ClInclude Include="CodyIdleJumpAttackState.h" />
+    <ClInclude Include="CodyIdleJumpState.h" />
     <ClInclude Include="CodyIdleState.h" />
+    <ClInclude Include="CodyMovementFallState.h" />
+    <ClInclude Include="CodyMovementJumpAttackState.h" />
+    <ClInclude Include="CodyMovementJumpState.h" />
     <ClInclude Include="CodyMoveState.h" />
     <ClInclude Include="CodyStateMachine.h" />
     <ClInclude Include="Creature.h" />
@@ -104,9 +108,13 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="CodyAttackStateOne.cpp" />
-    <ClCompile Include="CodyIdleFall.cpp" />
-    <ClCompile Include="CodyIdleJump.cpp" />
+    <ClCompile Include="CodyIdleFallState.cpp" />
+    <ClCompile Include="CodyIdleJumpAttackState.cpp" />
+    <ClCompile Include="CodyIdleJumpState.cpp" />
     <ClCompile Include="CodyIdleState.cpp" />
+    <ClCompile Include="CodyMovementFallState.cpp" />
+    <ClCompile Include="CodyMovementJumpAttackState.cpp" />
+    <ClCompile Include="CodyMovementJumpState.cpp" />
     <ClCompile Include="CodyMoveState.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="Enemy.cpp" />

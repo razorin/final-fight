@@ -63,14 +63,25 @@ void Player::Update() {
 		currentAnimation->Reset();
 		state->Start(this);
 	}
+	if (hits > 3)
+		hits = 0;
 }
 
 void Player::OnCollision(const Collider &other) {
 	switch (other.type) {
 	case COLLIDER_TYPE::WALL:
 	case COLLIDER_TYPE::CAMERA_WALL:
-		
-		Move(previousPosition- *position);
+		iPoint newPosition = previousPosition - *position;
+		if (previousPosition.x != position->x &&
+			positionCollider->rect.x > other.rect.x && positionCollider->rect.x < other.rect.x + other.rect.w) {
+			newPosition.x = 0;
+		}
+		//TODO: Now it's a little tricky. It needs a good revision to fix wall collisions
+		if (previousPosition.y != position->y && other.ignore_y) {
+			newPosition.y = 0;
+		}
+		newPosition.z = 0;
+		Move(newPosition);
 		break;
 	}
 }

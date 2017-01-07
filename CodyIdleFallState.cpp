@@ -1,21 +1,21 @@
-#include "CodyIdleFall.h"
+#include "CodyIdleFallState.h"
 #include "Player.h"
 #include "Point.h"
 #include "CodyIdleState.h"
 #include "Animation.h"
 
-CodyIdleFall::CodyIdleFall() {
+CodyIdleFallState::CodyIdleFallState() {
 }
 
 
-CodyIdleFall::~CodyIdleFall() {
+CodyIdleFallState::~CodyIdleFallState() {
 }
 
-void CodyIdleFall::Start(Player *player) {
+void CodyIdleFallState::Start(Player *player) {
 	player->setCurrentAnimation(player->animations["fall"]);
 }
 
-PlayerStateMachine *CodyIdleFall::Update(Player *player) {
+PlayerStateMachine *CodyIdleFallState::Update(Player *player) {
 	PlayerStateMachine *result = nullptr;
 	iPoint speed;
 	speed.SetToZero();

@@ -105,6 +105,29 @@
             ]
           },
           {
+            "name": "iddleJumpAttack",
+            "loop": false,
+            "speed": 0.2,
+            "frames": [
+              {
+                "x": 0,
+                "y": 535,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              },
+              {
+                "x": 107,
+                "y": 535,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              }
+            ]
+          },
+          {
             "name": "fall",
             "loop": false,
             "speed": 0.15,
@@ -112,6 +135,76 @@
               {
                 "x": 214,
                 "y": 214,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              }
+            ]
+          },
+          {
+            "name": "moveJump",
+            "loop": false,
+            "speed": 0.15,
+            "frames": [
+              {
+                "x": 321,
+                "y": 214,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              },
+              {
+                "x": 428,
+                "y": 214,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              },
+              {
+                "x": 535,
+                "y": 214,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              },
+              {
+                "x": 642,
+                "y": 214,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              },
+              {
+                "x": 749,
+                "y": 214,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              }
+            ]
+          },
+           {
+            "name": "moveJumpAttack",
+            "loop": false,
+            "speed": 0.15,
+            "frames": [
+              {
+                "x": 0,
+                "y": 321,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              },
+              {
+                "x": 107,
+                "y": 321,
                 "width": 107,
                 "height": 107,
                 "offset_x": 0,
@@ -163,9 +256,17 @@
             "loop": true,
             "speed": 0.1,
             "frames": [
+            {
+                "x": 0,
+                "y": 107,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              },
               {
                 "x": 107,
-                "y": 0,
+                "y": 107,
                 "width": 107,
                 "height": 107,
                 "offset_x": 0,
@@ -173,7 +274,7 @@
               },
               {
                 "x": 214,
-                "y": 0,
+                "y": 107,
                 "width": 107,
                 "height": 107,
                 "offset_x": 0,
@@ -181,7 +282,7 @@
               },
               {
                 "x": 321,
-                "y": 0,
+                "y": 107,
                 "width": 107,
                 "height": 107,
                 "offset_x": 0,
@@ -189,7 +290,7 @@
               },
               {
                 "x": 428,
-                "y": 0,
+                "y": 107,
                 "width": 107,
                 "height": 107,
                 "offset_x": 0,
@@ -197,15 +298,7 @@
               },
               {
                 "x": 535,
-                "y": 0,
-                "width": 107,
-                "height": 107,
-                "offset_x": 0,
-                "offset_y": 0
-              },
-              {
-                "x": 642,
-                "y": 0,
+                "y": 107,
                 "width": 107,
                 "height": 107,
                 "offset_x": 0,
@@ -221,20 +314,85 @@
             "frames": [
               {
                 "x": 0,
-                "y": 107,
+                "y": 428,
                 "width": 107,
                 "height": 107,
-                "offset_x": 0,
-                "offset_y": 2
+                "offset_x": 5,
+                "offset_y": 1
               },
 
               {
                 "x": 107,
-                "y": 107,
+                "y": 428,
                 "width": 107,
                 "height": 107,
                 "offset_x": 13,
-                "offset_y": 2
+                "offset_y": 1
+              }
+
+            ]
+          },
+          {
+            "name": "attack2",
+            "loop": true,
+            "speed": 0.1,
+            "frames": [
+              {
+                "x": 214,
+                "y": 428,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 5
+              },
+              {
+                "x": 321,
+                "y": 428,
+                "width": 107,
+                "height": 107,
+                "offset_x": 13,
+                "offset_y": 8
+              }
+
+            ]
+          },
+          {
+            "name": "attack3",
+            "loop": true,
+            "speed": 0.1,
+            "frames": [
+              {
+                "x": 428,
+                "y": 428,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 10
+              },
+              {
+                "x": 535,
+                "y": 428,
+                "width": 107,
+                "height": 107,
+                "offset_x": 1,
+                "offset_y": 8
+              },
+
+              {
+                "x": 642,
+                "y": 428,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              },
+              {
+                "x": 749,
+                "y": 428,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": -8
               }
 
             ]

@@ -106,13 +106,19 @@
     <ClInclude Include="CodyIdleState.h">
       <Filter>StateMachines</Filter>
     </ClInclude>
-    <ClInclude Include="CodyIdleJump.h">
+    <ClInclude Include="CodyIdleJumpState.h">
       <Filter>StateMachines</Filter>
     </ClInclude>
-    <ClInclude Include="CodyIdleFall.h">
+    <ClInclude Include="CodyIdleFallState.h">
       <Filter>StateMachines</Filter>
     </ClInclude>
-    <ClInclude Include="CodyAttackStateOne.h" />
+    <ClInclude Include="CodyAttackStateOne.h">
+      <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyIdleJumpAttackState.h" />
+    <ClInclude Include="CodyMovementJumpState.h" />
+    <ClInclude Include="CodyMovementFallState.h" />
+    <ClInclude Include="CodyMovementJumpAttackState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -175,19 +181,31 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="CodyIdleFall.cpp">
-      <Filter>StateMachines</Filter>
-    </ClCompile>
-    <ClCompile Include="CodyIdleJump.cpp">
-      <Filter>StateMachines</Filter>
-    </ClCompile>
     <ClCompile Include="CodyIdleState.cpp">
       <Filter>StateMachines</Filter>
     </ClCompile>
     <ClCompile Include="CodyMoveState.cpp">
       <Filter>StateMachines</Filter>
     </ClCompile>
+    <ClCompile Include="CodyIdleJumpState.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyIdleFallState.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
     <ClCompile Include="CodyAttackStateOne.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyIdleJumpAttackState.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyMovementJumpState.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyMovementFallState.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyMovementJumpAttackState.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "CodyIdleState.h"
 #include "CodyAttackStateOne.h"
+#include "CodyMovementJumpState.h"
 
 
 CodyMoveState::CodyMoveState() {
@@ -40,6 +41,10 @@ PlayerStateMachine *CodyMoveState::Update(Player *player) {
 
 	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 		return new CodyAttackStateOne();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		return new CodyMovementJumpState();
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE &&

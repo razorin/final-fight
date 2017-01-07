@@ -22,13 +22,12 @@ public:
 	void Init(const iPoint &initialPosition);
 
 private:
-	bool is_attacking = false;
-	bool is_jumping = false;
-	bool is_falling = false;
-	iPoint previousPosition;
+	iPoint previousPosition = {0,0,0};
 	PlayerStateMachine *state = nullptr;
 public:
 	int baseSpeed = 1;
+	int hits = 0;
+	Collider *attackCollider = nullptr;
 };
 
 #endif // !PLAYER_H
