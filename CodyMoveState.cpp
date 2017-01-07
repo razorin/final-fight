@@ -22,21 +22,19 @@ void CodyMoveState::Start(Player *player) {
 
 PlayerStateMachine *CodyMoveState::Update(Player *player) {
 	PlayerStateMachine *result = nullptr;
-	iPoint speed;
-	speed.SetToZero();
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		speed.x -= player->baseSpeed;
+		player->speed.x -= player->baseSpeed;
 		player->flipped = true;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		speed.x += player->baseSpeed;
+		player->speed.x += player->baseSpeed;
 		player->flipped = false;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		speed.y += player->baseSpeed;
+		player->speed.y += player->baseSpeed;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		speed.y -= player->baseSpeed;
+		player->speed.y -= player->baseSpeed;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
@@ -55,9 +53,6 @@ PlayerStateMachine *CodyMoveState::Update(Player *player) {
 		App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) {
 		return new CodyIdleState();
 	}
-
-
-	player->Move(speed);
 
 	return result;
 }

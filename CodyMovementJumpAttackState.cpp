@@ -18,16 +18,14 @@ void CodyMovementJumpAttackState::Start(Player *player) {
 }
 
 PlayerStateMachine *CodyMovementJumpAttackState::Update(Player *player) {
-	iPoint speed;
-	speed.SetToZero();
+
 	if (player->position->z > -55) {
-		speed.z -= player->baseSpeed * 2;
-		speed.x += (player->flipped ? -player->baseSpeed : player->baseSpeed) * 2;
+		player->speed.z -= player->baseSpeed * 2;
+		player->speed.x += (player->flipped ? -player->baseSpeed : player->baseSpeed) * 2;
 	}
 	else if (player->position->z <= -55) {
 		return new CodyMovementFallState();
 
 	}
-	player->Move(speed);
 	return nullptr;
 }

@@ -17,8 +17,6 @@ void CodyIdleFallState::Start(Player *player) {
 
 PlayerStateMachine *CodyIdleFallState::Update(Player *player) {
 	PlayerStateMachine *result = nullptr;
-	iPoint speed;
-	speed.SetToZero();
 
 	if (player->position->z >= 0) {
 		player->animations["iddleJump"]->Reset();
@@ -28,10 +26,9 @@ PlayerStateMachine *CodyIdleFallState::Update(Player *player) {
 	else {
 		if (player->getCurrentAnimation()->Finished())
 			player->setCurrentAnimation(player->animations["lastIddleJump"]);
-		speed.z += player->baseSpeed * 2;
+		player->speed.z += player->baseSpeed * 2;
 	}
 
-	player->Move(speed);
 
 	return result;
 }

@@ -23,11 +23,9 @@ void CodyMovementJumpState::Start(Player *player) {
 }
 
 PlayerStateMachine *CodyMovementJumpState::Update(Player *player) {
-	iPoint speed;
-	speed.SetToZero();
 	if (player->position->z > -55) {
-		speed.z -= player->baseSpeed * 2;
-		speed.x += (player->flipped ? -player->baseSpeed : player->baseSpeed) * 2;
+		player->speed.z -= player->baseSpeed * 2;
+		player->speed.x += (player->flipped ? -player->baseSpeed : player->baseSpeed) * 2;
 		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT) {
 			return new CodyMovementJumpAttackState();
 		}
@@ -35,8 +33,6 @@ PlayerStateMachine *CodyMovementJumpState::Update(Player *player) {
 	else if (player->position->z <= -55) {
 		return new CodyMovementFallState();
 	}
-
-	player->Move(speed);
 
 	return nullptr;
 }

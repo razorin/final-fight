@@ -39,7 +39,7 @@ Player::Player(const JSON_Object *playerConfig) : Creature(ENTITY_TYPE::PLAYER){
 	//currentAnimation = animations["idle"];
 	state = new CodyIdleState();
 
-	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, COLLIDER_PLAYER, false, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
+	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, PLAYER_COLLIDER, false, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
 	state->Start(this);
 	
 }
@@ -56,6 +56,7 @@ Player::~Player() {
 
 void Player::Update() {
 	previousPosition = iPoint(*position);
+	speed.SetToZero();
 	PlayerStateMachine *newState = state->Update(this);
 	if (newState != nullptr) {
 		RELEASE(state);
@@ -65,6 +66,7 @@ void Player::Update() {
 	}
 	if (hits > 3)
 		hits = 0;
+	Move(speed);
 }
 
 void Player::OnCollision(const Collider &other) {
