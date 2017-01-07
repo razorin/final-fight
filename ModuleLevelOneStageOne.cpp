@@ -30,8 +30,9 @@ bool ModuleLevelOneStageOne::Start() {
 	player->Init(iPoint(16, 80, 0));
 
 	bred = (Bred *)App->entities->Create(ENEMY_TYPE::BRED);
-	if(bred != nullptr)
-		bred->Init(iPoint(16, 80, 0));
+	//if(bred != nullptr)
+	bred->Init(iPoint(16, 80, 0));
+	bred->player = player;
 
 	const char* path = json_object_dotget_string(config, "graphics");
 	graphics = App->textures->Load(path);

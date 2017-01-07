@@ -1,11 +1,13 @@
 #ifndef ENEMY_H
 #define ENEMY_H
+
 #include "Creature.h"
 #include "Parson.h"
 #include "Point.h"
 
 class EnemyStateMachine;
 struct Collider;
+class Player;
 
 enum  ENEMY_TYPE {
 	NONE_ENEMY,
@@ -24,11 +26,12 @@ public:
 protected:
 	iPoint previousPosition = { 0,0,0 };
 	EnemyStateMachine *state = nullptr;
-	ENEMY_TYPE type;
 
 public:
+	ENEMY_TYPE type;
 	int baseSpeed = 1;
 	Collider *attackCollider = nullptr;
+	Player *player = nullptr;
 };
 
 #endif // !ENEMY_H

@@ -3,6 +3,12 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleCollision.h"
+#include "Application.h"
+#include "ModuleInput.h"
+#include <ctime>
+#include "Player.h"
+
+
 
 int Bred::number_of_instances = 0;
 
@@ -45,7 +51,7 @@ Bred::Bred(const Bred *other) : Enemy(other->type) {
 		Animation *anim = new Animation((*it->second));
 		animations[(it->first)] = anim;
 	}
-	currentAnimation = animations["idle"];
+	currentAnimation = animations["iddle"];
 	position = new iPoint(*other->position);
 	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, ENEMY_COLLIDER, false, false, std::bind(&Bred::OnCollision, this, std::placeholders::_1));
 	++number_of_instances;
@@ -57,6 +63,35 @@ Bred::~Bred() {
 	if (number_of_instances > 0)
 		graphics = nullptr;
 	currentAnimation = nullptr;
+}
+
+void Bred::Update() {
+	currentAnimation = animations["movement"];
+	speed.SetToZero();
+	targetPoint = iPoint{ player->positionCollider->rect.x + player->positionCollider->rect.w/2, player->positionCollider->rect.y + player->positionCollider->rect.h, 0};
+	
+	iPoint distanceVector = targetPoint - iPoint{ positionCollider->rect.x + positionCollider->rect.w / 2, positionCollider->rect.y + positionCollider->rect.h, 0 };
+
+	if (distanceVector.x < 0) {
+		flipped = true;
+	}
+	else {
+		flipped = false;
+	}
+
+	srand(time(NULL));
+	int number = rand() % 100 + 1;
+
+	if (number < 40 && !distanceVector.IsZero()) {
+		speed.x = distanceVector.x < 0 ? -baseSpeed : distanceVector.x > 0 ? baseSpeed : 0;
+		speed.y = distanceVector.y < 0 ? -baseSpeed : distanceVector.y > 0 ? baseSpeed : 0;
+	}
+	else {
+		currentAnimation = animations["idle"];
+	}
+
+
+	Move(speed);
 }
 
 void Bred::Init(const iPoint &initialPosition) {
