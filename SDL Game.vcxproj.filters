@@ -139,6 +139,7 @@
     <ClInclude Include="CodyMovementJumpState.h">
       <Filter>StateMachines\Player\Cody</Filter>
     </ClInclude>
+    <ClInclude Include="Bred.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -227,6 +228,9 @@
     </ClCompile>
     <ClCompile Include="CodyMovementJumpState.cpp">
       <Filter>StateMachines\Player\Cody</Filter>
+    </ClCompile>
+    <ClCompile Include="Bred.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

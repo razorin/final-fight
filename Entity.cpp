@@ -13,7 +13,6 @@ Entity::Entity(ENTITY_TYPE type) : type(type) {
 Entity::~Entity() {
 	RELEASE(position);
 	RELEASE(graphics);
-	RELEASE(positionCollider);
 	
 	for (auto it = animations.begin(); it != animations.end(); ++it) {
 		RELEASE(it->second);

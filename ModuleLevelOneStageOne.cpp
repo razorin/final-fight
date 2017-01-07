@@ -12,6 +12,8 @@
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 #include "Section.h"
+#include "Enemy.h"
+#include "Bred.h"
 
 ModuleLevelOneStageOne::ModuleLevelOneStageOne(const JSON_Value *json, bool active) : Module(json, active) {
 	config = json_value_get_object(json);
@@ -26,6 +28,10 @@ bool ModuleLevelOneStageOne::Start() {
 	LOG("Loading Level 1-1 ");
 	player = (Player *)App->entities->Create(ENTITY_TYPE::PLAYER);
 	player->Init(iPoint(16, 80, 0));
+
+	bred = (Bred *)App->entities->Create(ENEMY_TYPE::BRED);
+	if(bred != nullptr)
+		bred->Init(iPoint(16, 80, 0));
 
 	const char* path = json_object_dotget_string(config, "graphics");
 	graphics = App->textures->Load(path);

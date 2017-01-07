@@ -15,7 +15,7 @@ class Animation;
 
 enum ENTITY_TYPE {
 	PLAYER,
-	CREATURE,
+	ENEMY,
 	UNKNOWN
 };
 
@@ -37,6 +37,7 @@ public:
 	iPoint* position = nullptr;
 	bool flipped = false;
 	std::map<std::string, Animation*> animations;
+	bool active = false;
 
 protected:
 	SDL_Texture* graphics = nullptr;

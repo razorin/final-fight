@@ -2,6 +2,7 @@
 #define CREATURE_H
 
 #include "Entity.h"
+#include "Point.h"
 
 struct SDL_Texture;
 
@@ -15,6 +16,8 @@ public:
 	int max_life = 100;
 	int life = 100;
 	int lives = 1;
+	iPoint speed{ 0,0,0 };
+	int baseSpeed = 1;
 };
 
 #endif // !CREATURE_H

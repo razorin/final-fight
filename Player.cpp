@@ -45,6 +45,7 @@ Player::Player(const JSON_Object *playerConfig) : Creature(ENTITY_TYPE::PLAYER){
 }
 
 void Player::Init(const iPoint &initialPosition) {
+	active = true;
 	*position = initialPosition;
 	positionCollider->SetPos(position->x + 35, position->y + 9, position->z);
 }

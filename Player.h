@@ -25,7 +25,6 @@ private:
 	iPoint previousPosition = {0,0,0};
 	PlayerStateMachine *state = nullptr;
 public:
-	int baseSpeed = 1;
 	int hits = 0;
 	Collider *attackCollider = nullptr;
 };

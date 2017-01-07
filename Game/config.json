@@ -85,7 +85,28 @@
       ]
     },
     "entities": {
-
+      "enemies": {
+        "bred": {
+          "graphics": "resources/sprites/enemies/bred.png",
+          "animations": [
+            {
+              "name": "idle",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            }
+          ]
+        }
+      },
       "player": {
         "graphics": "resources/sprites/characters/cody.png",
         "animations": [

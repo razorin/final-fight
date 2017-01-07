@@ -71,6 +71,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Bred.h" />
     <ClInclude Include="CodyAttackStateOne.h" />
     <ClInclude Include="CodyIdleFallState.h" />
     <ClInclude Include="CodyIdleJumpAttackState.h" />
@@ -107,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Bred.cpp" />
     <ClCompile Include="CodyAttackStateOne.cpp" />
     <ClCompile Include="CodyIdleFallState.cpp" />
     <ClCompile Include="CodyIdleJumpAttackState.cpp" />
