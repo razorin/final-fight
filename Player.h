@@ -11,18 +11,18 @@ class Animation;
 struct Frame;
 struct SDL_Texture;
 class Enemy;
+class Timer;
 
 class Player : public Creature {
-	//friend class PlayerStateMachine;
+
 public:
 	Player(const JSON_Object *playerConfig);
 	~Player();
 	void Update();
 	void OnCollision(const Collider &other);
 	void TakeDamage(Enemy *enemy);
-	void Kill();
-	//void TakeDamage(int damage);
 	void Init(const iPoint &initialPosition);
+	void AddHit();
 
 private:
 	iPoint previousPosition = {0,0,0};
@@ -30,6 +30,7 @@ private:
 public:
 	int hits = 0;
 	Collider *attackCollider = nullptr;
+	Timer *hitsTimer;
 };
 
 #endif // !PLAYER_H

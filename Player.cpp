@@ -11,6 +11,7 @@
 #include "Timer.h"
 #include "CodyIdleState.h"
 #include "Enemy.h"
+#include "Timer.h"
 
 Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_TYPE::PLAYER){
 	const char* path = json_object_dotget_string(playerConfig, "graphics");
@@ -42,18 +43,18 @@ Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_
 
 	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, PLAYER_COLLIDER, false, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
 	state->Start(this);
-	
+	hitsTimer = new Timer();
 }
 
 void Player::Init(const iPoint &initialPosition) {
 	active = true;
 	*position = initialPosition;
 	positionCollider->SetPos(position->x + 35, position->y + 9, position->z);
-	attack = 50;
 }
 
 Player::~Player() {
 	currentAnimation = nullptr;
+	RELEASE(hitsTimer);
 }
 
 
@@ -71,7 +72,7 @@ void Player::Update() {
 		currentAnimation->Reset();
 		state->Start(this);
 	}
-	if (hits > 3)
+	if (hitsTimer->Ellapsed() > 2000)
 		hits = 0;
 	Move(speed);
 }
@@ -93,6 +94,7 @@ void Player::OnCollision(const Collider &other) {
 		Move(newPosition);
 		break;
 	case COLLIDER_TYPE::ENEMY_HIT:
+		if(other.z - positionCollider->z > 10 || other.z - positionCollider->z > 10)
 		TakeDamage((Enemy*)other.owner);
 		break;
 	}
@@ -110,33 +112,19 @@ void Player::TakeDamage(Enemy *enemy) {
 			state = newState;
 			currentAnimation->Reset();
 			state->Start(this);
-			LOG("LIFE BEFORE: %i", life);
-			life -= enemy->attack;
-			LOG("LIFE AFETER: %i", life);
-			//if (life <= 0)
-				//Kill();
-				
+			life -= enemy->attack;				
 		}
 	}
 }
 
-void Player::Kill() {
-	LOG("KILLING!");
-	if (state != nullptr) {
-		PlayerStateMachine *newState = state->ChangeState(PLAYER_KILLED_STATE);
-		if (newState != nullptr) {
-			//--lives;
-			//life = max_life;
-			if (lives <= 0) {
-				RELEASE(state);
-				if (attackCollider != nullptr) {
-					attackCollider->to_delete = true;
-					attackCollider = nullptr;
-				}
-			}
-			state = newState;
-			currentAnimation->Reset();
-			state->Start(this);
-		}
+void Player::AddHit() {
+	if (hits == 0)
+		hitsTimer->Start();
+	++hits;
+	if (hits > 3) {
+		hits = 0;
+		hitsTimer->Stop();
+		hitsTimer->Start();
 	}
+		
 }

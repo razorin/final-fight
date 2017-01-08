@@ -321,6 +321,11 @@
         "attack": 1,
         "baseSpeed": 1,
         "attacks": [
+          {
+            "name": "attack1",
+            "y": 3,
+            "x": 37
+          },
             {
               "name": "attack1",
               "y": 3,

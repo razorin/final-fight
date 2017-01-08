@@ -46,7 +46,7 @@ void Enemy::TakeDamage(Player *player) {
 	if (state != nullptr) {
 		EnemyStateMachine *newState = state->ChangeTo(ENEMY_DAMAGED);
 		if (newState != nullptr) {
-			player->hits++;
+			player->AddHit();
 			RELEASE(state);
 			if (attackCollider != nullptr) {
 				attackCollider->to_delete = true;
@@ -68,7 +68,8 @@ void Enemy::TakeDamage(int damage) {
 		EnemyStateMachine *newState = state->ChangeTo(ENEMY_DAMAGED);
 		if (newState != nullptr) {
 			life -= player->attack;
-			player->hits++;
+			LOG("ENEMY CURRENT LIFE: %i", life);
+			player->AddHit();
 			RELEASE(state);
 			if (attackCollider != nullptr) {
 				attackCollider->to_delete = true;
