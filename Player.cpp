@@ -10,6 +10,7 @@
 #include "ModuleTextures.h"
 #include "Timer.h"
 #include "CodyIdleState.h"
+#include "Enemy.h"
 
 Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_TYPE::PLAYER){
 	const char* path = json_object_dotget_string(playerConfig, "graphics");
@@ -76,10 +77,10 @@ void Player::Update() {
 }
 
 void Player::OnCollision(const Collider &other) {
+	iPoint newPosition = previousPosition - *position;
 	switch (other.type) {
 	case COLLIDER_TYPE::WALL:
 	case COLLIDER_TYPE::CAMERA_WALL:
-		iPoint newPosition = previousPosition - *position;
 		if (previousPosition.x != position->x &&
 			positionCollider->rect.x > other.rect.x && positionCollider->rect.x < other.rect.x + other.rect.w) {
 			newPosition.x = 0;
@@ -91,6 +92,51 @@ void Player::OnCollision(const Collider &other) {
 		newPosition.z = 0;
 		Move(newPosition);
 		break;
+	case COLLIDER_TYPE::ENEMY_HIT:
+		TakeDamage((Enemy*)other.owner);
+		break;
 	}
 }
 
+void Player::TakeDamage(Enemy *enemy) {
+	if (state != nullptr) {
+		PlayerStateMachine *newState = state->ChangeState(PLAYER_DAMAGE_STATE);
+		if (newState != nullptr) {
+			RELEASE(state);
+			if (attackCollider != nullptr) {
+				attackCollider->to_delete = true;
+				attackCollider = nullptr;
+			}
+			state = newState;
+			currentAnimation->Reset();
+			state->Start(this);
+			LOG("LIFE BEFORE: %i", life);
+			life -= enemy->attack;
+			LOG("LIFE AFETER: %i", life);
+			//if (life <= 0)
+				//Kill();
+				
+		}
+	}
+}
+
+void Player::Kill() {
+	LOG("KILLING!");
+	if (state != nullptr) {
+		PlayerStateMachine *newState = state->ChangeState(PLAYER_KILLED_STATE);
+		if (newState != nullptr) {
+			//--lives;
+			//life = max_life;
+			if (lives <= 0) {
+				RELEASE(state);
+				if (attackCollider != nullptr) {
+					attackCollider->to_delete = true;
+					attackCollider = nullptr;
+				}
+			}
+			state = newState;
+			currentAnimation->Reset();
+			state->Start(this);
+		}
+	}
+}

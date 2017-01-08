@@ -4,6 +4,8 @@
 #include "Entity.h"
 #include "Point.h"
 #include "Parson.h"
+#include <vector>
+#include "Attack.h"
 
 struct SDL_Texture;
 
@@ -22,6 +24,7 @@ public:
 	int attack = 0;
 	iPoint speed{ 0,0,0 };
 	int baseSpeed = 1;
+	std::vector<Attack> attacks;
 };
 
 #endif // !CREATURE_H

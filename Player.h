@@ -10,6 +10,7 @@
 class Animation;
 struct Frame;
 struct SDL_Texture;
+class Enemy;
 
 class Player : public Creature {
 	//friend class PlayerStateMachine;
@@ -18,7 +19,9 @@ public:
 	~Player();
 	void Update();
 	void OnCollision(const Collider &other);
-	
+	void TakeDamage(Enemy *enemy);
+	void Kill();
+	//void TakeDamage(int damage);
 	void Init(const iPoint &initialPosition);
 
 private:

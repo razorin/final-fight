@@ -156,6 +156,11 @@
     </ClInclude>
     <ClInclude Include="EnemyDamageState.h" />
     <ClInclude Include="EnemyKilledState.h" />
+    <ClInclude Include="Attack.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyDamageState.h" />
+    <ClInclude Include="CodyKilledState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -264,6 +269,18 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="EnemyKilledState.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyDamageState.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStateMachine.cpp">
+      <Filter>StateMachines\Player\Cody</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyStateMachine.cpp">
+      <Filter>StateMachines\Player\Cody</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyKilledState.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>

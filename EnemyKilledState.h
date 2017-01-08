@@ -12,6 +12,7 @@ public:
 	~EnemyKilledState();
 	virtual void Start(Enemy *enemy);
 	virtual EnemyStateMachine * Update(Enemy *enemy);
+	virtual EnemyStateMachine * ChangeTo(ENEMY_STATE enemyState);
 };
 
 #endif // !ENEMY_KILLED_STATE_H

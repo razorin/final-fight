@@ -73,10 +73,12 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Bred.h" />
     <ClInclude Include="CodyAttackStateOne.h" />
+    <ClInclude Include="CodyDamageState.h" />
     <ClInclude Include="CodyIdleFallState.h" />
     <ClInclude Include="CodyIdleJumpAttackState.h" />
     <ClInclude Include="CodyIdleJumpState.h" />
     <ClInclude Include="CodyIdleState.h" />
+    <ClInclude Include="CodyKilledState.h" />
     <ClInclude Include="CodyMovementFallState.h" />
     <ClInclude Include="CodyMovementJumpAttackState.h" />
     <ClInclude Include="CodyMovementJumpState.h" />
@@ -91,6 +93,7 @@
     <ClInclude Include="EnemyMoveState.h" />
     <ClInclude Include="EnemyStateMachine.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Attack.h" />
     <ClInclude Include="ModuleEntity.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Item.h" />
@@ -116,14 +119,17 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Bred.cpp" />
     <ClCompile Include="CodyAttackStateOne.cpp" />
+    <ClCompile Include="CodyDamageState.cpp" />
     <ClCompile Include="CodyIdleFallState.cpp" />
     <ClCompile Include="CodyIdleJumpAttackState.cpp" />
     <ClCompile Include="CodyIdleJumpState.cpp" />
     <ClCompile Include="CodyIdleState.cpp" />
+    <ClCompile Include="CodyKilledState.cpp" />
     <ClCompile Include="CodyMovementFallState.cpp" />
     <ClCompile Include="CodyMovementJumpAttackState.cpp" />
     <ClCompile Include="CodyMovementJumpState.cpp" />
     <ClCompile Include="CodyMoveState.cpp" />
+    <ClCompile Include="CodyStateMachine.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAttackState.cpp" />
@@ -148,6 +154,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Parson.c" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerStateMachine.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,24 +3,17 @@
 
 #include "PlayerStateMachine.h"
 
+
 class Player;
 
 class CodyStateMachine : public PlayerStateMachine {
 public:
-	CodyStateMachine() {
+	CodyStateMachine(PLAYER_STATE state = PLAYER_STATE::PLAYER_OTHER_STATE);
+	~CodyStateMachine();
 
-	}
-	~CodyStateMachine() {
-
-	}
-	
-	void Start(Player *player) {
-
-	}
-
-	PlayerStateMachine * Update(Player *player) {
-		return nullptr;
-	}
+	void Start(Player *player);
+	PlayerStateMachine * Update(Player *player);
+	PlayerStateMachine *ChangeState(PLAYER_STATE playerState);
 
 };
 

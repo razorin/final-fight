@@ -81,6 +81,13 @@ bool ModuleLevelOneStageOne::Start() {
 	return true;
 }
 
+update_status ModuleLevelOneStageOne::PreUpdate() {
+	if (player != nullptr && player->to_delete == true)
+		player = nullptr;
+	return UPDATE_CONTINUE;
+
+}
+
 update_status ModuleLevelOneStageOne::Update() {
 	
 	App->renderer->Blit(graphics, iPoint{ 0, 0 }, scene);
@@ -91,26 +98,28 @@ update_status ModuleLevelOneStageOne::Update() {
 
 	Section *section = sections.at(currentSection);
 	//Camera Movement
-	int playerCenter = player->positionCollider->rect.x + player->positionCollider->rect.w / 2;
-	int cameraCenter = (App->renderer->camera.w / 2 - App->renderer->camera.x) / App->window->screen_size;
-	int movement = playerCenter - cameraCenter;
+	if (player != nullptr) {
+		int playerCenter = player->positionCollider->rect.x + player->positionCollider->rect.w / 2;
+		int cameraCenter = (App->renderer->camera.w / 2 - App->renderer->camera.x) / App->window->screen_size;
+		int movement = playerCenter - cameraCenter;
 
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
-		section->EnemyKilled();
-	}
+		if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
+			section->EnemyKilled();
+		}
 
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		LOG("Camera Center: %i Player Center: %i", cameraCenter, playerCenter);
-		LOG("Camera (x,w) %i,%i", App->renderer->camera.x, App->renderer->camera.w);
-	}
+		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+			LOG("Camera Center: %i Player Center: %i", cameraCenter, playerCenter);
+			LOG("Camera (x,w) %i,%i", App->renderer->camera.x, App->renderer->camera.w);
+		}
 
-	if (movement > 0) {
-		bool sectionReached = cameraWalls["right"]->rect.x + 1 >= section->section_ends;
+		if (movement > 0) {
+			bool sectionReached = cameraWalls["right"]->rect.x + 1 >= section->section_ends;
 		
-		if (!sectionReached) {
-			App->renderer->camera.x -= (App->window->screen_size);
-			cameraWalls["left"]->AddPoint(iPoint(1, 0));
-			cameraWalls["right"]->AddPoint(iPoint(1, 0));
+			if (!sectionReached) {
+				App->renderer->camera.x -= (App->window->screen_size);
+				cameraWalls["left"]->AddPoint(iPoint(1, 0));
+				cameraWalls["right"]->AddPoint(iPoint(1, 0));
+			}
 		}
 	}
 

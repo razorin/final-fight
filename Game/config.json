@@ -94,13 +94,19 @@
           "baseSpeed": 1,
           "attacks": [
             {
-              "name": "punch"
+              "name": "punch",
+              "y": 3,
+              "x": 50
             },
             {
-              "name": "kick1"
+              "name": "kick1",
+              "y": 3,
+              "x": 37
             },
             {
-              "name": "kick2"
+              "name": "kick2",
+              "y": 3,
+              "x": 50
             }
           ],
           "animations": [
@@ -222,7 +228,7 @@
                   "width": 120,
                   "height": 120,
                   "offset_x": 0,
-                  "offset_y": 0
+                  "offset_y": 20
                 },
                 {
                   "x": 120,
@@ -230,15 +236,15 @@
                   "width": 120,
                   "height": 120,
                   "offset_x": 0,
-                  "offset_y": 0
+                  "offset_y": 20
                 },
-                                {
+                {
                   "x": 0,
                   "y": 240,
                   "width": 120,
                   "height": 120,
                   "offset_x": 0,
-                  "offset_y": 0
+                  "offset_y": 20
                 },
                 {
                   "x": 120,
@@ -246,7 +252,7 @@
                   "width": 120,
                   "height": 120,
                   "offset_x": 0,
-                  "offset_y": 0
+                  "offset_y": 20
                 },
                 {
                   "x": 240,
@@ -254,7 +260,7 @@
                   "width": 120,
                   "height": 120,
                   "offset_x": 0,
-                  "offset_y": 0
+                  "offset_y": 20
                 }
               ]
             },
@@ -310,10 +316,27 @@
       },
       "player": {
         "graphics": "resources/sprites/characters/cody.png",
-        "life": 100,
+        "life": 5,
         "lives": 5,
         "attack": 1,
-        "baseSpeed" :  1,
+        "baseSpeed": 1,
+        "attacks": [
+            {
+              "name": "attack1",
+              "y": 3,
+              "x": 37
+            },
+            {
+              "name": "attack2",
+              "y": 3,
+              "x": 37
+            },
+            {
+              "name": "attack3",
+              "y": 3,
+              "x": 37
+            }
+          ],
         "animations": [
           {
             "name": "idle",
@@ -558,6 +581,55 @@
 
             ]
           },
+          {
+            "name": "damage",
+            "loop": true,
+            "speed": 0.025,
+            "frames": [
+              {
+                "x": 107,
+                "y": 749,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 0
+              }
+            ]
+          },
+
+          {
+            "name": "killed",
+            "loop": true,
+            "speed": 0.05,
+            "frames": [
+              {
+                "x": 321,
+                "y": 749,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 30
+              },
+              {
+                "x": 428,
+                "y": 749,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 30
+              },
+              {
+                "x": 535,
+                "y": 749,
+                "width": 107,
+                "height": 107,
+                "offset_x": 0,
+                "offset_y": 20
+              }
+            ]
+          },
+
+
           {
             "name": "attack2",
             "loop": true,

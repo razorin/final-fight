@@ -16,28 +16,30 @@ CodyAttackStateOne::~CodyAttackStateOne() {
 void CodyAttackStateOne::Start(Player *player) {
 
 
-	player->setCurrentAnimation("attack3");
+	Attack attack;
 
 	switch (player->hits) {
 	case 2:
-		player->setCurrentAnimation("attack2");
+		attack = player->attacks.at(player->hits);
 		break;
 	case 3:
-		player->setCurrentAnimation("attack3");
+		attack = player->attacks.at(player->hits);
 		break;
 	default:
-		player->setCurrentAnimation("attack1");
+		attack = player->attacks.at(0);
 		break;
 	}
+
+	player->setCurrentAnimation(attack.name);
+
 
 	if (player->attackCollider != nullptr) {
 		player->attackCollider->to_delete = true;
 	}
 	int attack_x = player->positionCollider->rect.x + (player->flipped ? -(player->positionCollider->rect.w / 2) : (player->positionCollider->rect.w / 2));
 	int attack_w = player->positionCollider->rect.w;
-	player->attackCollider = App->collision->AddCollider({attack_x, player->positionCollider->rect.y, attack_w, player->positionCollider->rect.h}, COLLIDER_TYPE::PLAYER_HIT, false, false, std::bind(&Player::OnCollision, player, std::placeholders::_1), player);
+	player->attackCollider = App->collision->AddCollider({attack_x, player->positionCollider->rect.y - attack.y, attack.x, player->positionCollider->rect.h + attack.y * 2}, COLLIDER_TYPE::PLAYER_HIT, false, false, std::bind(&Player::OnCollision, player, std::placeholders::_1), player);
 	
-	//++player->hits;
 }
 
 PlayerStateMachine *CodyAttackStateOne::Update(Player *player) {

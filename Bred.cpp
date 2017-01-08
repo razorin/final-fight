@@ -63,22 +63,7 @@ Bred::~Bred() {
 	currentAnimation = nullptr;
 }
 
-void Bred::Update() {
-	previousPosition = iPoint(*position);
-	speed.SetToZero();
-	EnemyStateMachine *newState = state->Update(this);
-	if (newState != nullptr) {
-		RELEASE(state);
-		if (attackCollider != nullptr) {
-			attackCollider->to_delete = true;
-			attackCollider = nullptr;
-		}
-		state = newState;
-		currentAnimation->Reset();
-		state->Start(this);
-	}
-	Move(speed);
-}
+
 
 void Bred::Init(const iPoint &initialPosition) {
 	active = true;
