@@ -46,6 +46,7 @@ void Enemy::TakeDamage(Player *player) {
 	if (state != nullptr) {
 		EnemyStateMachine *newState = state->ChangeTo(ENEMY_DAMAGED);
 		if (newState != nullptr) {
+			player->AddCurrentEnemy(this);
 			player->AddHit();
 			RELEASE(state);
 			if (attackCollider != nullptr) {

@@ -154,3 +154,23 @@ bool ModuleRender::DrawQuad(const Collider& collider, Uint8 r, Uint8 g, Uint8 b,
 
 	return ret;
 }
+
+bool ModuleRender::DrawRect(const SDL_Rect &rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+	bool ret = true;
+
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+	SDL_Rect rec(rect);
+		rec.x = (int)(rec.x * App->window->screen_size);
+		rec.y = (int)(rec.y  * App->window->screen_size);
+		rec.w *= App->window->screen_size;
+		rec.h *= App->window->screen_size;
+
+	if (SDL_RenderFillRect(renderer, &rec) != 0) {
+		LOG("Cannot draw rectangle to screen. SDL_RenderFillRect error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}

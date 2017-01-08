@@ -121,6 +121,16 @@ update_status ModuleLevelOneStageOne::Update() {
 				cameraWalls["right"]->AddPoint(iPoint(1, 0));
 			}
 		}
+
+		//Draw interface
+		//App->renderer->DrawRect({25, 20, 125, 6}, 247, 247, 43, 255);
+		
+		App->renderer->DrawRect({ 25, 20, 125, 6 }, 255, 0, 0, 255);
+		App->renderer->DrawRect({ 25, 20, 125 * player->life/ player->max_life, 6 }, 247, 247, 43, 255);
+		if (player->currentEnemy != nullptr) {
+			App->renderer->DrawRect({ 200, 20, 125, 6 }, 255, 0, 0, 255);
+			App->renderer->DrawRect({ 200, 20, 125 * player->currentEnemy->life / player->currentEnemy->max_life, 6 }, 247, 247, 43, 255);
+		}
 	}
 
 	return UPDATE_CONTINUE;

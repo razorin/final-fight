@@ -37,7 +37,6 @@ void CodyAttackStateOne::Start(Player *player) {
 		player->attackCollider->to_delete = true;
 	}
 	int attack_x = player->positionCollider->rect.x + (player->flipped ? -(player->positionCollider->rect.w / 2) : (player->positionCollider->rect.w / 2));
-	int attack_w = player->positionCollider->rect.w;
 	player->attackCollider = App->collision->AddCollider({attack_x, player->positionCollider->rect.y - attack.y, attack.x, player->positionCollider->rect.h + attack.y * 2}, COLLIDER_TYPE::PLAYER_HIT, false, false, std::bind(&Player::OnCollision, player, std::placeholders::_1), player);
 	
 }

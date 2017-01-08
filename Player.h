@@ -23,7 +23,7 @@ public:
 	void TakeDamage(Enemy *enemy);
 	void Init(const iPoint &initialPosition);
 	void AddHit();
-
+	void AddCurrentEnemy(Enemy *enemy);
 private:
 	iPoint previousPosition = {0,0,0};
 	PlayerStateMachine *state = nullptr;
@@ -31,6 +31,8 @@ public:
 	int hits = 0;
 	Collider *attackCollider = nullptr;
 	Timer *hitsTimer;
+	Enemy *currentEnemy = nullptr;
+	Timer *currentEnemyTimer;
 };
 
 #endif // !PLAYER_H

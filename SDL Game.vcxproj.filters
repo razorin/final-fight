@@ -154,13 +154,24 @@
     <ClInclude Include="Bred.h">
       <Filter>Game Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyDamageState.h" />
-    <ClInclude Include="EnemyKilledState.h" />
     <ClInclude Include="Attack.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="CodyDamageState.h" />
-    <ClInclude Include="CodyKilledState.h" />
+    <ClInclude Include="CodyAirDamageState.h">
+      <Filter>StateMachines\Player\Cody</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyDamageState.h">
+      <Filter>StateMachines\Player\Cody</Filter>
+    </ClInclude>
+    <ClInclude Include="CodyKilledState.h">
+      <Filter>StateMachines\Player\Cody</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDamageState.h">
+      <Filter>StateMachines\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyKilledState.h">
+      <Filter>StateMachines\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -281,6 +292,9 @@
       <Filter>StateMachines\Player\Cody</Filter>
     </ClCompile>
     <ClCompile Include="CodyKilledState.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CodyAirDamageState.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>

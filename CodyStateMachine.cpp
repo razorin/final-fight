@@ -1,6 +1,7 @@
 #include "CodyStateMachine.h"
 #include "CodyDamageState.h"
 #include "CodyKilledState.h"
+#include "CodyAirDamageState.h"
 
 CodyStateMachine::CodyStateMachine(PLAYER_STATE state) : PlayerStateMachine(state) {
 
@@ -25,6 +26,8 @@ PlayerStateMachine *CodyStateMachine::ChangeState(PLAYER_STATE playerState) {
 	case PLAYER_DAMAGE_STATE:
 		return new CodyDamageState();
 		break;
+	case PLAYER_AIR_DAMAGE_STATE:
+		return new CodyAirDamageState();
 	default:
 		return new CodyKilledState();
 		break;

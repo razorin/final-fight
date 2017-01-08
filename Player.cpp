@@ -44,6 +44,7 @@ Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_
 	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, PLAYER_COLLIDER, false, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
 	state->Start(this);
 	hitsTimer = new Timer();
+	currentEnemyTimer = new Timer();
 }
 
 void Player::Init(const iPoint &initialPosition) {
@@ -74,6 +75,8 @@ void Player::Update() {
 	}
 	if (hitsTimer->Ellapsed() > 2000)
 		hits = 0;
+	if (currentEnemyTimer->Ellapsed() > 2000)
+		currentEnemy = nullptr;
 	Move(speed);
 }
 
@@ -94,7 +97,6 @@ void Player::OnCollision(const Collider &other) {
 		Move(newPosition);
 		break;
 	case COLLIDER_TYPE::ENEMY_HIT:
-		if(other.z - positionCollider->z > 10 || other.z - positionCollider->z > 10)
 		TakeDamage((Enemy*)other.owner);
 		break;
 	}
@@ -102,8 +104,16 @@ void Player::OnCollision(const Collider &other) {
 
 void Player::TakeDamage(Enemy *enemy) {
 	if (state != nullptr) {
-		PlayerStateMachine *newState = state->ChangeState(PLAYER_DAMAGE_STATE);
+		PlayerStateMachine *newState = positionCollider->z == 0 ? state->ChangeState(PLAYER_DAMAGE_STATE) : state->ChangeState(PLAYER_AIR_DAMAGE_STATE);
 		if (newState != nullptr) {
+			
+			iPoint playerPoint = getBottomPoint();
+			iPoint enemyPoint = enemy->getBottomPoint();
+			int direction = playerPoint.x - enemyPoint.x;
+
+			if (newState->GetState() == PLAYER_STATE::PLAYER_AIR_DAMAGE_STATE) {
+				newState->direction = playerPoint.x - enemyPoint.x;
+			}
 			RELEASE(state);
 			if (attackCollider != nullptr) {
 				attackCollider->to_delete = true;
@@ -126,5 +136,9 @@ void Player::AddHit() {
 		hitsTimer->Stop();
 		hitsTimer->Start();
 	}
-		
+}
+
+void Player::AddCurrentEnemy(Enemy *enemy) {
+	currentEnemy = enemy;
+	currentEnemyTimer->Start();
 }
