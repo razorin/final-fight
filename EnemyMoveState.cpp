@@ -6,6 +6,7 @@
 #include "ModuleCollision.h"
 #include "Point.h"
 #include "Timer.h"
+#include "EnemyAttackState.h"
 
 EnemyMoveState::EnemyMoveState() : EnemyStateMachine(ENEMY_MOVING) {
 }
@@ -22,6 +23,17 @@ void EnemyMoveState::Start(Enemy *enemy) {
 }
 
 EnemyStateMachine * EnemyMoveState::Update(Enemy *enemy) {
+	distanceVector = enemy->distanceToTarget();
+	flipEnemy(enemy);
+
+	//TODO: if distance is near...ATTACK!
+	if (distanceVector.x <= 20 && distanceVector.x >= -20 &&
+		distanceVector.y <= 10 && distanceVector.y >= -10) {
+		srand(time(NULL));
+		int number = rand() % 10 + 1;
+		if (number > 6)
+			return new EnemyAttackState();
+	}
 
 	if (timer->Ellapsed() >= 1000) {
 		srand(time(NULL));
@@ -31,8 +43,6 @@ EnemyStateMachine * EnemyMoveState::Update(Enemy *enemy) {
 			return new EnemyIdleState();
 	}
 
-	distanceVector = enemy->distanceToTarget();
-	flipEnemy(enemy);
 
 	if (!distanceVector.IsZero()) {
 		if (distanceVector.x != 0 && distanceVector.y != 0) {
@@ -49,7 +59,6 @@ EnemyStateMachine * EnemyMoveState::Update(Enemy *enemy) {
 		}
 	} 
 
-	//TODO: if distance is near...ATTACK!d
 
 
 	return nullptr;

@@ -5,6 +5,7 @@
 #include <ctime>
 #include "EnemyMoveState.h"
 #include "Timer.h"
+#include "EnemyAttackState.h"
 
 EnemyIdleState::EnemyIdleState() : EnemyStateMachine(ENEMY_IDLE){
 }
@@ -21,12 +22,13 @@ void EnemyIdleState::Start(Enemy *enemy) {
 }
 
 EnemyStateMachine * EnemyIdleState::Update(Enemy *enemy) {
+	//return new EnemyAttackState();
+	distanceVector = enemy->distanceToTarget();
+	flipEnemy(enemy);
 	if (timer->Ellapsed() >= 500) {
 		srand(time(NULL));
 		int number = rand() % 10 + 1;
 
-		distanceVector = enemy->distanceToTarget();
-		flipEnemy(enemy);
 
 		if (number < 5)
 			return nullptr;

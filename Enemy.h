@@ -5,6 +5,7 @@
 #include "Parson.h"
 #include "Point.h"
 #include "Parson.h"
+#include <vector>
 
 class EnemyStateMachine;
 struct Collider;
@@ -25,6 +26,7 @@ public:
 	virtual void Init(const iPoint &initialPosition) = 0;
 	~Enemy();
 	iPoint &distanceToTarget() const;
+	std::vector<std::string> attacks;
 
 protected:
 	iPoint previousPosition = { 0,0,0 };

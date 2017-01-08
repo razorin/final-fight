@@ -8,9 +8,15 @@
 
 Enemy::Enemy(const JSON_Object *enemyConfig, ENEMY_TYPE type) : type(type), Creature(enemyConfig, ENTITY_TYPE::ENEMY){
 	state = new EnemyIdleState();
+	JSON_Array *configAttacks = json_object_dotget_array(enemyConfig, "attacks");
+
+	for (int i = 0; i < json_array_get_count(configAttacks); ++i) {
+		JSON_Object *configAttack = json_array_get_object(configAttacks, i);
+		attacks.push_back(json_object_dotget_string(configAttack, "name"));
+	}
 }
 
-Enemy::Enemy(const Enemy *other) : type(other->type), Creature(other){
+Enemy::Enemy(const Enemy *other) : type(other->type), attacks(other->attacks), Creature(other){
 	state = new EnemyIdleState();
 }
 

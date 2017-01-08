@@ -91,7 +91,18 @@
           "life": 100,
           "lives": 1,
           "attack": 5,
-          "baseSpeed" :  1,
+          "baseSpeed": 1,
+          "attacks": [
+            {
+              "name": "punch"
+            },
+            {
+              "name": "kick1"
+            },
+            {
+              "name": "kick2"
+            }
+          ],
           "animations": [
             {
               "name": "idle",
@@ -105,6 +116,83 @@
                   "height": 120,
                   "offset_x": 0,
                   "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "punch",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 120,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 15,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "kick1",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 240,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 360,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 7,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "kick2",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 480,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": -5,
+                  "offset_y": 0
+                },
+                {
+                  "x": 600,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 9,
+                  "offset_y": 0
+                },
+                {
+                  "x": 720,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 16,
+                  "offset_y": -1
                 }
               ]
             },
@@ -162,7 +250,7 @@
         "graphics": "resources/sprites/characters/cody.png",
         "life": 100,
         "lives": 5,
-        "attack": 50,
+        "attack": 1,
         "baseSpeed" :  1,
         "animations": [
           {
@@ -353,7 +441,7 @@
                 "y": 107,
                 "width": 107,
                 "height": 107,
-                "offset_x": 0,
+                "offset_x": -3,
                 "offset_y": 0
               },
               {
@@ -369,7 +457,7 @@
                 "y": 107,
                 "width": 107,
                 "height": 107,
-                "offset_x": 0,
+                "offset_x": 1,
                 "offset_y": 0
               },
               {
@@ -377,7 +465,7 @@
                 "y": 107,
                 "width": 107,
                 "height": 107,
-                "offset_x": 0,
+                "offset_x": -3,
                 "offset_y": 0
               }
             ]

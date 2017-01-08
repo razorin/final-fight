@@ -84,6 +84,7 @@
     <ClInclude Include="CodyStateMachine.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyAttackState.h" />
     <ClInclude Include="EnemyIdleState.h" />
     <ClInclude Include="EnemyMoveState.h" />
     <ClInclude Include="EnemyStateMachine.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="CodyMoveState.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyAttackState.cpp" />
     <ClCompile Include="EnemyIdleState.cpp" />
     <ClCompile Include="EnemyMoveState.cpp" />
     <ClCompile Include="EnemyStateMachine.cpp" />
