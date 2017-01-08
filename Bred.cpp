@@ -78,56 +78,10 @@ void Bred::Update() {
 		state->Start(this);
 	}
 	Move(speed);
-	/*currentAnimation = animations["movement"];
-	speed.SetToZero();
-	targetPoint = iPoint{ player->positionCollider->rect.x + player->positionCollider->rect.w/2, player->positionCollider->rect.y + player->positionCollider->rect.h, 0};
-	
-	iPoint distanceVector = targetPoint - iPoint{ positionCollider->rect.x + positionCollider->rect.w / 2, positionCollider->rect.y + positionCollider->rect.h, 0 };
-
-	if (distanceVector.x < 0) {
-		flipped = true;
-	}
-	else {
-		flipped = false;
-	}
-
-	srand(time(NULL));
-	int number = rand() % 2 + 1;
-
-	if (number == 1 && !distanceVector.IsZero()) {
-		speed.x = distanceVector.x < 0 ? -baseSpeed : distanceVector.x > 0 ? baseSpeed : 0;
-		speed.y = distanceVector.y < 0 ? -baseSpeed : distanceVector.y > 0 ? baseSpeed : 0;
-	}
-	else {
-		currentAnimation = animations["idle"];
-	}
-
-
-	Move(speed);*/
 }
 
 void Bred::Init(const iPoint &initialPosition) {
 	active = true;
 	*position = initialPosition;
 	positionCollider->SetPos(position->x + 40, position->y + 15, position->z);
-}
-
-void Bred::OnCollision(const Collider &other) {
-	switch (other.type) {
-	case COLLIDER_TYPE::PLAYER_HIT:
-		Player *playerCollides = (Player*)other.owner;
-		++playerCollides->hits;
-		life -= player->attack;
-		if (life <= 0) {
-			to_delete = true;
-			positionCollider->to_delete = true;
-		}
-		LOG("ENEMY HAS BEEN HIT!");
-		break;
-	}
-}
-
-void Bred::Move(const iPoint &movement) {
-	*position += movement;
-	positionCollider->AddPoint(movement);
 }

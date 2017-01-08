@@ -197,6 +197,68 @@
               ]
             },
             {
+              "name": "damage",
+              "loop": false,
+              "speed": 0.05,
+              "frames": [
+                {
+                  "x": 600,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "killed",
+              "loop": true,
+              "speed": 0.025,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 120,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                                {
+                  "x": 0,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 120,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 240,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
               "name": "movement",
               "loop": true,
               "speed": 0.05,

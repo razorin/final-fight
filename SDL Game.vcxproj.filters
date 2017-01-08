@@ -29,8 +29,8 @@
     <Filter Include="StateMachines\Enemies">
       <UniqueIdentifier>{c63633af-dfbc-4d35-bde9-65d14c412aa0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StateMachines\Enemies\Bred">
-      <UniqueIdentifier>{cf4b910f-5f35-47f0-baf3-5b6d83bdc811}</UniqueIdentifier>
+    <Filter Include="Game Entities\Enemies">
+      <UniqueIdentifier>{1de5c9ca-201c-44d6-a185-8b37e11217c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -85,9 +85,6 @@
     <ClInclude Include="Creature.h">
       <Filter>Game Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game Entities</Filter>
     </ClInclude>
@@ -139,7 +136,6 @@
     <ClInclude Include="CodyMovementJumpState.h">
       <Filter>StateMachines\Player\Cody</Filter>
     </ClInclude>
-    <ClInclude Include="Bred.h" />
     <ClInclude Include="EnemyStateMachine.h">
       <Filter>StateMachines\Enemies</Filter>
     </ClInclude>
@@ -152,6 +148,14 @@
     <ClInclude Include="EnemyAttackState.h">
       <Filter>StateMachines\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Bred.h">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDamageState.h" />
+    <ClInclude Include="EnemyKilledState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -196,9 +200,6 @@
     <ClCompile Include="Creature.cpp">
       <Filter>Game Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game Entities</Filter>
     </ClCompile>
@@ -241,9 +242,6 @@
     <ClCompile Include="CodyMovementJumpState.cpp">
       <Filter>StateMachines\Player\Cody</Filter>
     </ClCompile>
-    <ClCompile Include="Bred.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyStateMachine.cpp">
       <Filter>StateMachines</Filter>
     </ClCompile>
@@ -255,6 +253,18 @@
     </ClCompile>
     <ClCompile Include="EnemyAttackState.cpp">
       <Filter>StateMachines\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Bred.cpp">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDamageState.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyKilledState.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

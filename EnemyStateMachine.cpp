@@ -1,5 +1,6 @@
 #include "EnemyStateMachine.h"
 #include "EnemyIdleState.h"
+#include "EnemyDamageState.h"
 #include "Point.h"
 #include "Enemy.h"
 #include "Player.h"
@@ -19,6 +20,9 @@ EnemyStateMachine * EnemyStateMachine::ChangeTo(ENEMY_STATE enemyState) {
 	switch (enemyState) {
 	case ENEMY_IDLE:
 		return new EnemyIdleState();
+		break;
+	case ENEMY_DAMAGED:
+		return new EnemyDamageState();
 	}
 }
 

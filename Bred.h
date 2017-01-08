@@ -9,9 +9,6 @@ public:
 	Bred(const JSON_Object *bredConfig);
 	Bred(const Bred *other);
 	~Bred();
-	void Update();
-	void OnCollision(const Collider &other);
-	void Move(const iPoint &movement);
 	void Init(const iPoint &initialPosition);
 private:
 	static int number_of_instances;

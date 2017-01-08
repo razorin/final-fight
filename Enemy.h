@@ -21,12 +21,15 @@ class Enemy : public Creature {
 public:
 	Enemy(const JSON_Object *enemyConfig, ENEMY_TYPE type);
 	Enemy(const Enemy *other);
-	virtual void OnCollision(const Collider &other) = 0;
-	virtual void Move(const iPoint &movement) = 0;
 	virtual void Init(const iPoint &initialPosition) = 0;
 	~Enemy();
 	iPoint &distanceToTarget() const;
 	std::vector<std::string> attacks;
+	void OnCollision(const Collider &other);
+	void TakeDamage(int damage);
+	void TakeDamage(Player *player);
+	void Kill();
+	void Update();
 
 protected:
 	iPoint previousPosition = { 0,0,0 };
