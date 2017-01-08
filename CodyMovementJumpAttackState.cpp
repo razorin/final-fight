@@ -14,7 +14,7 @@ CodyMovementJumpAttackState::~CodyMovementJumpAttackState() {
 
 
 void CodyMovementJumpAttackState::Start(Player *player) {
-	player->setCurrentAnimation(player->animations["moveJumpAttack"]);
+	player->setCurrentAnimation("moveJumpAttack");
 }
 
 PlayerStateMachine *CodyMovementJumpAttackState::Update(Player *player) {

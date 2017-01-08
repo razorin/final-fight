@@ -12,7 +12,7 @@ CodyMovementFallState::~CodyMovementFallState() {
 }
 
 void CodyMovementFallState::Start(Player *player) {
-	player->setCurrentAnimation(player->animations["fall"]);
+	player->setCurrentAnimation("fall");
 }
 
 PlayerStateMachine *CodyMovementFallState::Update(Player *player) {
@@ -25,7 +25,7 @@ PlayerStateMachine *CodyMovementFallState::Update(Player *player) {
 	}
 	else {
 		if (player->getCurrentAnimation()->Finished())
-			player->setCurrentAnimation(player->animations["lastIddleJump"]);
+			player->setCurrentAnimation("lastIddleJump");
 
 		player->speed.z += player->baseSpeed * 2;
 		player->speed.x += (player->flipped ? -player->baseSpeed : player->baseSpeed) * 2;

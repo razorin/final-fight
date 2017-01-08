@@ -11,7 +11,7 @@
 #include "Timer.h"
 #include "CodyIdleState.h"
 
-Player::Player(const JSON_Object *playerConfig) : Creature(ENTITY_TYPE::PLAYER){
+Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_TYPE::PLAYER){
 	const char* path = json_object_dotget_string(playerConfig, "graphics");
 	graphics =  App->textures->Load(path);
 	JSON_Array *configAnimations = json_object_dotget_array(playerConfig, "animations");
@@ -48,6 +48,7 @@ void Player::Init(const iPoint &initialPosition) {
 	active = true;
 	*position = initialPosition;
 	positionCollider->SetPos(position->x + 35, position->y + 9, position->z);
+	attack = 50;
 }
 
 Player::~Player() {
@@ -61,6 +62,10 @@ void Player::Update() {
 	PlayerStateMachine *newState = state->Update(this);
 	if (newState != nullptr) {
 		RELEASE(state);
+		if (attackCollider != nullptr) {
+			attackCollider->to_delete = true;
+			attackCollider = nullptr;
+		}
 		state = newState;
 		currentAnimation->Reset();
 		state->Start(this);
@@ -89,7 +94,3 @@ void Player::OnCollision(const Collider &other) {
 	}
 }
 
-void Player::Move(const iPoint &movement) {
-	*position += movement;
-	positionCollider->AddPoint(movement);
-}

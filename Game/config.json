@@ -88,6 +88,10 @@
       "enemies": {
         "bred": {
           "graphics": "resources/sprites/enemies/bred.png",
+          "life": 100,
+          "lives": 1,
+          "attack": 5,
+          "baseSpeed" :  1,
           "animations": [
             {
               "name": "idle",
@@ -156,6 +160,10 @@
       },
       "player": {
         "graphics": "resources/sprites/characters/cody.png",
+        "life": 100,
+        "lives": 5,
+        "attack": 50,
+        "baseSpeed" :  1,
         "animations": [
           {
             "name": "idle",

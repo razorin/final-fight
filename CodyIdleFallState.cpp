@@ -12,7 +12,7 @@ CodyIdleFallState::~CodyIdleFallState() {
 }
 
 void CodyIdleFallState::Start(Player *player) {
-	player->setCurrentAnimation(player->animations["fall"]);
+	player->setCurrentAnimation("fall");
 }
 
 PlayerStateMachine *CodyIdleFallState::Update(Player *player) {
@@ -25,7 +25,7 @@ PlayerStateMachine *CodyIdleFallState::Update(Player *player) {
 	}
 	else {
 		if (player->getCurrentAnimation()->Finished())
-			player->setCurrentAnimation(player->animations["lastIddleJump"]);
+			player->setCurrentAnimation("lastIddleJump");
 		player->speed.z += player->baseSpeed * 2;
 	}
 

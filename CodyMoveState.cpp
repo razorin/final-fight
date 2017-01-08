@@ -17,7 +17,7 @@ CodyMoveState::~CodyMoveState() {
 }
 
 void CodyMoveState::Start(Player *player) {
-	player->setCurrentAnimation(player->animations["movement"]);
+	player->setCurrentAnimation("movement");
 }
 
 PlayerStateMachine *CodyMoveState::Update(Player *player) {

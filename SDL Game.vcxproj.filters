@@ -140,6 +140,11 @@
       <Filter>StateMachines\Player\Cody</Filter>
     </ClInclude>
     <ClInclude Include="Bred.h" />
+    <ClInclude Include="EnemyStateMachine.h">
+      <Filter>StateMachines\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyIdleState.h" />
+    <ClInclude Include="EnemyMoveState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -230,6 +235,15 @@
       <Filter>StateMachines\Player\Cody</Filter>
     </ClCompile>
     <ClCompile Include="Bred.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyIdleState.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyStateMachine.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMoveState.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>

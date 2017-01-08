@@ -3,22 +3,21 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
+#include "Entity.h"
 
 using namespace std;
 
-
-
 ModuleCollision::ModuleCollision(const JSON_Object *json) : Module(json)
 {
-	matrix_collision = new bool[81]{false, false, false, false, false, false, false, false,
-									false, false, false, true, true, true, true, true,
-									false, false, false, true, false, false, false, true,
-									false, false, true, false, false, true, false, true,
-									false, true, false, false, false, false, false, false,
-									false, true, false, true, false, false, false, false,
-									false, true, false, false, false, false, false, false,
-									false, true, true, true, false, false, false, false,
-									false, true, false, false, false, false, false, false
+	matrix_collision = new bool[81]{false, false, false, false, false, false, false, false, false,
+									false, false, false, true, true, true, true, true, true,
+									false, false, false, true, false, false, false, true, false,
+									false, false, true, false, false, true, false, true, false,
+									false, true, false, false, false, false, false, false, false,
+									false, true, false, true, false, false, false, false, false,
+									false, true, false, false, false, false, false, false, false,
+									false, true, true, true, false, false, false, false, false,
+									false, true, false, false, false, false, false, false, false
 									};
 }
 
@@ -45,11 +44,9 @@ update_status ModuleCollision::PreUpdate()
 
 update_status ModuleCollision::Update()
 {
-	// TODO 8: Check collisions between all colliders. 
-	// After making it work, review that you are doing the minumum checks possible
 	for (list<Collider*>::iterator it = colliders.begin(); it != colliders.end(); ++it){
 		for (list<Collider*>::iterator jt = std::next(it); jt != colliders.end(); ++jt) {
-			if (matrix_collision[(*it)->type * 6 + (*jt)->type] && (*it)->CheckCollision(**jt)) {
+			if (matrix_collision[(*it)->type * 9 + (*jt)->type] && (*it)->CheckCollision(**jt)) {
 				(*it)->Notify((**jt));
 				(*jt)->Notify((**it));
 			}
@@ -84,9 +81,9 @@ bool ModuleCollision::CleanUp()
 	return true;
 }
 
-Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, COLLIDER_TYPE type, bool ignore_z, bool ignore_y, std::function<void(const Collider &)> onCollision)
+Collider* ModuleCollision::AddCollider(const SDL_Rect& rect, COLLIDER_TYPE type, bool ignore_z, bool ignore_y, std::function<void(const Collider &)> onCollision, Entity *owner)
 {
-	Collider* ret = new Collider(rect, type, ignore_z, ignore_y, onCollision);
+	Collider* ret = new Collider(rect, type, ignore_z, ignore_y, onCollision, owner);
 
 	colliders.push_back(ret);
 

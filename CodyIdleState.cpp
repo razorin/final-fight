@@ -16,7 +16,7 @@ CodyIdleState::~CodyIdleState() {
 }
 
 void CodyIdleState::Start(Player *player) {
-	player->setCurrentAnimation(player->animations["idle"]);
+	player->setCurrentAnimation("idle");
 }
 
 PlayerStateMachine * CodyIdleState::Update(Player *player) {

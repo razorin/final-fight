@@ -10,7 +10,7 @@ CodyIdleJumpAttackState::~CodyIdleJumpAttackState() {
 }
 
 void CodyIdleJumpAttackState::Start(Player *player) {
-	player->setCurrentAnimation(player->animations["iddleJumpAttack"]);
+	player->setCurrentAnimation("iddleJumpAttack");
 }
 
 PlayerStateMachine *CodyIdleJumpAttackState::Update(Player *player) {

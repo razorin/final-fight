@@ -18,7 +18,7 @@ public:
 	~Player();
 	void Update();
 	void OnCollision(const Collider &other);
-	void Move(const iPoint &movement);
+	
 	void Init(const iPoint &initialPosition);
 
 private:

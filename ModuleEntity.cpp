@@ -40,6 +40,7 @@ Entity* ModuleEntity::Create(const ENTITY_TYPE &type) {
 }
 
 Entity* ModuleEntity::Create(const ENEMY_TYPE &type) {
+	static_assert(ENEMY_TYPE::UNKNOWN_ENEMY == 1, "Update enemy types");
 	Entity *result = nullptr;
 
 	switch (type) {
@@ -63,26 +64,37 @@ bool ModuleEntity::Start() {
 	return true;
 }
 
-bool ModuleEntity::CleanUp() {
-	
-	return true;
+update_status ModuleEntity::PreUpdate() {
+	for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end();) {
+		if ((*it)->to_delete == true) {
+			RELEASE(*it);
+			it = entities.erase(it);
+		}
+		else
+			++it;
+	}
+
+	return UPDATE_CONTINUE;
 }
 
 update_status ModuleEntity::Update() {
 	entities.sort([](const Entity *a, const Entity *b) { return a->positionCollider->rect.y + a->positionCollider->rect.h < b->positionCollider->rect.y + b->positionCollider->rect.h;});
+	std::list<Entity*>::iterator it;
 	for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it) {
-		if((*it)->active)
+		if ((*it)->active) {
 			(*it)->Update();
-		if ((*it)->to_delete) {
-			RELEASE(*it);
-			entities.remove(*it);
-		}
-		else {
-			if(&(*it)->getCurrentFrame() != nullptr)
+			if (&(*it)->getCurrentFrame() != nullptr)
 				App->renderer->Blit((*it)->getGraphics(), *(*it)->position, &(*it)->getCurrentFrame(), (*it)->flipped);
 		}
+		
 	}
 	return update_status::UPDATE_CONTINUE;
 }
 
+bool ModuleEntity::CleanUp() {
+	for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it)
+		RELEASE(*it);
 
+	entities.clear();
+	return true;
+}

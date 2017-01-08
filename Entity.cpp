@@ -3,6 +3,8 @@
 #include "Globals.h"
 #include <string.h>
 #include "Animation.h"
+#include <assert.h>
+#include "ModuleCollision.h"
 
 Entity::Entity(ENTITY_TYPE type) : type(type) {
 	position = new iPoint(0, 0, 0);
@@ -12,7 +14,7 @@ Entity::Entity(ENTITY_TYPE type) : type(type) {
 
 Entity::~Entity() {
 	RELEASE(position);
-	RELEASE(graphics);
+	graphics = nullptr;
 	
 	for (auto it = animations.begin(); it != animations.end(); ++it) {
 		RELEASE(it->second);
@@ -35,10 +37,19 @@ Frame & Entity::getCurrentFrame() const {
 	return currentAnimation->GetCurrentFrame();
 }
 
-void Entity::setCurrentAnimation(Animation *animation) {
-	this->currentAnimation = animation;
+void Entity::setCurrentAnimation(const std::string &animation) {
+	map<std::string, Animation*>::iterator anim = animations.find(animation);
+	assert(animations.find(animation) != animations.end());
+	this->currentAnimation = anim->second;
 }
 
 Animation * Entity::getCurrentAnimation() const {
 	return currentAnimation;
+}
+
+iPoint &Entity::getBottomPoint() const {
+	if (positionCollider == nullptr)
+		return iPoint{ 0,0,0 };
+	return iPoint{ positionCollider->rect.x + positionCollider->rect.w / 2,
+		positionCollider->rect.y + positionCollider->rect.h, 0 };
 }

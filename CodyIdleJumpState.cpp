@@ -14,7 +14,7 @@ CodyIdleJumpState::~CodyIdleJumpState() {
 }
 
 void CodyIdleJumpState::Start(Player *player) {
-	player->setCurrentAnimation(player->animations["iddleJump"]);
+	player->setCurrentAnimation("iddleJump");
 }
 
 PlayerStateMachine *CodyIdleJumpState::Update(Player *player) {

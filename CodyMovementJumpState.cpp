@@ -19,7 +19,7 @@ CodyMovementJumpState::~CodyMovementJumpState() {
 
 
 void CodyMovementJumpState::Start(Player *player) {
-	player->setCurrentAnimation(player->animations["moveJump"]);
+	player->setCurrentAnimation("moveJump");
 }
 
 PlayerStateMachine *CodyMovementJumpState::Update(Player *player) {

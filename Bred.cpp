@@ -5,14 +5,13 @@
 #include "ModuleCollision.h"
 #include "Application.h"
 #include "ModuleInput.h"
-#include <ctime>
 #include "Player.h"
-
+#include "EnemyStateMachine.h"
 
 
 int Bred::number_of_instances = 0;
 
-Bred::Bred(const JSON_Object *bredConfig) : Enemy(ENEMY_TYPE::BRED){
+Bred::Bred(const JSON_Object *bredConfig) : Enemy(bredConfig, ENEMY_TYPE::BRED){
 	const char* path = json_object_dotget_string(bredConfig, "graphics");
 	graphics = App->textures->Load(path);
 	JSON_Array *configAnimations = json_object_dotget_array(bredConfig, "animations");
@@ -40,33 +39,46 @@ Bred::Bred(const JSON_Object *bredConfig) : Enemy(ENEMY_TYPE::BRED){
 	currentAnimation = animations["idle"];
 	//state = new CodyIdleState();
 
-	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, ENEMY_COLLIDER, false, false, std::bind(&Bred::OnCollision, this, std::placeholders::_1));
+	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, COLLIDER_TYPE::ENEMY_COLLIDER, false, false, std::bind(&Bred::OnCollision, this, std::placeholders::_1));
 	//state->Start(this);
 	++number_of_instances;
 }
 
-Bred::Bred(const Bred *other) : Enemy(other->type) {
+Bred::Bred(const Bred *other) : Enemy(other) {
 	graphics = other->graphics;
 	for (auto it = other->animations.begin(); it != other->animations.end(); ++it) {
 		Animation *anim = new Animation((*it->second));
 		animations[(it->first)] = anim;
 	}
-	currentAnimation = animations["iddle"];
+	currentAnimation = animations["idle"];
 	position = new iPoint(*other->position);
-	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, ENEMY_COLLIDER, false, false, std::bind(&Bred::OnCollision, this, std::placeholders::_1));
+	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, COLLIDER_TYPE::ENEMY_COLLIDER, false, false, std::bind(&Bred::OnCollision, this, std::placeholders::_1));
 	++number_of_instances;
 }
 
 
 Bred::~Bred() {
-	--number_of_instances;
-	if (number_of_instances > 0)
+	if (--number_of_instances > 0)
 		graphics = nullptr;
 	currentAnimation = nullptr;
 }
 
 void Bred::Update() {
-	currentAnimation = animations["movement"];
+	previousPosition = iPoint(*position);
+	speed.SetToZero();
+	EnemyStateMachine *newState = state->Update(this);
+	if (newState != nullptr) {
+		RELEASE(state);
+		if (attackCollider != nullptr) {
+			attackCollider->to_delete = true;
+			attackCollider = nullptr;
+		}
+		state = newState;
+		currentAnimation->Reset();
+		state->Start(this);
+	}
+	Move(speed);
+	/*currentAnimation = animations["movement"];
 	speed.SetToZero();
 	targetPoint = iPoint{ player->positionCollider->rect.x + player->positionCollider->rect.w/2, player->positionCollider->rect.y + player->positionCollider->rect.h, 0};
 	
@@ -80,9 +92,9 @@ void Bred::Update() {
 	}
 
 	srand(time(NULL));
-	int number = rand() % 100 + 1;
+	int number = rand() % 2 + 1;
 
-	if (number < 40 && !distanceVector.IsZero()) {
+	if (number == 1 && !distanceVector.IsZero()) {
 		speed.x = distanceVector.x < 0 ? -baseSpeed : distanceVector.x > 0 ? baseSpeed : 0;
 		speed.y = distanceVector.y < 0 ? -baseSpeed : distanceVector.y > 0 ? baseSpeed : 0;
 	}
@@ -91,7 +103,7 @@ void Bred::Update() {
 	}
 
 
-	Move(speed);
+	Move(speed);*/
 }
 
 void Bred::Init(const iPoint &initialPosition) {
@@ -101,7 +113,18 @@ void Bred::Init(const iPoint &initialPosition) {
 }
 
 void Bred::OnCollision(const Collider &other) {
-
+	switch (other.type) {
+	case COLLIDER_TYPE::PLAYER_HIT:
+		Player *playerCollides = (Player*)other.owner;
+		++playerCollides->hits;
+		life -= player->attack;
+		if (life <= 0) {
+			to_delete = true;
+			positionCollider->to_delete = true;
+		}
+		LOG("ENEMY HAS BEEN HIT!");
+		break;
+	}
 }
 
 void Bred::Move(const iPoint &movement) {

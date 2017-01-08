@@ -26,8 +26,9 @@ public:
 	virtual void Update();
 	SDL_Texture* getGraphics() const;
 	Frame & getCurrentFrame() const;
-	void setCurrentAnimation(Animation *animation);
+	void setCurrentAnimation(const std::string &animation);
 	Animation *getCurrentAnimation() const;
+	iPoint &getBottomPoint() const;
 
 public:
 	std::list<Entity *> entities;
