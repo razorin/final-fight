@@ -106,11 +106,6 @@ update_status ModuleLevelOneStageOne::Update() {
 			section->EnemyKilled();
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-			LOG("Camera Center: %i Player Center: %i", cameraCenter, playerCenter);
-			LOG("Camera (x,w) %i,%i", App->renderer->camera.x, App->renderer->camera.w);
-		}
-
 		if (movement > 0) {
 			bool sectionReached = cameraWalls["right"]->rect.x + 1 >= section->section_ends;
 		
@@ -120,17 +115,17 @@ update_status ModuleLevelOneStageOne::Update() {
 				cameraWalls["right"]->AddPoint(iPoint(1, 0));
 			}
 		}
-
-		//Draw interface
-		//App->renderer->DrawRect({25, 20, 125, 6}, 247, 247, 43, 255);
 		
-		App->renderer->DrawRect({ 25, 20, 125, 6 }, 255, 0, 0, 255);
-		if(player != nullptr && player->life > 0)
-		App->renderer->DrawRect({ 25, 20, 125 * player->life/ player->max_life, 6 }, 247, 247, 43, 255);
+		App->renderer->DrawRect({ 25, 18, 125, 7 }, 255, 0, 0, 255);
+		if (player != nullptr && player->life > 0) {
+			App->renderer->StaticBlit(player->getGraphics(), player->getIcon()->position, player->getIcon()->section);
+			App->renderer->DrawRect({ 25, 18, 125 * player->life/ player->max_life, 7 }, 247, 247, 43, 255);
+		}
 		if (player->currentEnemy != nullptr) {
-			App->renderer->DrawRect({ 200, 20, 125, 6 }, 255, 0, 0, 255);
+			App->renderer->StaticBlit(player->currentEnemy->getGraphics(), player->currentEnemy->getIcon()->position, player->currentEnemy->getIcon()->section);
+			App->renderer->DrawRect({ 212, 18, 125, 7 }, 255, 0, 0, 255);
 			if(player->currentEnemy->life > 0)
-				App->renderer->DrawRect({ 200, 20, 125 * player->currentEnemy->life / player->currentEnemy->max_life, 6 }, 247, 247, 43, 255);
+				App->renderer->DrawRect({ 212, 18, 125 * player->currentEnemy->life / player->currentEnemy->max_life, 7 }, 247, 247, 43, 255);
 		}
 	}
 

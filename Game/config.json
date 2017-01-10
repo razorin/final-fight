@@ -15,7 +15,7 @@
       "borderless": false,
       "resizable": false,
       "fullscren_window": false,
-      "size": 2,
+      "size": 1,
       "title": "Final Fight"
     },
     "levelOneStageOne": {
@@ -92,6 +92,16 @@
           "lives": 1,
           "attack": 100,
           "baseSpeed": 1,
+          "icon": {
+            "x": 0,
+            "y": 360,
+            "width": 16,
+            "height": 16,
+            "position": {
+              "x": 196,
+              "y": 10
+            }
+          },
           "attacks": [
             {
               "name": "punch",
@@ -319,6 +329,16 @@
           "lives": 1,
           "attack": 100,
           "baseSpeed": 1,
+          "icon": {
+            "x": 0,
+            "y": 360,
+            "width": 16,
+            "height": 16,
+            "position": {
+              "x": 196,
+              "y": 10
+            }
+          },
           "attacks": [
             {
               "name": "punch",
@@ -546,6 +566,16 @@
           "lives": 1,
           "attack": 100,
           "baseSpeed": 1,
+          "icon": {
+            "x": 0,
+            "y": 360,
+            "width": 16,
+            "height": 16,
+            "position": {
+              "x": 196,
+              "y": 10
+            }
+          },
           "attacks": [
             {
               "name": "punch",
@@ -773,6 +803,16 @@
           "lives": 1,
           "attack": 100,
           "baseSpeed": 1,
+           "icon": {
+            "x": 0,
+            "y": 360,
+            "width": 16,
+            "height": 16,
+            "position": {
+              "x": 196,
+              "y": 10
+            }
+          },
           "attacks": [
             {
               "name": "punch",
@@ -1001,6 +1041,16 @@
         "lives": 5,
         "attack": 1,
         "baseSpeed": 1,
+        "icon": {
+          "x": 0,
+          "y": 892,
+          "width": 13,
+          "height": 16,
+          "position": {
+            "x": 12,
+            "y": 10
+          }
+        },
         "attacks": [
           {
             "name": "attack1",

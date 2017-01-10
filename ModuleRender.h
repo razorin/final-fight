@@ -26,6 +26,8 @@ public:
 	bool CleanUp();
 
 	bool Blit(SDL_Texture* texture, iPoint &position, Frame* section, bool flip = false, float speed = 1.0f);
+	bool StaticBlit(SDL_Texture* texture, const iPoint &position, const SDL_Rect &section);
+
 	bool DrawQuad(const Collider& collider, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera = true);
 	bool DrawRect(const SDL_Rect &rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 public:

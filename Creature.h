@@ -8,6 +8,7 @@
 #include "Attack.h"
 
 struct SDL_Texture;
+struct Icon;
 
 
 class Creature : public Entity {
@@ -16,6 +17,7 @@ public:
 	Creature(Creature const *other);
 	~Creature();
 	void Move(const iPoint &movement);
+	Icon * getIcon() const;
 
 public:
 	int max_life = 100;
@@ -25,6 +27,10 @@ public:
 	iPoint speed{ 0,0,0 };
 	int baseSpeed = 1;
 	std::vector<Attack> attacks;
+
+protected:
+	Icon *icon = nullptr;
+
 };
 
 #endif // !CREATURE_H

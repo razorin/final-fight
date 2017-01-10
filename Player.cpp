@@ -45,6 +45,8 @@ Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_
 	state->Start(this);
 	hitsTimer = new Timer();
 	currentEnemyTimer = new Timer();
+	
+	LOG("PLAYER CREATED");
 }
 
 void Player::Init(const iPoint &initialPosition) {

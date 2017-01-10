@@ -130,6 +130,23 @@ bool ModuleRender::Blit(SDL_Texture* texture, iPoint &position, Frame* frame, bo
 	return ret;
 }
 
+bool ModuleRender::StaticBlit(SDL_Texture* texture, const iPoint &position, const SDL_Rect &section) {
+	bool ret = true;
+	SDL_Rect rec(section);
+
+	rec.x = (int)(position.x * App->window->screen_size);
+	rec.y = (int)(position.y  * App->window->screen_size);
+	rec.w *= App->window->screen_size;
+	rec.h *= App->window->screen_size;
+	
+	if (SDL_RenderCopy(renderer, texture, &section, &rec) != 0) {
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
 bool ModuleRender::DrawQuad(const Collider& collider, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera)
 {
 	bool ret = true;
@@ -162,10 +179,10 @@ bool ModuleRender::DrawRect(const SDL_Rect &rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
 	SDL_Rect rec(rect);
-		rec.x = (int)(rec.x * App->window->screen_size);
-		rec.y = (int)(rec.y  * App->window->screen_size);
-		rec.w *= App->window->screen_size;
-		rec.h *= App->window->screen_size;
+	rec.x = (int)(rec.x * App->window->screen_size);
+	rec.y = (int)(rec.y  * App->window->screen_size);
+	rec.w *= App->window->screen_size;
+	rec.h *= App->window->screen_size;
 
 	if (SDL_RenderFillRect(renderer, &rec) != 0) {
 		LOG("Cannot draw rectangle to screen. SDL_RenderFillRect error: %s", SDL_GetError());

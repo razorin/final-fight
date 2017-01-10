@@ -2,6 +2,7 @@
 #include <vector>
 #include "SDL\include\SDL.h"
 #include "Globals.h"
+#include "Point.h"
 
 using namespace std;
 
@@ -10,6 +11,19 @@ struct Frame {
 	int offset_x;
 	int offset_y;
 	Frame(const SDL_Rect &section, int offset_x = 0, int offset_y = 0) : section(section), offset_x(offset_x), offset_y(offset_y){
+
+	}
+};
+
+struct Icon {
+	SDL_Rect section;
+	iPoint position;
+
+	Icon(const SDL_Rect &section, const iPoint &position) : section(section), position(position) {
+
+	}
+
+	Icon(const Icon &other) : section(other.section), position(other.position) {
 
 	}
 };

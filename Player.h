@@ -9,9 +9,9 @@
 
 class Animation;
 struct Frame;
-struct SDL_Texture;
 class Enemy;
 class Timer;
+
 
 class Player : public Creature {
 
@@ -33,6 +33,7 @@ public:
 	Timer *hitsTimer;
 	Enemy *currentEnemy = nullptr;
 	Timer *currentEnemyTimer;
+
 };
 
 #endif // !PLAYER_H
