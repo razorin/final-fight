@@ -10,6 +10,8 @@
 #include "Enemy.h"
 #include "Bred.h"
 #include "Simons.h"
+#include "Jake.h"
+#include "Dug.h"
 #include "ModuleCollision.h"
 
 ModuleEntity::ModuleEntity(const JSON_Value *json, bool enable) : Module(json, enable) {
@@ -18,7 +20,7 @@ ModuleEntity::ModuleEntity(const JSON_Value *json, bool enable) : Module(json, e
 
 
 ModuleEntity::~ModuleEntity() {
-	RELEASE(bred);
+	RELEASE(enemy);
 }
 
 Entity* ModuleEntity::Create(const ENTITY_TYPE &type) {
@@ -41,15 +43,21 @@ Entity* ModuleEntity::Create(const ENTITY_TYPE &type) {
 }
 
 Enemy* ModuleEntity::Create(const ENEMY_TYPE &type) {
-	static_assert(ENEMY_TYPE::UNKNOWN_ENEMY == 2, "Update enemy types");
+	static_assert(ENEMY_TYPE::UNKNOWN_ENEMY == 4, "Update enemy types");
 	Enemy *result = nullptr;
 
 	switch (type) {
 	case ENEMY_TYPE::BRED :
-		result = new Bred(bred);
+		result = new Bred(enemy);
 		break;
 	case ENEMY_TYPE::SIMONS:
 		result = new Simons(simons);
+		break;
+	case ENEMY_TYPE::JAKE:
+		result = new Jake(jake);
+		break;
+	case ENEMY_TYPE::DUG:
+		result = new Dug(dug);
 		break;
 	}
 
@@ -63,8 +71,11 @@ Enemy* ModuleEntity::Create(const ENEMY_TYPE &type) {
 
 bool ModuleEntity::Start() {
 	LOG("Started Module Entity");
-	bred = new Bred(json_object_dotget_object(config, "enemies.bred"));
+	enemy = new Bred(json_object_dotget_object(config, "enemies.bred"));
 	simons = new Simons(json_object_dotget_object(config, "enemies.simons"));
+	jake = new Jake(json_object_dotget_object(config, "enemies.jake"));
+	dug = new Dug(json_object_dotget_object(config, "enemies.dug"));
+
 	return true;
 }
 

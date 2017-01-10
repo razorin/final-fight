@@ -20,8 +20,8 @@ public:
 	EnemyStateMachine(ENEMY_STATE state);
 	virtual ~EnemyStateMachine();
 
-	virtual void Start(Enemy *bred) = 0;
-	virtual EnemyStateMachine * Update(Enemy *bred) = 0;
+	virtual void Start(Enemy *enemy) = 0;
+	virtual EnemyStateMachine * Update(Enemy *enemy) = 0;
 	virtual EnemyStateMachine * ChangeTo(ENEMY_STATE enemyState);
 
 protected:
@@ -30,7 +30,7 @@ protected:
 	Timer *timer;
 
 protected:
-	virtual void flipEnemy(Enemy *bred);
+	virtual void flipEnemy(Enemy *enemy);
 };
 
 #endif // !ENEMY_STATE_MACHINE_H

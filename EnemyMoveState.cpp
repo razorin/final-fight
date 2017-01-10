@@ -16,15 +16,15 @@ EnemyMoveState::~EnemyMoveState() {
 }
 
 
-void EnemyMoveState::Start(Enemy *bred) {
+void EnemyMoveState::Start(Enemy *enemy) {
 	const static std::string anim = "movement";
-	bred->setCurrentAnimation(anim);
+	enemy->setCurrentAnimation(anim);
 	timer->Start();
 }
 
-EnemyStateMachine * EnemyMoveState::Update(Enemy *bred) {
-	distanceVector = bred->distanceToTarget();
-	flipEnemy(bred);
+EnemyStateMachine * EnemyMoveState::Update(Enemy *enemy) {
+	distanceVector = enemy->distanceToTarget();
+	flipEnemy(enemy);
 
 	
 	if (distanceVector.x <= 30 && distanceVector.x >= -30 &&
@@ -49,14 +49,14 @@ EnemyStateMachine * EnemyMoveState::Update(Enemy *bred) {
 	if (!distanceVector.IsZero()) {
 		if (distanceVector.x != 0 && distanceVector.y != 0) {
 			if(rand() % 2 == 0)
-				bred->speed.x = distanceVector.x < 0 ? -bred->baseSpeed : distanceVector.x > 0 ? bred->baseSpeed : 0;
+				enemy->speed.x = distanceVector.x < 0 ? -enemy->baseSpeed : distanceVector.x > 0 ? enemy->baseSpeed : 0;
 			else
-				bred->speed.y = distanceVector.y < 0 ? -bred->baseSpeed : distanceVector.y > 0 ? bred->baseSpeed : 0;
+				enemy->speed.y = distanceVector.y < 0 ? -enemy->baseSpeed : distanceVector.y > 0 ? enemy->baseSpeed : 0;
 		}
 		else if (distanceVector.x != 0) {
-			bred->speed.x = distanceVector.x < 0 ? -bred->baseSpeed : distanceVector.x > 0 ? bred->baseSpeed : 0;
+			enemy->speed.x = distanceVector.x < 0 ? -enemy->baseSpeed : distanceVector.x > 0 ? enemy->baseSpeed : 0;
 		} else if(distanceVector.y != 0){
-			bred->speed.y = distanceVector.y < 0 ? -bred->baseSpeed : distanceVector.y > 0 ? bred->baseSpeed : 0;
+			enemy->speed.y = distanceVector.y < 0 ? -enemy->baseSpeed : distanceVector.y > 0 ? enemy->baseSpeed : 0;
 
 		}
 	} 

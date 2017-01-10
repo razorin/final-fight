@@ -28,10 +28,10 @@ bool ModuleLevelOneStageOne::Start() {
 	player = (Player *)App->entities->Create(ENTITY_TYPE::PLAYER);
 	player->Init(iPoint(16, 80, 0));
 
-	bred = App->entities->Create(ENEMY_TYPE::SIMONS);
+	enemy = App->entities->Create(ENEMY_TYPE::DUG);
 	//if(bred != nullptr)
-	bred->Init(iPoint(16, 80, 0));
-	bred->player = player;
+	enemy->Init(iPoint(16, 80, 0));
+	enemy->player = player;
 
 	const char* path = json_object_dotget_string(config, "graphics");
 	graphics = App->textures->Load(path);

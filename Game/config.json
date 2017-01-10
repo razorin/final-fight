@@ -539,6 +539,460 @@
               ]
             }
           ]
+        },
+        "jake": {
+          "graphics": "resources/sprites/enemies/jake.png",
+          "life": 100,
+          "lives": 1,
+          "attack": 100,
+          "baseSpeed": 1,
+          "attacks": [
+            {
+              "name": "punch",
+              "y": 3,
+              "x": 50
+            },
+            {
+              "name": "kick1",
+              "y": 3,
+              "x": 37
+            },
+            {
+              "name": "kick2",
+              "y": 3,
+              "x": 50
+            }
+          ],
+          "animations": [
+            {
+              "name": "idle",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "punch",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 120,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 15,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "kick1",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 240,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 360,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 7,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "kick2",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 480,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": -5,
+                  "offset_y": 0
+                },
+                {
+                  "x": 600,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 9,
+                  "offset_y": 0
+                },
+                {
+                  "x": 720,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 16,
+                  "offset_y": -1
+                }
+              ]
+            },
+            {
+              "name": "damage",
+              "loop": false,
+              "speed": 0.05,
+              "frames": [
+                {
+                  "x": 600,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "killed",
+              "loop": true,
+              "speed": 0.025,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                },
+                {
+                  "x": 120,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                },
+                {
+                  "x": 0,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                },
+                {
+                  "x": 120,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                },
+                {
+                  "x": 240,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                }
+              ]
+            },
+            {
+              "name": "movement",
+              "loop": true,
+              "speed": 0.05,
+              "frames": [
+                {
+                  "x": 120,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 240,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 360,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 480,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 600,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            }
+          ]
+        },
+        "dug": {
+          "graphics": "resources/sprites/enemies/dug.png",
+          "life": 100,
+          "lives": 1,
+          "attack": 100,
+          "baseSpeed": 1,
+          "attacks": [
+            {
+              "name": "punch",
+              "y": 3,
+              "x": 50
+            },
+            {
+              "name": "kick1",
+              "y": 3,
+              "x": 37
+            },
+            {
+              "name": "kick2",
+              "y": 3,
+              "x": 50
+            }
+          ],
+          "animations": [
+            {
+              "name": "idle",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "punch",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 120,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 15,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "kick1",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 240,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 360,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 7,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "kick2",
+              "loop": false,
+              "speed": 0.1,
+              "frames": [
+                {
+                  "x": 480,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": -5,
+                  "offset_y": 0
+                },
+                {
+                  "x": 600,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 9,
+                  "offset_y": 0
+                },
+                {
+                  "x": 720,
+                  "y": 120,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 16,
+                  "offset_y": -1
+                }
+              ]
+            },
+            {
+              "name": "damage",
+              "loop": false,
+              "speed": 0.05,
+              "frames": [
+                {
+                  "x": 600,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            },
+            {
+              "name": "killed",
+              "loop": true,
+              "speed": 0.025,
+              "frames": [
+                {
+                  "x": 0,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                },
+                {
+                  "x": 120,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                },
+                {
+                  "x": 0,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                },
+                {
+                  "x": 120,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                },
+                {
+                  "x": 240,
+                  "y": 240,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 20
+                }
+              ]
+            },
+            {
+              "name": "movement",
+              "loop": true,
+              "speed": 0.05,
+              "frames": [
+                {
+                  "x": 120,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 240,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 360,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 480,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                },
+                {
+                  "x": 600,
+                  "y": 0,
+                  "width": 120,
+                  "height": 120,
+                  "offset_x": 0,
+                  "offset_y": 0
+                }
+              ]
+            }
+          ]
         }
       },
       "player": {

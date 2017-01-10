@@ -10,6 +10,8 @@ enum ENTITY_TYPE;
 enum ENEMY_TYPE;
 class Bred;
 class Simons;
+class Jake;
+class Dug;
 class Enemy;
 
 class ModuleEntity : public Module {
@@ -28,8 +30,10 @@ public:
 private:
 	JSON_Object *config = nullptr;
 	std::list<Entity*> entities;
-	Bred *bred = nullptr;
+	Bred *enemy = nullptr;
 	Simons *simons = nullptr;
+	Jake *jake = nullptr;
+	Dug *dug = nullptr;
 
 };
 

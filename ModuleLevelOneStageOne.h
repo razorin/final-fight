@@ -32,7 +32,7 @@ public:
 	std::map<std::string, Collider*> cameraWalls;
 	std::vector<Section*> sections;
 	int currentSection = 0;
-	Enemy *bred = nullptr;
+	Enemy *enemy = nullptr;
 
 };
 

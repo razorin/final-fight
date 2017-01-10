@@ -86,6 +86,7 @@
     <ClInclude Include="CodyMoveState.h" />
     <ClInclude Include="CodyStateMachine.h" />
     <ClInclude Include="Creature.h" />
+    <ClInclude Include="Dug.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAttackState.h" />
     <ClInclude Include="EnemyDamageState.h" />
@@ -95,6 +96,7 @@
     <ClInclude Include="EnemyStateMachine.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Attack.h" />
+    <ClInclude Include="Jake.h" />
     <ClInclude Include="ModuleEntity.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Item.h" />
@@ -134,6 +136,7 @@
     <ClCompile Include="CodyMoveState.cpp" />
     <ClCompile Include="CodyStateMachine.cpp" />
     <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="Dug.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAttackState.cpp" />
     <ClCompile Include="EnemyDamageState.cpp" />
@@ -142,6 +145,7 @@
     <ClCompile Include="EnemyMoveState.cpp" />
     <ClCompile Include="EnemyStateMachine.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Jake.cpp" />
     <ClCompile Include="ModuleEntity.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Log.cpp" />

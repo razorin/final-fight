@@ -12,16 +12,16 @@ EnemyDamageState::EnemyDamageState() : EnemyStateMachine(ENEMY_DAMAGED){
 EnemyDamageState::~EnemyDamageState() {
 }
 
-void EnemyDamageState::Start(Enemy *bred) {
+void EnemyDamageState::Start(Enemy *enemy) {
 	const static std::string anim = "damage";
-	bred->setCurrentAnimation(anim);
+	enemy->setCurrentAnimation(anim);
 	//timer->Start();
 
 }
 
-EnemyStateMachine * EnemyDamageState::Update(Enemy *bred) {
-	if (bred->getCurrentAnimation()->Finished()) {
-		if (bred->life <= 0)
+EnemyStateMachine * EnemyDamageState::Update(Enemy *enemy) {
+	if (enemy->getCurrentAnimation()->Finished()) {
+		if (enemy->life <= 0)
 			return new EnemyKilledState();
 		else
 			return new EnemyIdleState();

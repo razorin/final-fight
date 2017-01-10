@@ -1,4 +1,4 @@
-#include "Simons.h"
+#include "Dug.h"
 #include "Animation.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -9,9 +9,9 @@
 #include "EnemyStateMachine.h"
 
 
-int Simons::number_of_instances = 0;
+int Dug::number_of_instances = 0;
 
-Simons::Simons(const JSON_Object *bredConfig) : Enemy(bredConfig, ENEMY_TYPE::SIMONS) {
+Dug::Dug(const JSON_Object *bredConfig) : Enemy(bredConfig, ENEMY_TYPE::DUG) {
 	const char* path = json_object_dotget_string(bredConfig, "graphics");
 	graphics = App->textures->Load(path);
 	JSON_Array *configAnimations = json_object_dotget_array(bredConfig, "animations");
@@ -37,14 +37,10 @@ Simons::Simons(const JSON_Object *bredConfig) : Enemy(bredConfig, ENEMY_TYPE::SI
 	}
 
 	currentAnimation = animations["idle"];
-	//state = new CodyIdleState();
-
-	//positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, COLLIDER_TYPE::ENEMY_COLLIDER, false, false, std::bind(&Bred::OnCollision, this, std::placeholders::_1));
-	//state->Start(this);
 	++number_of_instances;
 }
 
-Simons::Simons(const Simons *other) : Enemy(other) {
+Dug::Dug(const Dug *other) : Enemy(other) {
 	graphics = other->graphics;
 	for (auto it = other->animations.begin(); it != other->animations.end(); ++it) {
 		Animation *anim = new Animation((*it->second));
@@ -52,12 +48,12 @@ Simons::Simons(const Simons *other) : Enemy(other) {
 	}
 	currentAnimation = animations["idle"];
 	position = new iPoint(*other->position);
-	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, COLLIDER_TYPE::ENEMY_COLLIDER, false, false, std::bind(&Simons::OnCollision, this, std::placeholders::_1));
+	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, COLLIDER_TYPE::ENEMY_COLLIDER, false, false, std::bind(&Dug::OnCollision, this, std::placeholders::_1));
 	++number_of_instances;
 }
 
 
-Simons::~Simons() {
+Dug::~Dug() {
 	if (--number_of_instances > 0)
 		graphics = nullptr;
 	currentAnimation = nullptr;
@@ -65,7 +61,7 @@ Simons::~Simons() {
 
 
 
-void Simons::Init(const iPoint &initialPosition) {
+void Dug::Init(const iPoint &initialPosition) {
 	active = true;
 	*position = initialPosition;
 	positionCollider->SetPos(position->x + 40, position->y + 15, position->z);

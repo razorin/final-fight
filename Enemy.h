@@ -15,6 +15,8 @@ class Player;
 enum  ENEMY_TYPE {
 	BRED,
 	SIMONS,
+	JAKE,
+	DUG,
 	UNKNOWN_ENEMY
 };
 

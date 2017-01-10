@@ -10,8 +10,8 @@ public:
 	EnemyMoveState();
 	~EnemyMoveState();
 
-	virtual void Start(Enemy *bred);
-	virtual EnemyStateMachine * Update(Enemy *bred);
+	virtual void Start(Enemy *enemy);
+	virtual EnemyStateMachine * Update(Enemy *enemy);
 };
 
 #endif // !ENEMY_MOVE_STATE_H

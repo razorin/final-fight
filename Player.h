@@ -20,10 +20,10 @@ public:
 	~Player();
 	void Update();
 	void OnCollision(const Collider &other);
-	void TakeDamage(Enemy *bred);
+	void TakeDamage(Enemy *enemy);
 	void Init(const iPoint &initialPosition);
 	void AddHit();
-	void AddCurrentEnemy(Enemy *bred);
+	void AddCurrentEnemy(Enemy *enemy);
 private:
 	iPoint previousPosition = {0,0,0};
 	PlayerStateMachine *state = nullptr;

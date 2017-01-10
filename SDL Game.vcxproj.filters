@@ -173,6 +173,8 @@
       <Filter>StateMachines\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Simons.h" />
+    <ClInclude Include="Jake.h" />
+    <ClInclude Include="Dug.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -299,6 +301,12 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Simons.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Jake.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Dug.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
