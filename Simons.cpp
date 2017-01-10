@@ -1,4 +1,4 @@
-#include "Bred.h"
+#include "Simons.h"
 #include "Animation.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -9,9 +9,9 @@
 #include "EnemyStateMachine.h"
 
 
-int Bred::number_of_instances = 0;
+int Simons::number_of_instances = 0;
 
-Bred::Bred(const JSON_Object *bredConfig) : Enemy(bredConfig, ENEMY_TYPE::BRED){
+Simons::Simons(const JSON_Object *bredConfig) : Enemy(bredConfig, ENEMY_TYPE::BRED) {
 	const char* path = json_object_dotget_string(bredConfig, "graphics");
 	graphics = App->textures->Load(path);
 	JSON_Array *configAnimations = json_object_dotget_array(bredConfig, "animations");
@@ -44,7 +44,7 @@ Bred::Bred(const JSON_Object *bredConfig) : Enemy(bredConfig, ENEMY_TYPE::BRED){
 	++number_of_instances;
 }
 
-Bred::Bred(const Bred *other) : Enemy(other) {
+Simons::Simons(const Simons *other) : Enemy(other) {
 	graphics = other->graphics;
 	for (auto it = other->animations.begin(); it != other->animations.end(); ++it) {
 		Animation *anim = new Animation((*it->second));
@@ -52,12 +52,12 @@ Bred::Bred(const Bred *other) : Enemy(other) {
 	}
 	currentAnimation = animations["idle"];
 	position = new iPoint(*other->position);
-	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, COLLIDER_TYPE::ENEMY_COLLIDER, false, false, std::bind(&Bred::OnCollision, this, std::placeholders::_1));
+	positionCollider = App->collision->AddCollider({ position->x, position->y, 37, 88 }, COLLIDER_TYPE::ENEMY_COLLIDER, false, false, std::bind(&Simons::OnCollision, this, std::placeholders::_1));
 	++number_of_instances;
 }
 
 
-Bred::~Bred() {
+Simons::~Simons() {
 	if (--number_of_instances > 0)
 		graphics = nullptr;
 	currentAnimation = nullptr;
@@ -65,7 +65,7 @@ Bred::~Bred() {
 
 
 
-void Bred::Init(const iPoint &initialPosition) {
+void Simons::Init(const iPoint &initialPosition) {
 	active = true;
 	*position = initialPosition;
 	positionCollider->SetPos(position->x + 40, position->y + 15, position->z);

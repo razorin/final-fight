@@ -9,6 +9,8 @@ class Entity;
 enum ENTITY_TYPE;
 enum ENEMY_TYPE;
 class Bred;
+class Simons;
+class Enemy;
 
 class ModuleEntity : public Module {
 public:
@@ -21,12 +23,14 @@ public:
 	bool CleanUp();
 
 	Entity* Create(const ENTITY_TYPE &type);
-	Entity* Create(const ENEMY_TYPE &type);
+	Enemy* Create(const ENEMY_TYPE &type);
 
 private:
 	JSON_Object *config = nullptr;
 	std::list<Entity*> entities;
 	Bred *bred = nullptr;
+	Simons *simons = nullptr;
+
 };
 
 #endif // !MODULE_ENTITY_H

@@ -9,8 +9,8 @@ class EnemyDamageState : public EnemyStateMachine {
 public:
 	EnemyDamageState();
 	~EnemyDamageState();
-	virtual void Start(Enemy *enemy);
-	virtual EnemyStateMachine * Update(Enemy *enemy);
+	virtual void Start(Enemy *bred);
+	virtual EnemyStateMachine * Update(Enemy *bred);
 };
 
 #endif // !ENEMY_DAMAGE_STATE_H

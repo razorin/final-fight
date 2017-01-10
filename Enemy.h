@@ -14,6 +14,7 @@ class Player;
 
 enum  ENEMY_TYPE {
 	BRED,
+	SIMONS,
 	UNKNOWN_ENEMY
 };
 
@@ -33,6 +34,7 @@ public:
 protected:
 	iPoint previousPosition = { 0,0,0 };
 	EnemyStateMachine *state = nullptr;
+	iPoint targetPoint{ 0,0,0 };
 
 public:
 	ENEMY_TYPE type;

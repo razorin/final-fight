@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Enemy.h"
 #include "Bred.h"
+#include "Simons.h"
 #include "ModuleCollision.h"
 
 ModuleEntity::ModuleEntity(const JSON_Value *json, bool enable) : Module(json, enable) {
@@ -39,14 +40,16 @@ Entity* ModuleEntity::Create(const ENTITY_TYPE &type) {
 	return result;
 }
 
-Entity* ModuleEntity::Create(const ENEMY_TYPE &type) {
-	static_assert(ENEMY_TYPE::UNKNOWN_ENEMY == 1, "Update enemy types");
-	Entity *result = nullptr;
+Enemy* ModuleEntity::Create(const ENEMY_TYPE &type) {
+	static_assert(ENEMY_TYPE::UNKNOWN_ENEMY == 2, "Update enemy types");
+	Enemy *result = nullptr;
 
 	switch (type) {
 	case ENEMY_TYPE::BRED :
 		result = new Bred(bred);
-		//result = new Bred(bred);
+		break;
+	case ENEMY_TYPE::SIMONS:
+		result = new Simons(simons);
 		break;
 	}
 
@@ -61,6 +64,7 @@ Entity* ModuleEntity::Create(const ENEMY_TYPE &type) {
 bool ModuleEntity::Start() {
 	LOG("Started Module Entity");
 	bred = new Bred(json_object_dotget_object(config, "enemies.bred"));
+	simons = new Simons(json_object_dotget_object(config, "enemies.simons"));
 	return true;
 }
 

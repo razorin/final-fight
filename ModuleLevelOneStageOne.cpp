@@ -13,7 +13,6 @@
 #include "ModuleWindow.h"
 #include "Section.h"
 #include "Enemy.h"
-#include "Bred.h"
 
 ModuleLevelOneStageOne::ModuleLevelOneStageOne(const JSON_Value *json, bool active) : Module(json, active) {
 	config = json_value_get_object(json);
@@ -29,7 +28,7 @@ bool ModuleLevelOneStageOne::Start() {
 	player = (Player *)App->entities->Create(ENTITY_TYPE::PLAYER);
 	player->Init(iPoint(16, 80, 0));
 
-	bred = (Bred *)App->entities->Create(ENEMY_TYPE::BRED);
+	bred = App->entities->Create(ENEMY_TYPE::SIMONS);
 	//if(bred != nullptr)
 	bred->Init(iPoint(16, 80, 0));
 	bred->player = player;
@@ -126,10 +125,12 @@ update_status ModuleLevelOneStageOne::Update() {
 		//App->renderer->DrawRect({25, 20, 125, 6}, 247, 247, 43, 255);
 		
 		App->renderer->DrawRect({ 25, 20, 125, 6 }, 255, 0, 0, 255);
+		if(player != nullptr && player->life > 0)
 		App->renderer->DrawRect({ 25, 20, 125 * player->life/ player->max_life, 6 }, 247, 247, 43, 255);
 		if (player->currentEnemy != nullptr) {
 			App->renderer->DrawRect({ 200, 20, 125, 6 }, 255, 0, 0, 255);
-			App->renderer->DrawRect({ 200, 20, 125 * player->currentEnemy->life / player->currentEnemy->max_life, 6 }, 247, 247, 43, 255);
+			if(player->currentEnemy->life > 0)
+				App->renderer->DrawRect({ 200, 20, 125 * player->currentEnemy->life / player->currentEnemy->max_life, 6 }, 247, 247, 43, 255);
 		}
 	}
 

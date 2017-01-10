@@ -9,7 +9,7 @@ struct SDL_Texture;
 class Player;
 struct Collider;
 class Section;
-class Bred;
+class Enemy;
 
 class ModuleLevelOneStageOne : public Module {
 public:
@@ -32,7 +32,7 @@ public:
 	std::map<std::string, Collider*> cameraWalls;
 	std::vector<Section*> sections;
 	int currentSection = 0;
-	Bred *bred = nullptr;
+	Enemy *bred = nullptr;
 
 };
 

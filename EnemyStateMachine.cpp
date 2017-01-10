@@ -26,12 +26,12 @@ EnemyStateMachine * EnemyStateMachine::ChangeTo(ENEMY_STATE enemyState) {
 	}
 }
 
-void EnemyStateMachine::flipEnemy(Enemy *enemy) {
+void EnemyStateMachine::flipEnemy(Enemy *bred) {
 	if (distanceVector.x < 0) {
-		enemy->flipped = true;
+		bred->flipped = true;
 	}
 	else {
-		enemy->flipped = false;
+		bred->flipped = false;
 	}
 }
 

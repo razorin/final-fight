@@ -15,24 +15,24 @@ EnemyAttackState::EnemyAttackState() : EnemyStateMachine(ENEMY_ATTACKING) {
 EnemyAttackState::~EnemyAttackState() {
 }
 
-void EnemyAttackState::Start(Enemy *enemy) {
+void EnemyAttackState::Start(Enemy *bred) {
 	srand(time(NULL));
-	int number = rand() % enemy->attacks.size();
-	Attack attack = enemy->attacks.at(number);
-	enemy->setCurrentAnimation(attack.name);
-	if (enemy->attackCollider != nullptr) {
-		enemy->attackCollider->to_delete = true;
+	int number = rand() % bred->attacks.size();
+	Attack attack = bred->attacks.at(number);
+	bred->setCurrentAnimation(attack.name);
+	if (bred->attackCollider != nullptr) {
+		bred->attackCollider->to_delete = true;
 	}
-	int attack_x = enemy->positionCollider->rect.x + (enemy->flipped ? -(enemy->positionCollider->rect.w / 2) : (enemy->positionCollider->rect.w / 2));
+	int attack_x = bred->positionCollider->rect.x + (bred->flipped ? -(bred->positionCollider->rect.w / 2) : (bred->positionCollider->rect.w / 2));
 
-	enemy->attackCollider = App->collision->AddCollider({ attack_x, enemy->positionCollider->rect.y - attack.y, attack.x, enemy->positionCollider->rect.h + attack.y * 2 }, COLLIDER_TYPE::ENEMY_HIT, false, false, std::bind(&Enemy::OnCollision, enemy, std::placeholders::_1), enemy);
+	bred->attackCollider = App->collision->AddCollider({ attack_x, bred->positionCollider->rect.y - attack.y, attack.x, bred->positionCollider->rect.h + attack.y * 2 }, COLLIDER_TYPE::ENEMY_HIT, false, false, std::bind(&Enemy::OnCollision, bred, std::placeholders::_1), bred);
 }
 
-EnemyStateMachine * EnemyAttackState::Update(Enemy *enemy) {
-	distanceVector = enemy->distanceToTarget();
-	flipEnemy(enemy);
+EnemyStateMachine * EnemyAttackState::Update(Enemy *bred) {
+	distanceVector = bred->distanceToTarget();
+	flipEnemy(bred);
 
-	if (enemy->getCurrentAnimation()->Finished())
+	if (bred->getCurrentAnimation()->Finished())
 		return new EnemyIdleState();
 
 	return nullptr;

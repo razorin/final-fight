@@ -102,13 +102,13 @@ void Player::OnCollision(const Collider &other) {
 	}
 }
 
-void Player::TakeDamage(Enemy *enemy) {
+void Player::TakeDamage(Enemy *bred) {
 	if (state != nullptr) {
 		PlayerStateMachine *newState = positionCollider->z == 0 ? state->ChangeState(PLAYER_DAMAGE_STATE) : state->ChangeState(PLAYER_AIR_DAMAGE_STATE);
 		if (newState != nullptr) {
 			
 			iPoint playerPoint = getBottomPoint();
-			iPoint enemyPoint = enemy->getBottomPoint();
+			iPoint enemyPoint = bred->getBottomPoint();
 			int direction = playerPoint.x - enemyPoint.x;
 
 			if (newState->GetState() == PLAYER_STATE::PLAYER_AIR_DAMAGE_STATE) {
@@ -122,12 +122,13 @@ void Player::TakeDamage(Enemy *enemy) {
 			state = newState;
 			currentAnimation->Reset();
 			state->Start(this);
-			life -= enemy->attack;				
+			life -= bred->attack;				
 		}
 	}
 }
 
 void Player::AddHit() {
+	LOG("Added hit!!! Current hit: %i", hits);
 	if (hits == 0)
 		hitsTimer->Start();
 	++hits;
@@ -138,7 +139,7 @@ void Player::AddHit() {
 	}
 }
 
-void Player::AddCurrentEnemy(Enemy *enemy) {
-	currentEnemy = enemy;
+void Player::AddCurrentEnemy(Enemy *bred) {
+	currentEnemy = bred;
 	currentEnemyTimer->Start();
 }

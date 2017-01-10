@@ -14,17 +14,17 @@ EnemyIdleState::EnemyIdleState() : EnemyStateMachine(ENEMY_IDLE){
 EnemyIdleState::~EnemyIdleState() {
 }
 
-void EnemyIdleState::Start(Enemy *enemy) {
+void EnemyIdleState::Start(Enemy *bred) {
 	const static std::string anim = "idle";
-	enemy->setCurrentAnimation(anim);
+	bred->setCurrentAnimation(anim);
 	timer->Start();
 
 }
 
-EnemyStateMachine * EnemyIdleState::Update(Enemy *enemy) {
+EnemyStateMachine * EnemyIdleState::Update(Enemy *bred) {
 	//return new EnemyAttackState();
-	distanceVector = enemy->distanceToTarget();
-	flipEnemy(enemy);
+	distanceVector = bred->distanceToTarget();
+	flipEnemy(bred);
 	if (timer->Ellapsed() >= 500) {
 		srand(time(NULL));
 		int number = rand() % 10 + 1;

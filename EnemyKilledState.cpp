@@ -12,17 +12,17 @@ EnemyKilledState::EnemyKilledState() : EnemyStateMachine(ENEMY_KILLED){
 EnemyKilledState::~EnemyKilledState() {
 }
 
-void EnemyKilledState::Start(Enemy *enemy) {
+void EnemyKilledState::Start(Enemy *bred) {
 	const static std::string anim = "killed";
-	--enemy->lives;
-	enemy->setCurrentAnimation(anim);
+	--bred->lives;
+	bred->setCurrentAnimation(anim);
 }
 
-EnemyStateMachine * EnemyKilledState::Update(Enemy *enemy) {
-	if (enemy->getCurrentAnimation()->Finished()) {
-		if (enemy->lives <= 0) {
-			enemy->positionCollider->to_delete = true;
-			enemy->to_delete = true;
+EnemyStateMachine * EnemyKilledState::Update(Enemy *bred) {
+	if (bred->getCurrentAnimation()->Finished()) {
+		if (bred->lives <= 0) {
+			bred->positionCollider->to_delete = true;
+			bred->to_delete = true;
 		}
 		else
 			return new EnemyIdleState();

@@ -10,8 +10,8 @@ class EnemyKilledState :
 public:
 	EnemyKilledState();
 	~EnemyKilledState();
-	virtual void Start(Enemy *enemy);
-	virtual EnemyStateMachine * Update(Enemy *enemy);
+	virtual void Start(Enemy *bred);
+	virtual EnemyStateMachine * Update(Enemy *bred);
 	virtual EnemyStateMachine * ChangeTo(ENEMY_STATE enemyState);
 };
 

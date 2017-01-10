@@ -2,7 +2,6 @@
 #define BRED_H
 
 #include "Enemy.h"
-#include "Point.h"
 
 class Bred : public Enemy {
 public:
@@ -12,7 +11,6 @@ public:
 	void Init(const iPoint &initialPosition);
 private:
 	static int number_of_instances;
-	iPoint targetPoint{ 0,0,0 };
 
 };
 
