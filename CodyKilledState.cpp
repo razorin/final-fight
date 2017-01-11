@@ -14,6 +14,7 @@ CodyKilledState::~CodyKilledState() {
 
 void CodyKilledState::Start(Player *player) {
 	player->setCurrentAnimation("killed");
+	player->setCurrentFx("killed");
 	--player->lives;
 }
 

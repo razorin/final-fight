@@ -39,8 +39,10 @@ Frame & Entity::getCurrentFrame() const {
 
 void Entity::setCurrentAnimation(const std::string &animation) {
 	map<std::string, Animation*>::iterator anim = animations.find(animation);
-	assert(animations.find(animation) != animations.end());
-	this->currentAnimation = anim->second;
+	if (anim != animations.end())
+		this->currentAnimation = anim->second;
+	else
+		this->currentAnimation = nullptr;
 }
 
 Animation * Entity::getCurrentAnimation() const {
@@ -52,4 +54,18 @@ iPoint &Entity::getBottomPoint() const {
 		return iPoint{ 0,0,0 };
 	return iPoint{ positionCollider->rect.x + positionCollider->rect.w / 2,
 		positionCollider->rect.y + positionCollider->rect.h, 0 };
+}
+
+void Entity::setCurrentFx(const std::string fx) {
+	map<std::string, unsigned int>::iterator sound = sounds.find(fx);
+	if (sound != sounds.end())
+		this->currentFx = sound->second;
+	else
+		this->currentFx = -1;
+}
+
+unsigned int  Entity::getCurrentFx(){
+	unsigned int  aux = currentFx;
+	currentFx = -1;
+	return aux;
 }

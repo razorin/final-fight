@@ -15,7 +15,7 @@
       "borderless": false,
       "resizable": false,
       "fullscren_window": false,
-      "size": 1,
+      "size": 2,
       "title": "Final Fight"
     },
     "levelOneStageOne": {
@@ -110,6 +110,20 @@
               "y": 10
             }
           },
+          "sounds": [
+          {
+            "name": "attack",
+            "path": "resources/fx/001.wav"
+          },
+            {
+              "name": "damage",
+              "path": "resources/fx/004.wav"
+            },
+          {
+            "name": "killed",
+            "path": "resources/fx/006.wav"
+          }
+        ],
           "attacks": [
             {
               "name": "punch",
@@ -347,6 +361,20 @@
               "y": 10
             }
           },
+        "sounds": [
+          {
+            "name": "attack",
+            "path": "resources/fx/001.wav"
+          },
+          {
+            "name": "damage",
+            "path": "resources/fx/004.wav"
+          },
+          {
+            "name": "killed",
+            "path": "resources/fx/006.wav"
+          }
+        ],
           "attacks": [
             {
               "name": "punch",
@@ -584,6 +612,20 @@
               "y": 10
             }
           },
+        "sounds": [
+          {
+            "name": "attack",
+            "path": "resources/fx/001.wav"
+          },
+          {
+            "name": "damage",
+            "path": "resources/fx/004.wav"
+          },
+          {
+            "name": "killed",
+            "path": "resources/fx/006.wav"
+          }
+        ],
           "attacks": [
             {
               "name": "punch",
@@ -811,7 +853,7 @@
           "lives": 1,
           "attack": 25,
           "baseSpeed": 1,
-           "icon": {
+          "icon": {
             "x": 0,
             "y": 360,
             "width": 16,
@@ -821,6 +863,20 @@
               "y": 10
             }
           },
+        "sounds": [
+          {
+            "name": "attack",
+            "path": "resources/fx/001.wav"
+          },
+          {
+            "name": "damage",
+            "path": "resources/fx/004.wav"
+          },
+          {
+            "name": "killed",
+            "path": "resources/fx/006.wav"
+          }
+        ],
           "attacks": [
             {
               "name": "punch",
@@ -1059,6 +1115,24 @@
             "y": 10
           }
         },
+        "sounds": [
+          {
+            "name": "attack",
+            "path": "resources/fx/001.wav"
+          },
+          {
+            "name": "jumpMovingAttack",
+            "path": "resources/fx/002.wav"
+          },
+          {
+            "name": "damage",
+            "path": "resources/fx/003.wav"
+          },
+          {
+            "name": "killed",
+            "path": "resources/fx/005.wav"
+          }
+        ],
         "attacks": [
           {
             "name": "attack1",

@@ -13,6 +13,7 @@ CodyDamageState::~CodyDamageState() {
 
 void CodyDamageState::Start(Player *player) {
 	player->setCurrentAnimation("damage");
+	player->setCurrentFx("damage");
 }
 
 PlayerStateMachine * CodyDamageState::Update(Player *player) {

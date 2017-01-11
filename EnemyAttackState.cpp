@@ -25,6 +25,7 @@ void EnemyAttackState::Start(Enemy *enemy) {
 	int attack_x = enemy->positionCollider->rect.x + (enemy->flipped ? -(enemy->positionCollider->rect.w / 2) : (enemy->positionCollider->rect.w / 2));
 
 	enemy->attackCollider = App->collision->AddCollider({ attack_x, enemy->positionCollider->rect.y - attack.y, attack.x, enemy->positionCollider->rect.h + attack.y * 2 }, COLLIDER_TYPE::ENEMY_HIT, false, false, std::bind(&Enemy::OnCollision, enemy, std::placeholders::_1), enemy);
+	enemy->setCurrentFx("attack");
 }
 
 EnemyStateMachine * EnemyAttackState::Update(Enemy *enemy) {

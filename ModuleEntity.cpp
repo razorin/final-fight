@@ -13,6 +13,7 @@
 #include "Jake.h"
 #include "Dug.h"
 #include "ModuleCollision.h"
+#include "ModuleAudio.h"
 
 ModuleEntity::ModuleEntity(const JSON_Value *json, bool enable) : Module(json, enable) {
 	config = json_value_get_object(json);
@@ -100,6 +101,9 @@ update_status ModuleEntity::Update() {
 			(*it)->Update();
 			if (&(*it)->getCurrentFrame() != nullptr)
 				App->renderer->Blit((*it)->getGraphics(), *(*it)->position, &(*it)->getCurrentFrame(), (*it)->flipped);
+			unsigned int fx = (*it)->getCurrentFx();
+			if ( fx != -1)
+				App->audio->PlayFx(fx);
 		}
 		
 	}

@@ -172,14 +172,17 @@
     <ClInclude Include="EnemyKilledState.h">
       <Filter>StateMachines\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Simons.h" />
-    <ClInclude Include="Jake.h" />
-    <ClInclude Include="Dug.h" />
+    <ClInclude Include="Simons.h">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Jake.h">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Dug.h">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Main</Filter>
     </ClCompile>
@@ -294,20 +297,23 @@
     <ClCompile Include="CodyAirDamageState.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Simons.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Jake.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Dug.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyDamageState.cpp">
       <Filter>StateMachines\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="EnemyKilledState.cpp">
       <Filter>StateMachines\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Simons.cpp">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Jake.cpp">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Dug.cpp">
+      <Filter>Game Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

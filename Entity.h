@@ -27,6 +27,8 @@ public:
 	SDL_Texture* getGraphics() const;
 	Frame & getCurrentFrame() const;
 	void setCurrentAnimation(const std::string &animation);
+	void setCurrentFx(const std::string fx);
+	unsigned int  getCurrentFx();
 	Animation *getCurrentAnimation() const;
 	iPoint &getBottomPoint() const;
 
@@ -38,12 +40,15 @@ public:
 	iPoint* position = nullptr;
 	bool flipped = false;
 	std::map<std::string, Animation*> animations;
+	std::map<std::string, unsigned int > sounds;
+
 	bool active = false;
 
 protected:
 	SDL_Texture* graphics = nullptr;
 	//SDL_Rect *section = nullptr;
 	Animation *currentAnimation = nullptr;
+	int currentFx = -1;
 };
 
 #endif // !ENTITY_H

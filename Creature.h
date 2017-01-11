@@ -20,12 +20,12 @@ public:
 	Icon * getIcon() const;
 
 public:
-	int max_life = 100;
-	int life = 100;
-	int lives = 1;
+	int max_life = 0;
+	int life = 0;
+	int lives = 0;
 	int attack = 0;
 	iPoint speed{ 0,0,0 };
-	int baseSpeed = 1;
+	int baseSpeed = 0;
 	std::vector<Attack> attacks;
 
 protected:

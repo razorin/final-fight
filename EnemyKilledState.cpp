@@ -16,6 +16,7 @@ void EnemyKilledState::Start(Enemy *enemy) {
 	const static std::string anim = "killed";
 	--enemy->lives;
 	enemy->setCurrentAnimation(anim);
+	enemy->setCurrentFx("killed");
 }
 
 EnemyStateMachine * EnemyKilledState::Update(Enemy *enemy) {

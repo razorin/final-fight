@@ -16,7 +16,7 @@ void EnemyDamageState::Start(Enemy *enemy) {
 	const static std::string anim = "damage";
 	enemy->setCurrentAnimation(anim);
 	//timer->Start();
-
+	enemy->setCurrentFx("damage");
 }
 
 EnemyStateMachine * EnemyDamageState::Update(Enemy *enemy) {

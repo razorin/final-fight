@@ -11,6 +11,7 @@ CodyIdleJumpAttackState::~CodyIdleJumpAttackState() {
 
 void CodyIdleJumpAttackState::Start(Player *player) {
 	player->setCurrentAnimation("iddleJumpAttack");
+	player->setCurrentFx("attack");
 }
 
 PlayerStateMachine *CodyIdleJumpAttackState::Update(Player *player) {

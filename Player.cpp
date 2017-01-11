@@ -12,31 +12,13 @@
 #include "CodyIdleState.h"
 #include "Enemy.h"
 #include "Timer.h"
+#include "ModuleAudio.h"
 
 Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_TYPE::PLAYER){
 	const char* path = json_object_dotget_string(playerConfig, "graphics");
 	graphics =  App->textures->Load(path);
-	JSON_Array *configAnimations = json_object_dotget_array(playerConfig, "animations");
 
-	for (int i = 0; i < json_array_get_count(configAnimations); ++i) {
-		JSON_Object *configAnimation = json_array_get_object(configAnimations, i);
-		std::string key = json_object_dotget_string(configAnimation, "name");
-		
-		Animation *anim = new Animation();
-		anim->loop = json_object_dotget_boolean(configAnimation, "loop");
-		anim->speed = json_object_dotget_number(configAnimation, "speed");
-		
-		JSON_Array *configFrames = json_object_dotget_array(configAnimation, "frames");
 
-		for (int j = 0; j < json_array_get_count(configFrames); ++j) {
-			JSON_Object *configFrame = json_array_get_object(configFrames, j);
-			anim->frames.push_back(Frame({ (int)json_object_dotget_number(configFrame, "x"), (int)json_object_dotget_number(configFrame, "y"),
-				(int)json_object_dotget_number(configFrame, "width"), (int)json_object_dotget_number(configFrame, "height") },
-				(int)json_object_dotget_number(configFrame, "offset_x"), (int)json_object_dotget_number(configFrame, "offset_y")));
-		}
-
-		animations[key] =  anim;
-	}
 
 	//currentAnimation = animations["idle"];
 	state = new CodyIdleState();
@@ -45,6 +27,7 @@ Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_
 	state->Start(this);
 	hitsTimer = new Timer();
 	currentEnemyTimer = new Timer();
+
 	
 	LOG("PLAYER CREATED");
 }
