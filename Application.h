@@ -4,7 +4,6 @@
 #include<list>
 #include "Globals.h"
 #include "Module.h"
-#include "Parson.h"
 
 class ModuleRender;
 class ModuleWindow;
@@ -48,6 +47,8 @@ public:
 private:
 
 	std::list<Module*> modules;
+
+
 };
 
 extern Application* App;

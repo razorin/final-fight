@@ -71,16 +71,24 @@
       ],
       "sections": [
         {
+          "endPoint": 330,
+          "numberOfEnemies": 0
+        },
+        {
+          "endPoint": 400,
+          "numberOfEnemies": 3
+        },
+        {
           "endPoint": 521,
-          "numberOfEnemies": 1
+          "numberOfEnemies": 4
         },
         {
           "endPoint": 880,
-          "numberOfEnemies": 1
+          "numberOfEnemies": 3
         },
         {
           "endPoint": 992,
-          "numberOfEnemies": 0
+          "numberOfEnemies": 4
         }
       ]
     },
@@ -88,9 +96,9 @@
       "enemies": {
         "bred": {
           "graphics": "resources/sprites/enemies/bred.png",
-          "life": 100,
+          "life": 20,
           "lives": 1,
-          "attack": 100,
+          "attack": 15,
           "baseSpeed": 1,
           "icon": {
             "x": 0,
@@ -325,9 +333,9 @@
         },
         "simons": {
           "graphics": "resources/sprites/enemies/simons.png",
-          "life": 100,
+          "life": 30,
           "lives": 1,
-          "attack": 100,
+          "attack": 20,
           "baseSpeed": 1,
           "icon": {
             "x": 0,
@@ -562,9 +570,9 @@
         },
         "jake": {
           "graphics": "resources/sprites/enemies/jake.png",
-          "life": 100,
+          "life": 40,
           "lives": 1,
-          "attack": 100,
+          "attack": 30,
           "baseSpeed": 1,
           "icon": {
             "x": 0,
@@ -799,9 +807,9 @@
         },
         "dug": {
           "graphics": "resources/sprites/enemies/dug.png",
-          "life": 100,
+          "life": 50,
           "lives": 1,
-          "attack": 100,
+          "attack": 25,
           "baseSpeed": 1,
            "icon": {
             "x": 0,
@@ -1037,9 +1045,9 @@
       },
       "player": {
         "graphics": "resources/sprites/characters/cody.png",
-        "life": 125,
+        "life": 100,
         "lives": 5,
-        "attack": 1,
+        "attack": 3,
         "baseSpeed": 1,
         "icon": {
           "x": 0,

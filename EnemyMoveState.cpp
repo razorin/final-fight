@@ -1,5 +1,5 @@
 #include "EnemyMoveState.h"
-#include <ctime>
+#include <random>
 #include "Enemy.h"
 #include "Player.h"
 #include "EnemyIdleState.h"
@@ -26,29 +26,23 @@ EnemyStateMachine * EnemyMoveState::Update(Enemy *enemy) {
 	distanceVector = enemy->distanceToTarget();
 	flipEnemy(enemy);
 
-	
-	if (distanceVector.x <= 30 && distanceVector.x >= -30 &&
+	int number = rand() % 10000;
+	if (distanceVector.x <= 0 && distanceVector.x >= -40 &&
 		distanceVector.y <= 10 && distanceVector.y >= -10) {
-		srand(time(NULL));
-		int number = rand() % 10 + 1;
-		if (number > 6)
+		//if (number > 7000)
 			return new EnemyAttackState();
-		else
-			return new EnemyIdleState();
+		/*else
+			return new EnemyIdleState();*/
 	}
 
-	if (timer->Ellapsed() >= 1000) {
-		srand(time(NULL));
-		int number = rand() % 10 + 1;
-
-		if (number < 7)
+	if (timer->Ellapsed() >= 3000) {
 			return new EnemyIdleState();
 	}
 
 
 	if (!distanceVector.IsZero()) {
 		if (distanceVector.x != 0 && distanceVector.y != 0) {
-			if(rand() % 2 == 0)
+			if(number > 2500)
 				enemy->speed.x = distanceVector.x < 0 ? -enemy->baseSpeed : distanceVector.x > 0 ? enemy->baseSpeed : 0;
 			else
 				enemy->speed.y = distanceVector.y < 0 ? -enemy->baseSpeed : distanceVector.y > 0 ? enemy->baseSpeed : 0;
@@ -61,8 +55,5 @@ EnemyStateMachine * EnemyMoveState::Update(Enemy *enemy) {
 		}
 	} 
 
-
-
-	return nullptr;
-	
+	return nullptr;	
 }

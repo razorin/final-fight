@@ -16,7 +16,6 @@ EnemyAttackState::~EnemyAttackState() {
 }
 
 void EnemyAttackState::Start(Enemy *enemy) {
-	srand(time(NULL));
 	int number = rand() % enemy->attacks.size();
 	Attack attack = enemy->attacks.at(number);
 	enemy->setCurrentAnimation(attack.name);

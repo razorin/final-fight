@@ -7,6 +7,7 @@
 
 #include "ModuleLevelOneStageOne.h"
 #include "ModuleEntity.h"
+#include "ModuleFadeToBlack.h"
 #include "Player.h"
 #include "Animation.h"
 #include "ModuleInput.h"
@@ -27,11 +28,6 @@ bool ModuleLevelOneStageOne::Start() {
 	LOG("Loading Level 1-1 ");
 	player = (Player *)App->entities->Create(ENTITY_TYPE::PLAYER);
 	player->Init(iPoint(16, 80, 0));
-
-	enemy = App->entities->Create(ENEMY_TYPE::DUG);
-	//if(bred != nullptr)
-	enemy->Init(iPoint(16, 80, 0));
-	enemy->player = player;
 
 	const char* path = json_object_dotget_string(config, "graphics");
 	graphics = App->textures->Load(path);
@@ -77,6 +73,8 @@ bool ModuleLevelOneStageOne::Start() {
 			(int)json_object_dotget_number(configSection, "numberOfEnemies")));
 	}
 
+	currentSection = sections.at(sectionIndex);
+
 	return true;
 }
 
@@ -91,11 +89,35 @@ update_status ModuleLevelOneStageOne::Update() {
 	
 	App->renderer->Blit(graphics, iPoint{ 0, 0 }, scene);
 	//If current section is finished, increment section
-	if (sections.at(currentSection)->IsFinished() && currentSection + 1 < sections.size()) {
-		++currentSection;
+	if (currentSection->IsFinished()){
+		if (sectionIndex + 1 < sections.size() && cameraWalls["right"]->rect.x >= currentSection->section_ends) {
+			++sectionIndex;
+			currentSection = sections.at(sectionIndex);
+			int numberOfEnemies = currentSection->getNumberOfEnemies();
+			for (int i = 0; i < numberOfEnemies; ++i) {
+				Enemy *enemy = nullptr;
+				if (i % 4 == 0)
+					enemy = App->entities->Create(ENEMY_TYPE::BRED);
+				else if (i % 4 == 1)
+					enemy = App->entities->Create(ENEMY_TYPE::SIMONS);
+				else if (i % 4 == 2)
+					enemy = App->entities->Create(ENEMY_TYPE::JAKE);
+				else if (i % 4 == 3)
+					enemy = App->entities->Create(ENEMY_TYPE::DUG);
+				if (i % 2 == 0)
+					enemy->Init(iPoint(cameraWalls["left"]->rect.x - 100 - i * 10, 80 + i * 2, 0));
+				else
+					enemy->Init(iPoint(cameraWalls["right"]->rect.x + 100 + i * 10, 80 + i * 2, 0));
+				enemy->player = player;
+
+				enemies.push_back(enemy);
+			}
+		}
+		else if (sectionIndex == sections.size() - 1)
+			App->fade->FadeToBlack(nullptr, this);
 	}
 
-	Section *section = sections.at(currentSection);
+	//Section *section = sections.at(currentSection);
 	//Camera Movement
 	if (player != nullptr) {
 		int playerCenter = player->positionCollider->rect.x + player->positionCollider->rect.w / 2;
@@ -103,11 +125,11 @@ update_status ModuleLevelOneStageOne::Update() {
 		int movement = playerCenter - cameraCenter;
 
 		if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
-			section->EnemyKilled();
+			currentSection->EnemyKilled();
 		}
 
 		if (movement > 0) {
-			bool sectionReached = cameraWalls["right"]->rect.x + 1 >= section->section_ends;
+			bool sectionReached = cameraWalls["right"]->rect.x + 1 > currentSection->section_ends;
 		
 			if (!sectionReached) {
 				App->renderer->camera.x -= (App->window->screen_size);
@@ -121,14 +143,26 @@ update_status ModuleLevelOneStageOne::Update() {
 			App->renderer->StaticBlit(player->getGraphics(), player->getIcon()->position, player->getIcon()->section);
 			App->renderer->DrawRect({ 25, 18, 125 * player->life/ player->max_life, 7 }, 247, 247, 43, 255);
 		}
-		if (player->currentEnemy != nullptr) {
+		if (player->currentEnemy != nullptr && player->currentEnemy->to_delete == false) {
 			App->renderer->StaticBlit(player->currentEnemy->getGraphics(), player->currentEnemy->getIcon()->position, player->currentEnemy->getIcon()->section);
-			App->renderer->DrawRect({ 212, 18, 125, 7 }, 255, 0, 0, 255);
+			App->renderer->DrawRect({ 212, 18, player->currentEnemy->max_life, 7 }, 255, 0, 0, 255);
 			if(player->currentEnemy->life > 0)
-				App->renderer->DrawRect({ 212, 18, 125 * player->currentEnemy->life / player->currentEnemy->max_life, 7 }, 247, 247, 43, 255);
+				App->renderer->DrawRect({ 212, 18, player->currentEnemy->max_life * player->currentEnemy->life / player->currentEnemy->max_life, 7 }, 247, 247, 43, 255);
 		}
 	}
 
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleLevelOneStageOne::PostUpdate() {
+	for (std::vector<Enemy*>::iterator it = enemies.begin(); it != enemies.end();) {
+		if ((*it)->to_delete == true) {
+			currentSection->EnemyKilled();
+			it = enemies.erase(it);
+		}
+		else
+			++it;
+	}
 	return UPDATE_CONTINUE;
 }
 

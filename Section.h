@@ -23,6 +23,10 @@ public:
 		--number_of_enemies;
 	}
 
+	int getNumberOfEnemies() const {
+		return number_of_enemies;
+	}
+
 public:
 	int section_ends = 0;
 private:

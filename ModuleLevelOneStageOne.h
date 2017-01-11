@@ -19,6 +19,8 @@ public:
 	bool Start();
 	update_status PreUpdate();
 	update_status Update();
+	update_status PostUpdate();
+
 	bool CleanUp();
 
 private:
@@ -31,9 +33,9 @@ public:
 	Frame *scene = nullptr;
 	std::map<std::string, Collider*> cameraWalls;
 	std::vector<Section*> sections;
-	int currentSection = 0;
-	Enemy *enemy = nullptr;
-
+	Section *currentSection = nullptr;
+	int sectionIndex = 0;
+	std::vector<Enemy*> enemies;
 };
 
 #endif // !ModuleLevelOneStageOne_H

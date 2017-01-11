@@ -279,12 +279,6 @@
     <ClCompile Include="Bred.cpp">
       <Filter>Game Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyDamageState.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyKilledState.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="CodyDamageState.cpp">
       <Filter>Main</Filter>
     </ClCompile>
@@ -308,6 +302,12 @@
     </ClCompile>
     <ClCompile Include="Dug.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDamageState.cpp">
+      <Filter>StateMachines\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyKilledState.cpp">
+      <Filter>StateMachines\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "ModuleCollision.h"
-#include <ctime>
+#include <random>
 #include "EnemyMoveState.h"
 #include "Timer.h"
 #include "EnemyAttackState.h"
@@ -25,12 +25,12 @@ EnemyStateMachine * EnemyIdleState::Update(Enemy *enemy) {
 	//return new EnemyAttackState();
 	distanceVector = enemy->distanceToTarget();
 	flipEnemy(enemy);
-	if (timer->Ellapsed() >= 500) {
-		srand(time(NULL));
-		int number = rand() % 10 + 1;
+
+	int number = rand() % 10000;
+	if (timer->Ellapsed() >= number/5) {
 
 
-		if (number < 5)
+		if (number < 4500)
 			return nullptr;
 		else {
 			return new EnemyMoveState();
