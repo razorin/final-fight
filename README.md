@@ -20,7 +20,7 @@ Enjoy!
 Roberto Azorín Ferri
 
 ### Project Home
-https://github.com/razorin/zork
+https://razorin.github.io/final-fight/
 
 ### License
 This project is under MIT License
