@@ -6,21 +6,17 @@
 #include "ModuleInput.h"
 #include "Globals.h"
 #include "ModuleCollision.h"
-#include "Parson.h"
 #include "ModuleTextures.h"
+#include "Parson.h"
 #include "Timer.h"
 #include "CodyIdleState.h"
 #include "Enemy.h"
 #include "Timer.h"
-#include "ModuleAudio.h"
 
 Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_TYPE::PLAYER){
 	const char* path = json_object_dotget_string(playerConfig, "graphics");
 	graphics =  App->textures->Load(path);
 
-
-
-	//currentAnimation = animations["idle"];
 	state = new CodyIdleState();
 
 	positionCollider = App->collision->AddCollider({position->x, position->y, 37, 88}, PLAYER_COLLIDER, false, false, std::bind(&Player::OnCollision, this, std::placeholders::_1));
@@ -34,6 +30,7 @@ Player::Player(const JSON_Object *playerConfig) : Creature(playerConfig, ENTITY_
 
 void Player::Init(const iPoint &initialPosition) {
 	active = true;
+	originalAttack = attack;
 	*position = initialPosition;
 	positionCollider->SetPos(position->x + 35, position->y + 9, position->z);
 }
@@ -48,6 +45,15 @@ void Player::Update() {
 	previousPosition = iPoint(*position);
 	speed.SetToZero();
 	PlayerStateMachine *newState = state->Update(this);
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) {
+		godMode = !godMode;
+		if (godMode) {
+			attack = 1000;
+		}
+		else {
+			attack = originalAttack;
+		}
+	}
 	if (newState != nullptr) {
 		RELEASE(state);
 		if (attackCollider != nullptr) {
@@ -66,24 +72,26 @@ void Player::Update() {
 }
 
 void Player::OnCollision(const Collider &other) {
-	iPoint newPosition = previousPosition - *position;
-	switch (other.type) {
-	case COLLIDER_TYPE::WALL:
-	case COLLIDER_TYPE::CAMERA_WALL:
-		if (previousPosition.x != position->x &&
-			positionCollider->rect.x > other.rect.x && positionCollider->rect.x < other.rect.x + other.rect.w) {
-			newPosition.x = 0;
+	if (!godMode) {
+		iPoint newPosition = previousPosition - *position;
+		switch (other.type) {
+		case COLLIDER_TYPE::WALL:
+		case COLLIDER_TYPE::CAMERA_WALL:
+			if (previousPosition.x != position->x &&
+				positionCollider->rect.x > other.rect.x && positionCollider->rect.x < other.rect.x + other.rect.w) {
+				newPosition.x = 0;
+			}
+			//TODO: Now it's a little tricky. It needs a good revision to fix wall collisions
+			if (previousPosition.y != position->y && other.ignore_y) {
+				newPosition.y = 0;
+			}
+			newPosition.z = 0;
+			Move(newPosition);
+			break;
+		case COLLIDER_TYPE::ENEMY_HIT:
+			TakeDamage((Enemy*)other.owner);
+			break;
 		}
-		//TODO: Now it's a little tricky. It needs a good revision to fix wall collisions
-		if (previousPosition.y != position->y && other.ignore_y) {
-			newPosition.y = 0;
-		}
-		newPosition.z = 0;
-		Move(newPosition);
-		break;
-	case COLLIDER_TYPE::ENEMY_HIT:
-		TakeDamage((Enemy*)other.owner);
-		break;
 	}
 }
 

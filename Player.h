@@ -27,6 +27,9 @@ public:
 private:
 	iPoint previousPosition = {0,0,0};
 	PlayerStateMachine *state = nullptr;
+	int originalAttack = 0;
+	bool godMode = false;
+
 public:
 	int hits = 0;
 	Collider *attackCollider = nullptr;

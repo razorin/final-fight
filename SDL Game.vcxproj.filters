@@ -79,9 +79,6 @@
     <ClInclude Include="Entity.h">
       <Filter>Game Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Game Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Creature.h">
       <Filter>Game Entities</Filter>
     </ClInclude>
@@ -214,9 +211,6 @@
       <Filter>Core Modules</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Game Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
       <Filter>Game Entities</Filter>
     </ClCompile>
     <ClCompile Include="Creature.cpp">

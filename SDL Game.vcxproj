@@ -99,7 +99,6 @@
     <ClInclude Include="Jake.h" />
     <ClInclude Include="ModuleEntity.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Item.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleAudio.h" />
@@ -147,7 +146,6 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Jake.cpp" />
     <ClCompile Include="ModuleEntity.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
