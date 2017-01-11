@@ -16,6 +16,9 @@ Enjoy!
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/Sk2J6_M8yFw" frameborder="0" allowfullscreen></iframe>
 
+### Download
+https://github.com/razorin/final-fight/releases/download/1.0/Final.Fight.zip
+
 ### Author
 Roberto Azorín Ferri
 
