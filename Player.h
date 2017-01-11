@@ -31,6 +31,7 @@ public:
 	int hits = 0;
 	Collider *attackCollider = nullptr;
 	Timer *hitsTimer;
+	int lastHitTime = 0;
 	Enemy *currentEnemy = nullptr;
 	Timer *currentEnemyTimer;
 

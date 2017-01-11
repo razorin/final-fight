@@ -107,21 +107,28 @@ void Player::TakeDamage(Enemy *enemy) {
 			state = newState;
 			currentAnimation->Reset();
 			state->Start(this);
-			life -= enemy->attack;				
+			life -= enemy->attack;
+			hits = 0;
 		}
 	}
 }
 
 void Player::AddHit() {
 	LOG("Added hit!!! Current hit: %i", hits);
-	if (hits == 0)
+	if (hits == 0) {
 		hitsTimer->Start();
-	++hits;
+		++hits;
+	}
+	else {
+		if(hitsTimer->Ellapsed() - lastHitTime > 10)
+			++hits;
+		
+	}
 	if (hits > 3) {
 		hits = 0;
-		hitsTimer->Stop();
 		hitsTimer->Start();
 	}
+	lastHitTime = hitsTimer->Ellapsed();
 }
 
 void Player::AddCurrentEnemy(Enemy *enemy) {

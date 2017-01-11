@@ -71,7 +71,7 @@
       ],
       "sections": [
         {
-          "endPoint": 330,
+          "endPoint": 360,
           "numberOfEnemies": 0
         },
         {
@@ -1158,6 +1158,11 @@
             "name": "moveJumpAttack",
             "x": 37,
             "y": 3
+          },
+          {
+            "name": "idleJumpAttack",
+            "x": 37,
+            "y": 3
           }
           ],
         "animations": [
@@ -1177,7 +1182,7 @@
             ]
           },
           {
-            "name": "iddleJumpAttack",
+            "name": "idleJumpAttack",
             "loop": false,
             "speed": 0.2,
             "frames": [
