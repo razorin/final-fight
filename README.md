@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/razorin/final-fight/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Final Fight Tribute
 
-### Markdown
+This project is a tribute to Final Fight, an arcade game from 90s
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Controls
 
-```markdown
-Syntax highlighted code block
+**A W S D**: Movement keys
+**Space**: Jump
+**E**: Attack
+**G**: God mode
+**F1**: Show collisions
 
-# Header 1
-## Header 2
-### Header 3
+Enjoy!
 
-- Bulleted
-- List
+<iframe width="854" height="480" src="https://www.youtube.com/embed/Sk2J6_M8yFw" frameborder="0" allowfullscreen></iframe>
 
-1. Numbered
-2. List
+### Author
+Roberto Azorín Ferri
 
-**Bold** and _Italic_ and `Code` text
+### Project Home
+https://github.com/razorin/zork
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/razorin/final-fight/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### License
+This project is under MIT License
