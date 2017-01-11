@@ -27,7 +27,7 @@ EnemyStateMachine * EnemyMoveState::Update(Enemy *enemy) {
 	flipEnemy(enemy);
 
 	int number = rand() % 10000;
-	if (distanceVector.x <= 0 && distanceVector.x >= -40 &&
+	if (distanceVector.x <= 40 && distanceVector.x >= -40 &&
 		distanceVector.y <= 10 && distanceVector.y >= -10) {
 		//if (number > 7000)
 			return new EnemyAttackState();

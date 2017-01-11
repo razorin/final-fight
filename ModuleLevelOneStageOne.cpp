@@ -8,6 +8,7 @@
 #include "ModuleLevelOneStageOne.h"
 #include "ModuleEntity.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleAudio.h"
 #include "Player.h"
 #include "Animation.h"
 #include "ModuleInput.h"
@@ -74,7 +75,7 @@ bool ModuleLevelOneStageOne::Start() {
 	}
 
 	currentSection = sections.at(sectionIndex);
-
+	App->audio->PlayMusic("resources/music/level-1.wav");
 	return true;
 }
 
